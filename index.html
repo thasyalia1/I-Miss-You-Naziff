@@ -6,19 +6,33 @@
 <meta charset="UTF-8">
 <title>Im Sorry Naziff ❤️</title>
 
+
 <style>
 
-body{
+
+*{
 margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+
+body{
+
 background:black;
 overflow:hidden;
 color:white;
 font-family:Georgia,serif;
+
 }
 
+
+
 #startScreen{
+
 position:fixed;
 inset:0;
+
 background:black;
 
 display:flex;
@@ -27,18 +41,25 @@ justify-content:center;
 align-items:center;
 
 z-index:1000;
+
 cursor:pointer;
+
 }
+
 
 
 #startScreen h1{
+
 font-size:3em;
+
 }
+
 
 
 #lyrics{
 
 position:absolute;
+
 top:50%;
 
 width:100%;
@@ -58,6 +79,7 @@ font-size:2em;
 .snowflake{
 
 position:absolute;
+
 color:white;
 
 animation:fall linear infinite;
@@ -77,6 +99,7 @@ transform:translateY(110vh);
 }
 
 }
+
 
 
 
@@ -107,7 +130,6 @@ z-index:20;
 
 
 
-
 #photoGallery{
 
 display:flex;
@@ -121,6 +143,7 @@ opacity:0;
 transition:2s;
 
 }
+
 
 
 #photoGallery.show{
@@ -154,17 +177,13 @@ width:320px;
 
 height:200px;
 
-
 background:#ff9fbc;
 
-
 border-radius:15px;
-
 
 overflow:visible;
 
 }
-
 
 
 
@@ -192,52 +211,31 @@ z-index:5;
 
 #paper{
 
-
 position:absolute;
-
 
 left:10px;
 
-
 bottom:20px;
-
 
 width:300px;
 
-
 min-height:220px;
-
-
 
 background:white;
 
-
 color:black;
-
 
 padding:25px;
 
-
-box-sizing:border-box;
-
-
-
 border-radius:12px;
-
-
 
 transform:translateY(80px);
 
-
 opacity:0;
-
-
 
 transition:2s ease;
 
-
 z-index:10;
-
 
 }
 
@@ -245,12 +243,9 @@ z-index:10;
 
 #paper.open{
 
-
 transform:translateY(-150px);
 
-
 opacity:1;
-
 
 }
 
@@ -278,17 +273,13 @@ top:80px;
 
 left:135px;
 
-
 width:50px;
 
 height:50px;
 
-
 background:#ff3366;
 
-
 border-radius:50%;
-
 
 display:flex;
 
@@ -296,10 +287,11 @@ align-items:center;
 
 justify-content:center;
 
-
 z-index:20;
 
 }
+
+
 
 
 
@@ -317,7 +309,38 @@ z-index:30;
 }
 
 
+
+
+
+
+#neonHeart{
+
+position:fixed;
+
+inset:0;
+
+background:black;
+
+display:none;
+
+z-index:100;
+
+}
+
+
+
+#heartCanvas{
+
+width:100%;
+
+height:100%;
+
+}
+
+
+
 </style>
+
 
 </head>
 
@@ -325,6 +348,7 @@ z-index:30;
 
 
 <body>
+
 
 
 
@@ -340,6 +364,7 @@ Click Anywhere
 </p>
 
 </div>
+
 
 
 
@@ -388,9 +413,7 @@ Click Anywhere
 
 <div id="paper">
 
-
 <div id="letterText"></div>
-
 
 </div>
 
@@ -399,14 +422,15 @@ Click Anywhere
 <div id="flap"></div>
 
 
+
 <div id="seal">
+
 ❤️
-</div>
-
 
 </div>
 
 
+</div>
 
 
 </div>
@@ -420,6 +444,16 @@ Click Anywhere
 
 
 
+<div id="neonHeart">
+
+<canvas id="heartCanvas"></canvas>
+
+</div>
+
+
+
+
+
 
 
 
@@ -428,9 +462,6 @@ Click Anywhere
 
 
 
-
-
-/* LYRICS */
 
 
 const lyrics=[
@@ -471,13 +502,15 @@ text:"im sorry naziff, I miss you ❤️",
 time:31
 }
 
+
 ];
 
 
 
 
-let box=document.getElementById("lyrics");
 
+
+let box=document.getElementById("lyrics");
 
 let current=-1;
 
@@ -486,8 +519,6 @@ let lastTime=0;
 let endingShown=false;
 
 let letterStarted=false;
-
-
 
 
 
@@ -506,7 +537,8 @@ document.getElementById("bgMusic");
 function sync(){
 
 
-let now=music.currentTime;
+let now =
+music.currentTime;
 
 
 
@@ -538,7 +570,6 @@ lastTime=now;
 }
 
 
-
 }
 
 
@@ -546,6 +577,7 @@ lastTime=now;
 
 
 }
+
 
 
 
@@ -562,11 +594,12 @@ now>=lastTime+10 &&
 
 box.innerHTML="";
 
-
 showEnding();
 
 
 }
+
+
 
 
 
@@ -590,16 +623,13 @@ sync();
 
 
 
-
 function showEnding(){
 
 
-
-if(endingShown) return;
+if(endingShown)return;
 
 
 endingShown=true;
-
 
 
 
@@ -614,9 +644,7 @@ startFireworks();
 
 
 
-
 setTimeout(()=>{
-
 
 document
 .getElementById("photoGallery")
@@ -624,6 +652,7 @@ document
 
 
 },500);
+
 
 
 
@@ -643,8 +672,6 @@ document
 
 
 
-
-
 setTimeout(()=>{
 
 
@@ -652,6 +679,8 @@ typeLetter();
 
 
 },11000);
+
+
 
 
 
@@ -664,10 +693,11 @@ typeLetter();
 
 
 
+
 function typeLetter(){
 
 
-if(letterStarted) return;
+if(letterStarted)return;
 
 
 letterStarted=true;
@@ -683,9 +713,9 @@ I hope we can be okay again ❤️`;
 
 
 
-
 let target =
 document.getElementById("letterText");
+
 
 
 let i=0;
@@ -705,7 +735,21 @@ i++;
 
 if(i>=text.length){
 
+
 clearInterval(timer);
+
+
+
+setTimeout(()=>{
+
+
+startNeonHeart();
+
+
+
+},6000);
+
+
 
 }
 
@@ -714,6 +758,7 @@ clearInterval(timer);
 },60);
 
 
+
 }
 
 
@@ -724,33 +769,27 @@ clearInterval(timer);
 
 
 
-
-
-/* SNOW */
-
-
 function createSnow(){
 
 
-let snow=document.createElement("div");
+let snow =
+document.createElement("div");
 
 
 snow.className="snowflake";
 
-
 snow.innerHTML="❅";
 
 
-snow.style.left=
+snow.style.left =
 Math.random()*100+"vw";
 
 
-snow.style.fontSize=
+snow.style.fontSize =
 (10+Math.random()*20)+"px";
 
 
-
-snow.style.animationDuration=
+snow.style.animationDuration =
 (4+Math.random()*6)+"s";
 
 
@@ -766,7 +805,6 @@ snow.remove();
 },10000);
 
 
-
 }
 
 
@@ -779,13 +817,6 @@ setInterval(createSnow,120);
 
 
 
-
-
-
-
-
-
-/* FIREWORK */
 
 
 const canvas =
@@ -810,6 +841,7 @@ let particles=[];
 
 
 
+
 function heartFirework(){
 
 
@@ -826,7 +858,9 @@ for(let i=0;i<80;i++){
 let angle=Math.PI*2*i/80;
 
 
-let hx=16*Math.pow(Math.sin(angle),3);
+
+let hx=
+16*Math.pow(Math.sin(angle),3);
 
 
 
@@ -844,6 +878,7 @@ let hy=-(
 
 
 
+
 particles.push({
 
 x:x,
@@ -858,12 +893,11 @@ life:100
 
 });
 
-
 }
 
 
-
 }
+
 
 
 
@@ -887,9 +921,7 @@ particles.forEach((p,index)=>{
 
 p.x+=p.vx;
 
-
 p.y+=p.vy;
-
 
 
 p.life--;
@@ -915,6 +947,7 @@ particles.splice(index,1);
 }
 
 
+
 });
 
 
@@ -929,6 +962,8 @@ animateFirework
 
 
 animateFirework();
+
+
 
 
 
@@ -960,8 +995,214 @@ heartFirework();
 
 
 
+/* NEON HEART */
 
-/* START */
+
+const hCanvas =
+document.getElementById("heartCanvas");
+
+
+const hctx =
+hCanvas.getContext("2d");
+
+
+
+function resizeHeart(){
+
+hCanvas.width=innerWidth;
+
+hCanvas.height=innerHeight;
+
+}
+
+
+resizeHeart();
+
+
+window.addEventListener(
+"resize",
+resizeHeart
+);
+
+
+
+
+let points=[];
+
+let ttt=0;
+
+
+
+
+
+function makeHeart(){
+
+
+points=[];
+
+
+for(let i=0;i<100;i++){
+
+
+let t =
+Math.PI*2*i/100;
+
+
+
+let x=
+16*Math.pow(Math.sin(t),3);
+
+
+
+let y=-(
+
+13*Math.cos(t)
+
+-5*Math.cos(2*t)
+
+-2*Math.cos(3*t)
+
+-Math.cos(4*t)
+
+);
+
+
+
+points.push({
+
+x:x*10,
+
+y:y*10,
+
+phase:Math.random()*10
+
+});
+
+
+}
+
+
+}
+
+
+
+
+
+
+function neonDraw(){
+
+
+hctx.clearRect(
+0,
+0,
+hCanvas.width,
+hCanvas.height
+);
+
+
+
+ttt+=0.03;
+
+
+
+let cx =
+hCanvas.width/2;
+
+
+let cy =
+hCanvas.height/2;
+
+
+
+points.forEach(p=>{
+
+
+let pulse =
+Math.sin(ttt+p.phase)*5;
+
+
+
+hctx.save();
+
+
+
+hctx.translate(
+cx+p.x+pulse,
+cy+p.y+pulse
+);
+
+
+
+hctx.font=
+"bold 18px Arial";
+
+
+hctx.textAlign="center";
+
+
+
+hctx.shadowColor=
+"#ff4fa3";
+
+
+hctx.shadowBlur=25;
+
+
+hctx.fillStyle=
+"#ff7ed0";
+
+
+
+hctx.fillText(
+"I love u Naziff",
+0,
+0
+);
+
+
+
+hctx.restore();
+
+
+
+});
+
+
+
+requestAnimationFrame(
+neonDraw
+);
+
+
+}
+
+
+
+
+
+function startNeonHeart(){
+
+
+document
+.getElementById("neonHeart")
+.style.display="block";
+
+
+makeHeart();
+
+
+neonDraw();
+
+
+}
+
+
+
+
+
+
+
+
 
 
 document
