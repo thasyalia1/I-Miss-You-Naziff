@@ -65,17 +65,54 @@ to{
 }
 
 
+
 #ending{
 
     position:fixed;
     inset:0;
     background:black;
     display:none;
+    flex-direction:column;
     justify-content:center;
     align-items:center;
     text-align:center;
     font-size:2em;
     padding:20px;
+
+}
+
+
+#endingPhoto{
+
+    width:260px;
+    height:260px;
+    object-fit:cover;
+    border-radius:25px;
+    margin-bottom:25px;
+
+    animation:fadeIn 2s;
+
+}
+
+
+
+#endingText{
+
+    animation:fadeIn 2s;
+
+}
+
+
+
+@keyframes fadeIn{
+
+from{
+    opacity:0;
+}
+
+to{
+    opacity:1;
+}
 
 }
 
@@ -98,8 +135,6 @@ to{
 
 
 
-<!-- MUSIC -->
-
 <video id="bgMusic" style="display:none;" playsinline>
 
 <source src="music.mp4" type="video/mp4">
@@ -108,15 +143,28 @@ to{
 
 
 
+
 <div id="lyrics"></div>
+
 
 
 
 <div id="ending">
 
-i love u, please give me another chance
+
+<img id="endingPhoto" src="photo.jpg">
+
+
+<div id="endingText">
+
+i love u, please give me another chance ❤️
 
 </div>
+
+
+</div>
+
+
 
 
 
@@ -226,7 +274,6 @@ document.getElementById("startScreen")
 
 let music =
 document.getElementById("bgMusic");
-
 
 
 music.play();
