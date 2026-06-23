@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 
 <meta charset="UTF-8">
@@ -19,17 +20,21 @@ body{
 /* START */
 
 #startScreen{
+
     position:fixed;
     inset:0;
     background:black;
+
     display:flex;
     flex-direction:column;
     justify-content:center;
     align-items:center;
+
     z-index:1000;
     cursor:pointer;
-    text-align:center;
+
 }
+
 
 
 #startScreen h1{
@@ -37,31 +42,42 @@ body{
 }
 
 
+
 #startScreen p{
     opacity:.8;
 }
+
+
 
 
 /* LYRICS */
 
 #lyrics{
 
-    position:absolute;
-    top:50%;
-    width:100%;
-    transform:translateY(-50%);
-    text-align:center;
-    font-size:2em;
+position:absolute;
+top:50%;
+width:100%;
+
+transform:translateY(-50%);
+
+text-align:center;
+
+font-size:2em;
+
 }
+
+
+
 
 
 /* SNOW */
 
 .snowflake{
 
-    position:absolute;
-    color:white;
-    animation:fall linear infinite;
+position:absolute;
+color:white;
+
+animation:fall linear infinite;
 
 }
 
@@ -69,31 +85,41 @@ body{
 @keyframes fall{
 
 from{
-    transform:translateY(-10vh);
+transform:translateY(-10vh);
 }
 
 to{
-    transform:translateY(110vh);
+transform:translateY(110vh);
 }
 
 }
 
 
 
-/* END */
+
+
+
+/* ENDING */
 
 #ending{
 
-    position:fixed;
-    inset:0;
-    background:black;
-    display:none;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    z-index:20;
+position:fixed;
+inset:0;
+
+background:black;
+
+display:none;
+
+flex-direction:column;
+justify-content:center;
+align-items:center;
+
+z-index:20;
 
 }
+
+
+
 
 
 
@@ -101,251 +127,319 @@ to{
 
 #photoGallery{
 
-    display:flex;
-    gap:25px;
+display:flex;
 
-    opacity:0;
-    transform:translateY(-30px);
+gap:25px;
 
-    transition:2s;
+opacity:0;
+
+transform:translateY(-30px);
+
+transition:2s;
 
 }
+
 
 
 #photoGallery.show{
 
-    opacity:1;
-    transform:translateY(0);
+opacity:1;
+
+transform:translateY(0);
 
 }
+
 
 
 
 .polaroid{
 
-    background:white;
-    padding:12px 12px 35px 12px;
+background:white;
 
-    width:180px;
+padding:12px 12px 35px;
 
-    border-radius:5px;
+width:170px;
 
-    box-shadow:
-    0 0 20px rgba(255,255,255,.3);
+border-radius:8px;
 
-    transform:rotate(-5deg);
+box-shadow:0 0 25px rgba(255,255,255,.4);
 
+}
+
+
+
+.polaroid:nth-child(1){
+transform:rotate(-5deg);
 }
 
 
 .polaroid:nth-child(2){
-
-    transform:rotate(5deg);
-
+transform:rotate(5deg);
 }
 
 
 .polaroid:nth-child(3){
-
-    transform:rotate(-3deg);
-
+transform:rotate(-3deg);
 }
+
 
 
 
 .polaroid img{
 
-    width:180px;
-    height:180px;
+width:170px;
 
-    object-fit:cover;
+height:170px;
+
+object-fit:cover;
 
 }
+
 
 
 
 .caption{
 
-    color:black;
-    text-align:center;
+color:black;
 
-    margin-top:12px;
+text-align:center;
 
-    font-size:18px;
-
-}
-
-
-
-/* ENVELOPE AREA */
-
-#envelopeBox{
-
-    margin-top:45px;
-
-    position:relative;
-
-    width:340px;
-    height:220px;
+margin-top:12px;
 
 }
+
+
+
+
 
 
 
 /* ENVELOPE */
 
+#envelopeBox{
+
+margin-top:60px;
+
+position:relative;
+
+width:330px;
+
+height:230px;
+
+}
+
+
+
+
 #envelope{
 
 
-    position:absolute;
+position:absolute;
 
-    bottom:0;
-
-    width:340px;
-    height:190px;
-
-    background:#ffb6c9;
-
-    border-radius:15px;
-
-    box-shadow:
-    0 0 25px rgba(255,120,160,.5);
+bottom:0;
 
 
-    overflow:hidden;
+width:330px;
+
+height:190px;
+
+
+background:#ff9fbc;
+
+
+border-radius:15px;
+
+
+box-shadow:
+
+0 0 30px rgba(255,120,160,.6);
+
+
+overflow:visible;
 
 
 }
 
 
 
-/* flap */
-
-#flap{
 
 
-    position:absolute;
-
-    top:0;
-    left:0;
-
-    width:0;
-    height:0;
-
-    border-left:170px solid transparent;
-    border-right:170px solid transparent;
-    border-top:120px solid #ff8fb0;
-
-    z-index:3;
-
-}
-
-
-
-/* letter */
+/* LETTER */
 
 #paper{
 
 
-    position:absolute;
-
-    left:20px;
-
-    width:300px;
-
-    min-height:220px;
-
-    background:white;
-
-    color:#333;
-
-    padding:25px;
-
-    box-sizing:border-box;
-
-    border-radius:12px;
+position:absolute;
 
 
-    bottom:20px;
-
-    transform:translateY(130px);
-
-    transition:2s ease;
-
-    z-index:2;
+left:15px;
 
 
-    box-shadow:
-    0 0 20px rgba(0,0,0,.3);
+bottom:20px;
+
+
+width:300px;
+
+
+min-height:230px;
+
+
+background:#fffdf5;
+
+
+color:#333;
+
+
+padding:25px;
+
+
+box-sizing:border-box;
+
+
+border-radius:15px;
+
+
+
+transform:translateY(0);
+
+
+transition:2s ease;
+
+
+z-index:5;
+
+
+box-shadow:
+0 0 20px rgba(0,0,0,.4);
+
 
 }
+
 
 
 
 #paper.open{
 
-    transform:translateY(-130px);
+
+transform:translateY(-170px);
+
 
 }
+
 
 
 
 #letterText{
 
-    text-align:center;
 
-    line-height:1.7;
+text-align:center;
 
-    font-size:1.1em;
+line-height:1.7;
 
-    white-space:pre-line;
+font-size:1.05em;
+
+white-space:pre-line;
 
 }
 
 
 
-/* heart seal */
+
+
+/* FLAP */
+
+
+#flap{
+
+
+position:absolute;
+
+
+top:0;
+
+left:0;
+
+
+width:0;
+
+height:0;
+
+
+border-left:165px solid transparent;
+
+border-right:165px solid transparent;
+
+
+border-top:120px solid #ff6f9c;
+
+
+z-index:10;
+
+
+}
+
+
+
+
+
+/* HEART SEAL */
+
 
 #seal{
 
 
-    position:absolute;
+position:absolute;
 
-    top:85px;
-    left:145px;
 
-    width:50px;
-    height:50px;
+top:75px;
 
-    background:#ff3366;
+left:140px;
 
-    border-radius:50%;
 
-    z-index:5;
+width:50px;
 
-    display:flex;
+height:50px;
 
-    justify-content:center;
-    align-items:center;
 
-    font-size:25px;
+background:#ff3366;
+
+
+border-radius:50%;
+
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+
+font-size:25px;
+
+
+z-index:20;
+
 
 }
 
 
 
-/* fireworks */
+
+
+
+
+/* FIREWORK */
 
 
 #fireworks{
 
-    position:fixed;
+position:fixed;
 
-    inset:0;
+inset:0;
 
-    pointer-events:none;
+pointer-events:none;
 
-    z-index:25;
+z-index:50;
 
 }
 
@@ -355,13 +449,18 @@ to{
 </head>
 
 
+
 <body>
+
 
 
 <div id="startScreen">
 
 
-<h1>❤️ I'm Sorry Naziff</h1>
+<h1>
+❤️ I'm Sorry Naziff
+</h1>
+
 
 <p>
 Click Anywhere
@@ -369,6 +468,7 @@ Click Anywhere
 
 
 </div>
+
 
 
 
@@ -381,7 +481,12 @@ Click Anywhere
 
 
 
+
+
 <div id="lyrics"></div>
+
+
+
 
 
 
@@ -390,7 +495,10 @@ Click Anywhere
 
 
 
+
+
 <div id="photoGallery">
+
 
 
 <div class="polaroid">
@@ -398,7 +506,7 @@ Click Anywhere
 <img src="photo1.jpg">
 
 <div class="caption">
-memory ❤️
+I
 </div>
 
 </div>
@@ -410,10 +518,11 @@ memory ❤️
 <img src="photo2.jpg">
 
 <div class="caption">
-us ✨
+MISS
 </div>
 
 </div>
+
 
 
 
@@ -422,13 +531,16 @@ us ✨
 <img src="photo3.jpg">
 
 <div class="caption">
-forever
+US
 </div>
 
 </div>
 
 
 </div>
+
+
+
 
 
 
@@ -436,10 +548,8 @@ forever
 <div id="envelopeBox">
 
 
+
 <div id="envelope">
-
-
-<div id="flap"></div>
 
 
 <div id="paper">
@@ -449,18 +559,30 @@ forever
 </div>
 
 
+
+<div id="flap"></div>
+
+
 <div id="seal">
 ❤️
 </div>
 
 
-</div>
-
 
 </div>
 
 
 </div>
+
+
+
+
+
+
+</div>
+
+
+
 
 
 
@@ -470,7 +592,14 @@ forever
 
 
 
+
+
+
+
+
 <script>
+
+
 
 
 
@@ -491,8 +620,8 @@ const lyrics=[
 
 ["I'm sorry Naziff, I miss you ❤️",5000]
 
-
 ];
+
 
 
 
@@ -500,10 +629,14 @@ let box=document.getElementById("lyrics");
 
 
 
+
+
 async function showLyrics(){
 
 
+
 await new Promise(r=>setTimeout(r,500));
+
 
 
 for(let item of lyrics){
@@ -513,11 +646,14 @@ box.innerHTML=item[0];
 
 
 await new Promise(r=>
+
 setTimeout(r,item[1])
+
 );
 
 
 }
+
 
 
 box.innerHTML="";
@@ -527,6 +663,8 @@ showEnding();
 
 
 }
+
+
 
 
 
@@ -556,6 +694,8 @@ document
 
 
 
+
+
 setTimeout(()=>{
 
 
@@ -565,6 +705,9 @@ document
 
 
 },2500);
+
+
+
 
 
 
@@ -584,21 +727,31 @@ typeLetter();
 
 
 
+
+
+
+
 function typeLetter(){
 
 
 
-const text=
+const text =
 
 `I'm sorry Naziff ❤️
-Thank you for every memory,
-I hope we can be okay again.
-Please give me another chance`;
+Thank you for every moment.
+Please give me another chance
+I hope we can be okay again ❤️`;
 
 
 
-let target=
+let target =
 document.getElementById("letterText");
+
+
+
+target.innerHTML="";
+
+
 
 let i=0;
 
@@ -607,11 +760,13 @@ let i=0;
 let timer=setInterval(()=>{
 
 
-target.innerHTML+=
+target.innerHTML +=
 text.charAt(i);
 
 
+
 i++;
+
 
 
 if(i>=text.length){
@@ -619,6 +774,7 @@ if(i>=text.length){
 clearInterval(timer);
 
 }
+
 
 
 },60);
@@ -631,7 +787,12 @@ clearInterval(timer);
 
 
 
+
+
+
+
 function createSnow(){
+
 
 
 let snow=document.createElement("div");
@@ -643,12 +804,15 @@ snow.className="snowflake";
 snow.innerHTML="❅";
 
 
+
 snow.style.left=
 Math.random()*100+"vw";
 
 
+
 snow.style.fontSize=
 (10+Math.random()*20)+"px";
+
 
 
 snow.style.animationDuration=
@@ -678,25 +842,28 @@ setInterval(createSnow,120);
 
 
 
-const canvas=
+
+
+
+
+const canvas =
 document.getElementById("fireworks");
 
 
-const ctx=
+const ctx =
 canvas.getContext("2d");
 
 
 
-canvas.width=
-innerWidth;
+canvas.width=innerWidth;
 
-
-canvas.height=
-innerHeight;
+canvas.height=innerHeight;
 
 
 
 let particles=[];
+
+
 
 
 
@@ -709,49 +876,57 @@ let y=Math.random()*canvas.height/2;
 
 
 
+
 for(let i=0;i<80;i++){
 
 
-let a=Math.PI*2*i/80;
+
+let angle=Math.PI*2*i/80;
+
 
 
 let hx=
-16*Math.pow(Math.sin(a),3);
+16*Math.pow(Math.sin(angle),3);
 
 
 
 let hy=-(
 
-13*Math.cos(a)
+13*Math.cos(angle)
 
--5*Math.cos(2*a)
+-5*Math.cos(2*angle)
 
--2*Math.cos(3*a)
+-2*Math.cos(3*angle)
 
--Math.cos(4*a)
+-Math.cos(4*angle)
 
 );
+
 
 
 
 particles.push({
 
 x:x,
+
 y:y,
 
 vx:hx/8,
+
 vy:hy/8,
 
 life:100
 
-
 });
 
 
+
 }
 
 
+
 }
+
 
 
 
@@ -760,15 +935,13 @@ life:100
 function animateFirework(){
 
 
-ctx.clearRect(
-0,0,
-canvas.width,
-canvas.height
-);
+
+ctx.clearRect(0,0,canvas.width,canvas.height);
 
 
 
 particles.forEach((p,index)=>{
+
 
 
 p.x+=p.vx;
@@ -779,13 +952,10 @@ p.y+=p.vy;
 p.life--;
 
 
+
 ctx.font="20px serif";
 
-ctx.fillText(
-"❤️",
-p.x,
-p.y
-);
+ctx.fillText("❤️",p.x,p.y);
 
 
 
@@ -800,16 +970,19 @@ particles.splice(index,1);
 
 
 
-requestAnimationFrame(
-animateFirework
-);
+requestAnimationFrame(animateFirework);
+
 
 
 }
 
 
 
+
 animateFirework();
+
+
+
 
 
 
@@ -819,7 +992,10 @@ function startFireworks(){
 
 setInterval(()=>{
 
+
 heartFirework();
+
+
 
 },1500);
 
@@ -830,16 +1006,22 @@ heartFirework();
 
 
 
+
+
+
+
 document
 .getElementById("startScreen")
 .addEventListener("click",()=>{
 
 
-let music=
+
+let music =
 document.getElementById("bgMusic");
 
 
 music.currentTime=0;
+
 
 music.play();
 
