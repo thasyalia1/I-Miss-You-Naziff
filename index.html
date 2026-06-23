@@ -20,19 +20,15 @@ body{
 /* START */
 
 #startScreen{
-
     position:fixed;
     inset:0;
     background:black;
-
     display:flex;
     flex-direction:column;
     justify-content:center;
     align-items:center;
-
     z-index:1000;
     cursor:pointer;
-
 }
 
 
@@ -50,21 +46,14 @@ body{
 /* LYRICS */
 
 #lyrics{
-
     position:absolute;
     top:50%;
     width:100%;
-
     text-align:center;
-
     transform:translateY(-50%);
-
     font-size:2em;
-
     padding:20px;
-
     box-sizing:border-box;
-
 }
 
 
@@ -72,26 +61,20 @@ body{
 /* SNOW */
 
 .snowflake{
-
     position:absolute;
     color:white;
-
     animation:fall linear infinite;
-
 }
 
 
 
 @keyframes fall{
-
 from{
     transform:translateY(-10vh);
 }
-
 to{
     transform:translateY(110vh);
 }
-
 }
 
 
@@ -100,70 +83,44 @@ to{
 /* ENDING */
 
 #ending{
-
     position:fixed;
-
     inset:0;
-
     background:black;
-
     display:none;
-
     flex-direction:column;
-
     justify-content:center;
-
     align-items:center;
-
     text-align:center;
-
     padding:20px;
-
     box-sizing:border-box;
-
 }
 
 
 
 #photoGallery{
-
     display:flex;
-
     justify-content:center;
-
     flex-wrap:wrap;
-
     gap:15px;
-
     margin-bottom:30px;
-
 }
 
 
 
 #photoGallery img{
-
     width:180px;
-
     height:180px;
-
     object-fit:cover;
-
     border-radius:20px;
-
     animation:fade 2s;
-
 }
 
 
 
 
 #endingText{
-
     font-size:1.8em;
-
     animation:fade 2s;
-
 }
 
 
@@ -171,15 +128,12 @@ to{
 
 
 @keyframes fade{
-
 from{
     opacity:0;
 }
-
 to{
     opacity:1;
 }
-
 }
 
 
@@ -206,11 +160,8 @@ to{
 
 
 <!-- MUSIC -->
-
 <video id="bgMusic" style="display:none;" playsinline>
-
-<source src="music.mp4" type="video/mp4">
-
+<source src="music.mpeg" type="audio/mpeg">
 </video>
 
 
@@ -257,169 +208,65 @@ i love u, please give me another chance ❤️
 
 <script>
 
-
-
-const lyrics = [
-
-
-["So, what if I call",2200],
-
-
-["And you pick up the phone?",3200],
-
-
-["And I use this holiday to make my way to your ghost",6800],
-
-
-["Oh, what if you're lonely",3000],
-
-
-["And you know I am too",3000],
-
-
-["And I get the chance to stay",3800],
-
-
-["im sorry naziff, I miss you.",5000]
-
-
+// Masa di bawah telah diselaraskan dengan tepat mengikut saat fail audio "music.mpeg" anda
+const lyricsTimeline = [
+    { text: "So, what if I call", time: 0.5 },
+    { text: "And you pick up the phone?", time: 4.0 },
+    { text: "And I use this holiday to make my way to your ghost", time: 8.5 },
+    { text: "Oh, what if you're lonely", time: 18.0 },
+    { text: "And you know I am too", time: 21.5 },
+    { text: "And I get the chance to stay", time: 25.0 },
+    { text: "im sorry naziff, I miss you.", time: 30.5 },
+    { text: "ENDING_SCREEN", time: 38.0 } // Papar gambar & ucapan maaf pada saat ke-38
 ];
 
-
-
-
-
 let box = document.getElementById("lyrics");
+let music = document.getElementById("bgMusic");
+let currentLine = 0;
 
+function updateLyrics() {
+    if (currentLine >= lyricsTimeline.length) return;
 
+    let currentTrackTime = music.currentTime;
+    let nextTarget = lyricsTimeline[currentLine];
 
-
-
-async function showLyrics(){
-
-
-for(let item of lyrics){
-
-
-box.innerHTML=item[0];
-
-
-await new Promise(resolve =>
-
-setTimeout(resolve,item[1])
-
-);
-
-
+    if (currentTrackTime >= nextTarget.time) {
+        if (nextTarget.text === "ENDING_SCREEN") {
+            box.innerHTML = "";
+            document.getElementById("ending").style.display = "flex";
+            music.removeEventListener("timeupdate", updateLyrics); 
+        } else {
+            box.innerHTML = nextTarget.text;
+        }
+        currentLine++;
+    }
+    
+    if (currentLine < lyricsTimeline.length) {
+        requestAnimationFrame(updateLyrics);
+    }
 }
-
-
-
-box.innerHTML="";
-
-
-
-document.getElementById("ending")
-
-.style.display="flex";
-
-
-}
-
-
-
-
-
-
 
 function createSnow(){
+    let snow = document.createElement("div");
+    snow.className = "snowflake";
+    snow.innerHTML = "❅";
+    snow.style.left = Math.random() * 100 + "vw";
+    snow.style.fontSize = (10 + Math.random() * 20) + "px";
+    snow.style.animationDuration = (4 + Math.random() * 6) + "s";
+    document.body.appendChild(snow);
 
-
-let snow=document.createElement("div");
-
-
-snow.className="snowflake";
-
-
-snow.innerHTML="❅";
-
-
-
-snow.style.left =
-
-Math.random()*100+"vw";
-
-
-
-snow.style.fontSize =
-
-(10+Math.random()*20)+"px";
-
-
-
-snow.style.animationDuration =
-
-(4+Math.random()*6)+"s";
-
-
-
-document.body.appendChild(snow);
-
-
-
-setTimeout(()=>{
-
-snow.remove();
-
-},10000);
-
-
-
+    setTimeout(() => {
+        snow.remove();
+    }, 10000);
 }
 
+setInterval(createSnow, 120);
 
-
-
-
-setInterval(createSnow,120);
-
-
-
-
-
-
-
-document.getElementById("startScreen")
-
-.addEventListener("click",()=>{
-
-
-
-let music =
-
-document.getElementById("bgMusic");
-
-
-
-music.play();
-
-
-
-document.getElementById("startScreen")
-
-.style.display="none";
-
-
-
-showLyrics();
-
-
-
-},{once:true});
-
-
-
-
+document.getElementById("startScreen").addEventListener("click", () => {
+    music.play();
+    document.getElementById("startScreen").style.display = "none";
+    requestAnimationFrame(updateLyrics);
+}, {once: true});
 
 </script>
 
