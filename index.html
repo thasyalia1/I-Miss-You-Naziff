@@ -1,46 +1,79 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 
 <meta charset="UTF-8">
-<title>Im sorry Naziff ❤️</title>
+
+<title>Im Sorry Naziff ❤️</title>
+
 
 <style>
 
+
 body{
+
 margin:0;
+
 background:black;
+
 overflow:hidden;
+
 color:white;
+
 font-family:Georgia,serif;
+
 }
+
+
+
+/* START */
 
 
 #startScreen{
+
 position:fixed;
+
 inset:0;
+
 background:black;
 
 display:flex;
+
 flex-direction:column;
+
 justify-content:center;
+
 align-items:center;
 
 z-index:1000;
+
 cursor:pointer;
-text-align:center;
+
 }
+
 
 
 #startScreen h1{
+
 font-size:3em;
+
 }
+
+
+
+
+
+
+/* LYRICS */
 
 
 #lyrics{
 
 position:absolute;
+
 top:50%;
+
 width:100%;
 
 transform:translateY(-50%);
@@ -57,9 +90,15 @@ padding:20px;
 
 
 
+
+
+/* SNOW */
+
+
 .snowflake{
 
 position:absolute;
+
 color:white;
 
 animation:fall linear infinite;
@@ -70,23 +109,38 @@ animation:fall linear infinite;
 
 @keyframes fall{
 
+
 from{
+
 transform:translateY(-10vh);
+
 }
+
 
 to{
+
 transform:translateY(110vh);
-}
 
 }
 
 
+}
 
+
+
+
+
+
+
+
+
+/* END */
 
 
 #ending{
 
 position:fixed;
+
 inset:0;
 
 background:black;
@@ -107,6 +161,9 @@ z-index:20;
 
 
 
+
+
+/* PHOTO */
 
 
 #photoGallery{
@@ -151,6 +208,13 @@ box-shadow:0 0 20px rgba(255,255,255,.2);
 
 
 
+
+
+
+
+/* ENVELOPE */
+
+
 #envelope{
 
 position:relative;
@@ -159,15 +223,22 @@ width:320px;
 
 height:200px;
 
+
 background:#ff9fbc;
 
 border-radius:15px;
 
-box-shadow:0 0 25px rgba(255,100,150,.5);
+
+box-shadow:
+0 0 25px rgba(255,100,150,.5);
 
 overflow:visible;
 
 }
+
+
+
+
 
 
 
@@ -178,6 +249,7 @@ position:absolute;
 top:0;
 
 left:0;
+
 
 width:0;
 
@@ -190,6 +262,7 @@ border-right:160px solid transparent;
 
 border-top:120px solid #ff6f9c;
 
+
 z-index:5;
 
 }
@@ -198,25 +271,38 @@ z-index:5;
 
 
 
+
+
+/* PAPER HIDDEN */
+
+
 #paper{
+
 
 position:absolute;
 
+
 left:10px;
+
 
 bottom:20px;
 
+
 width:300px;
+
 
 min-height:220px;
 
 
 background:white;
 
+
 color:black;
 
 
+
 padding:25px;
+
 
 box-sizing:border-box;
 
@@ -225,15 +311,24 @@ border-radius:12px;
 
 
 
-transform:translateY(0);
+transform:translateY(80px);
+
+
+opacity:0;
+
+
 
 transition:2s ease;
+
 
 
 z-index:10;
 
 
-box-shadow:0 0 25px rgba(0,0,0,.4);
+
+box-shadow:
+0 0 25px rgba(0,0,0,.4);
+
 
 }
 
@@ -242,7 +337,12 @@ box-shadow:0 0 25px rgba(0,0,0,.4);
 
 #paper.open{
 
+
 transform:translateY(-150px);
+
+
+opacity:1;
+
 
 }
 
@@ -252,15 +352,22 @@ transform:translateY(-150px);
 
 #letterText{
 
+
 text-align:center;
+
 
 line-height:1.8;
 
+
 font-size:1.1em;
+
 
 white-space:pre-line;
 
+
 }
+
+
 
 
 
@@ -268,28 +375,39 @@ white-space:pre-line;
 
 #seal{
 
+
 position:absolute;
 
+
 top:80px;
+
 
 left:135px;
 
 
+
 width:50px;
+
 
 height:50px;
 
 
+
 background:#ff3366;
+
 
 border-radius:50%;
 
 
+
 display:flex;
+
+
+justify-content:center;
+
 
 align-items:center;
 
-justify-content:center;
 
 
 font-size:25px;
@@ -297,10 +415,16 @@ font-size:25px;
 
 z-index:20;
 
+
 }
 
 
 
+
+
+
+
+/* FIREWORK */
 
 
 #fireworks{
@@ -319,7 +443,11 @@ z-index:30;
 
 </style>
 
+
 </head>
+
+
+
 
 
 
@@ -327,11 +455,21 @@ z-index:30;
 
 
 
+
+
+
 <div id="startScreen">
 
-<h1>❤️ Im Sorry Naziff</h1>
 
-<p>Click Anywhere</p>
+<h1>
+❤️ Im Sorry Naziff
+</h1>
+
+
+<p>
+Click Anywhere
+</p>
+
 
 </div>
 
@@ -339,11 +477,16 @@ z-index:30;
 
 
 
+
 <audio id="bgMusic" loop>
+
 
 <source src="music.mp4" type="audio/mp4">
 
+
 </audio>
+
+
 
 
 
@@ -355,7 +498,11 @@ z-index:30;
 
 
 
+
+
 <div id="ending">
+
+
 
 
 
@@ -375,14 +522,20 @@ z-index:30;
 
 
 
+
+
 <div id="envelope">
+
 
 
 <div id="paper">
 
+
 <div id="letterText"></div>
 
+
 </div>
+
 
 
 <div id="flap"></div>
@@ -398,7 +551,13 @@ z-index:30;
 
 
 
+
+
+
 </div>
+
+
+
 
 
 
@@ -422,6 +581,7 @@ z-index:30;
 
 
 /* LYRICS */
+
 
 const lyrics=[
 
@@ -473,11 +633,14 @@ time:31
 
 
 
-let box =
-document.getElementById("lyrics");
 
+let box=document.getElementById("lyrics");
 
 let current=-1;
+
+let lastTime=0;
+
+
 
 
 
@@ -485,8 +648,7 @@ let current=-1;
 function showLyrics(){
 
 
-let music =
-document.getElementById("bgMusic");
+let music=document.getElementById("bgMusic");
 
 
 
@@ -516,13 +678,49 @@ lyrics[i].text;
 
 current=i;
 
+
+
+if(i===lyrics.length-1){
+
+lastTime=now;
+
 }
 
 
 }
 
 
+
 }
+
+
+}
+
+
+
+
+
+
+if(
+current===lyrics.length-1 &&
+now>=lastTime+10
+
+){
+
+
+box.innerHTML="";
+
+
+showEnding();
+
+
+current=-2;
+
+
+}
+
+
+
 
 
 
@@ -544,10 +742,13 @@ sync();
 
 
 
-/* ENDING */
+
+
+
 
 
 function showEnding(){
+
 
 
 document
@@ -570,10 +771,16 @@ document
 .classList.add("show");
 
 
+
 },500);
 
 
 
+
+
+
+
+// paper comes out after picture 8s
 
 
 setTimeout(()=>{
@@ -584,11 +791,15 @@ document
 .classList.add("open");
 
 
-},6000);
+
+},8500);
 
 
 
 
+
+
+// writing starts
 
 
 setTimeout(()=>{
@@ -597,11 +808,12 @@ setTimeout(()=>{
 typeLetter();
 
 
-},8000);
+},11000);
 
 
 
 }
+
 
 
 
@@ -622,6 +834,7 @@ I hope we can be okay again ❤️`;
 
 
 
+
 let target =
 document.getElementById("letterText");
 
@@ -639,6 +852,7 @@ target.innerHTML+=text.charAt(i);
 i++;
 
 
+
 if(i>=text.length){
 
 clearInterval(timer);
@@ -649,7 +863,9 @@ clearInterval(timer);
 },60);
 
 
+
 }
+
 
 
 
@@ -674,12 +890,14 @@ snow.className="snowflake";
 snow.innerHTML="❅";
 
 
-snow.style.left=
-Math.random()*100+"vw";
+
+snow.style.left=Math.random()*100+"vw";
+
 
 
 snow.style.fontSize=
 (10+Math.random()*20)+"px";
+
 
 
 snow.style.animationDuration=
@@ -701,8 +919,8 @@ snow.remove();
 }
 
 
-
 setInterval(createSnow,120);
+
 
 
 
@@ -724,6 +942,7 @@ const ctx=
 canvas.getContext("2d");
 
 
+
 canvas.width=innerWidth;
 
 canvas.height=innerHeight;
@@ -731,6 +950,7 @@ canvas.height=innerHeight;
 
 
 let particles=[];
+
 
 
 
@@ -747,25 +967,26 @@ let y=Math.random()*canvas.height/2;
 for(let i=0;i<80;i++){
 
 
-let angle=Math.PI*2*i/80;
+let a=Math.PI*2*i/80;
 
 
-let hx=
-16*Math.pow(Math.sin(angle),3);
+
+let hx=16*Math.pow(Math.sin(a),3);
 
 
 
 let hy=-(
 
-13*Math.cos(angle)
+13*Math.cos(a)
 
--5*Math.cos(2*angle)
+-5*Math.cos(2*a)
 
--2*Math.cos(3*angle)
+-2*Math.cos(3*a)
 
--Math.cos(4*angle)
+-Math.cos(4*a)
 
 );
+
 
 
 
@@ -787,14 +1008,16 @@ life:100
 }
 
 
-
 }
 
 
 
 
 
+
+
 function animateFirework(){
+
 
 
 ctx.clearRect(
@@ -810,7 +1033,9 @@ particles.forEach((p,index)=>{
 
 p.x+=p.vx;
 
+
 p.y+=p.vy;
+
 
 
 p.life--;
@@ -828,12 +1053,12 @@ p.y
 
 
 
+
 if(p.life<=0){
 
 particles.splice(index,1);
 
 }
-
 
 
 });
@@ -862,7 +1087,10 @@ function startFireworks(){
 
 setInterval(()=>{
 
+
 heartFirework();
+
+
 
 },1500);
 
@@ -875,18 +1103,25 @@ heartFirework();
 
 
 
+
+
+
+
 /* START */
+
 
 document
 .getElementById("startScreen")
 .addEventListener("click",()=>{
 
 
-let music =
+let music=
 document.getElementById("bgMusic");
 
 
+
 music.currentTime=0;
+
 
 music.play();
 
@@ -907,23 +1142,10 @@ showLyrics();
 
 
 
-
-
-
-/* WAIT UNTIL LYRICS END */
-
-setTimeout(()=>{
-
-
-showEnding();
-
-
-},36000);
-
-
-
 </script>
 
 
+
 </body>
+
 </html>
