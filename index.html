@@ -6,47 +6,39 @@
 <meta charset="UTF-8">
 <title>For You</title>
 
-
 <style>
 
-
 body{
-
-margin:0;
-background:black;
-overflow:hidden;
-color:white;
-font-family:Georgia,serif;
-
+    margin:0;
+    background:black;
+    overflow:hidden;
+    color:white;
+    font-family:Georgia, serif;
 }
 
 
 
-/* START */
+/* START SCREEN */
 
 #startScreen{
 
-position:fixed;
-inset:0;
+    position:fixed;
+    inset:0;
+    background:black;
 
-background:black;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
 
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-
-z-index:1000;
-
-cursor:pointer;
+    z-index:1000;
+    cursor:pointer;
 
 }
 
 
 #startScreen h1{
-
-font-size:3em;
-
+    font-size:3em;
 }
 
 
@@ -55,20 +47,19 @@ font-size:3em;
 
 /* LYRICS */
 
-
 #lyrics{
 
-position:absolute;
+    position:absolute;
+    top:50%;
+    width:100%;
 
-top:50%;
+    text-align:center;
 
-width:100%;
+    transform:translateY(-50%);
 
-text-align:center;
+    font-size:2em;
 
-transform:translateY(-50%);
-
-font-size:2em;
+    padding:20px;
 
 }
 
@@ -76,15 +67,17 @@ font-size:2em;
 
 
 
-/* SNOW */
 
+
+/* SNOW */
 
 .snowflake{
 
-position:absolute;
-color:white;
+    position:absolute;
 
-animation:fall linear infinite;
+    color:white;
+
+    animation:fall linear infinite;
 
 }
 
@@ -115,103 +108,30 @@ transform:translateY(110vh);
 
 
 
-/* ENDING */
 
+/* ENDING */
 
 #ending{
 
-position:fixed;
+    position:fixed;
 
-inset:0;
+    inset:0;
 
-background:black;
+    background:black;
 
-display:none;
+    display:none;
 
-justify-content:center;
+    flex-direction:column;
 
-align-items:center;
+    justify-content:center;
 
-z-index:10;
+    align-items:center;
 
+    text-align:center;
 
-}
+    padding:20px;
 
-
-
-
-
-
-
-/* ENVELOPE */
-
-
-#letter{
-
-
-position:relative;
-
-
-width:300px;
-
-height:200px;
-
-
-background:#fffaf0;
-
-
-border-radius:8px;
-
-
-box-shadow:0 0 40px white;
-
-
-transform:scale(0);
-
-
-}
-
-
-
-/* flap */
-
-
-#letter::before{
-
-
-content:"";
-
-
-position:absolute;
-
-
-top:0;
-
-left:0;
-
-
-width:0;
-
-height:0;
-
-
-border-left:150px solid transparent;
-
-border-right:150px solid transparent;
-
-
-border-top:100px solid #e7d5ae;
-
-
-
-transform-origin:top;
-
-
-transition:1s;
-
-
-z-index:5;
-
+    z-index:2;
 
 }
 
@@ -219,145 +139,72 @@ z-index:5;
 
 
 
+#photoGallery{
+
+    display:flex;
+
+    justify-content:center;
+
+    flex-wrap:wrap;
+
+    gap:15px;
+
+    margin-bottom:25px;
+
+}
 
 
-/* PAPER */
 
 
-#paper{
+
+#photoGallery img{
 
 
-position:absolute;
+    width:180px;
+
+    height:180px;
 
 
-left:25px;
+    object-fit:cover;
 
 
-bottom:20px;
+    border-radius:20px;
 
 
-width:250px;
+    animation:fade 2s;
+
+}
 
 
-height:170px;
 
 
-background:white;
+
+#endingText{
+
+    font-size:1.8em;
+
+    animation:fade 2s;
+
+}
 
 
-color:#222;
 
 
-padding:25px;
+
+@keyframes fade{
 
 
-box-sizing:border-box;
-
-
-border-radius:5px;
-
-
-transform:translateY(80px);
-
+from{
 
 opacity:0;
 
-
-transition:1.5s;
-
-
-z-index:2;
-
-
-box-shadow:0 5px 20px rgba(0,0,0,.3);
-
-
 }
 
 
-
-
-
-
-
-#letter.open{
-
-
-animation:openLetter 1s forwards;
-
-
-}
-
-
-
-#letter.open::before{
-
-
-transform:rotateX(180deg);
-
-
-z-index:1;
-
-
-}
-
-
-
-
-#letter.open #paper{
-
-
-transform:translateY(-140px);
-
+to{
 
 opacity:1;
 
-
-}
-
-
-
-
-
-
-
-#letterText{
-
-
-font-size:1.2em;
-
-
-line-height:1.6;
-
-
-text-align:center;
-
-
-white-space:pre-line;
-
-
-}
-
-
-
-
-
-
-@keyframes openLetter{
-
-
-0%{
-
-transform:scale(0);
-
-}
-
-
-
-100%{
-
-transform:scale(1);
-
 }
 
 
@@ -366,6 +213,21 @@ transform:scale(1);
 
 
 
+
+
+/* FIREWORK */
+
+#fireworks{
+
+    position:fixed;
+
+    inset:0;
+
+    pointer-events:none;
+
+    z-index:5;
+
+}
 
 
 
@@ -400,13 +262,17 @@ transform:scale(1);
 
 
 
-<audio id="bgMusic" loop>
+
+<!-- MUSIC -->
 
 
-<source src="music.mp4" type="audio/mp4">
+<video id="bgMusic" style="display:none;" playsinline>
 
 
-</audio>
+<source src="music.mp4" type="video/mp4">
+
+
+</video>
 
 
 
@@ -423,18 +289,32 @@ transform:scale(1);
 
 
 
+<!-- END -->
+
+
 <div id="ending">
 
 
-<div id="letter">
+
+<div id="photoGallery">
+
+
+<img src="photo1.jpg">
+
+<img src="photo2.jpg">
+
+<img src="photo3.jpg">
+
+
+</div>
 
 
 
-<div id="paper">
+
+<div id="endingText">
 
 
-<div id="letterText"></div>
-
+i love u, please give me another chance ❤️
 
 
 </div>
@@ -444,7 +324,12 @@ transform:scale(1);
 </div>
 
 
-</div>
+
+
+
+
+<canvas id="fireworks"></canvas>
+
 
 
 
@@ -461,7 +346,6 @@ transform:scale(1);
 const lyrics=[
 
 
-
 ["So, what if I call",4200],
 
 
@@ -471,21 +355,19 @@ const lyrics=[
 ["And I use this holiday to make my way to your ghost",7800],
 
 
-["Oh, what if you're lonely",4000],
+["Oh, what if you're lonely",4500],
 
 
-["And you know I am too",3300],
+["And you know I am too",3400],
 
 
-["And I get the chance to stay",3800],
+["And I get the chance to stay",4500],
 
 
 ["im sorry naziff, I miss you.",5000]
 
 
 ];
-
-
 
 
 
@@ -500,52 +382,31 @@ let box=document.getElementById("lyrics");
 
 
 
-
 async function showLyrics(){
+
+
+await new Promise(resolve=>setTimeout(resolve,500));
 
 
 
 for(let item of lyrics){
 
 
-
 box.innerHTML=item[0];
-
 
 
 await new Promise(resolve=>
 
-
 setTimeout(resolve,item[1])
-
 
 );
 
 
-
 }
-
-
 
 
 
 box.innerHTML="";
-
-
-showLetter();
-
-
-}
-
-
-
-
-
-
-
-
-
-function showLetter(){
 
 
 
@@ -555,85 +416,7 @@ document.getElementById("ending")
 
 
 
-
-let letter=document.getElementById("letter");
-
-
-
-
-
-setTimeout(()=>{
-
-
-letter.classList.add("open");
-
-
-
-},300);
-
-
-
-
-
-
-
-let text=
-
-
-"No matter what happens,\n\nI am grateful I met you. ❤️";
-
-
-
-
-
-
-let target=document.getElementById("letterText");
-
-
-
-let i=0;
-
-
-
-
-
-
-
-setTimeout(()=>{
-
-
-
-let timer=setInterval(()=>{
-
-
-target.innerHTML += text[i];
-
-
-
-i++;
-
-
-
-
-if(i>=text.length){
-
-
-clearInterval(timer);
-
-
-}
-
-
-
-},80);
-
-
-
-
-},1800);
-
-
-
+startFireworks();
 
 
 }
@@ -646,17 +429,15 @@ clearInterval(timer);
 
 
 
+/* SNOW */
 
 function createSnow(){
-
 
 
 let snow=document.createElement("div");
 
 
-
 snow.className="snowflake";
-
 
 
 snow.innerHTML="❅";
@@ -669,11 +450,9 @@ Math.random()*100+"vw";
 
 
 
-
 snow.style.fontSize=
 
 (10+Math.random()*20)+"px";
-
 
 
 
@@ -683,34 +462,19 @@ snow.style.animationDuration=
 
 
 
-
-
-
-
 document.body.appendChild(snow);
-
-
 
 
 
 
 setTimeout(()=>{
 
-
 snow.remove();
-
-
 
 },10000);
 
 
-
-
 }
-
-
-
-
 
 
 
@@ -723,14 +487,174 @@ setInterval(createSnow,120);
 
 
 
+/* HEART FIREWORK */
+
+
+
+const canvas=document.getElementById("fireworks");
+
+const ctx=canvas.getContext("2d");
+
+
+canvas.width=window.innerWidth;
+
+canvas.height=window.innerHeight;
+
+
+
+let particles=[];
+
+
+
+function heartFirework(){
+
+
+
+let x=Math.random()*canvas.width;
+
+let y=Math.random()*canvas.height/2;
+
+
+
+for(let i=0;i<80;i++){
+
+
+
+let angle=Math.PI*2*i/80;
+
+
+
+let hx=16*Math.pow(Math.sin(angle),3);
+
+
+let hy=-(
+
+13*Math.cos(angle)
+
+-5*Math.cos(2*angle)
+
+-2*Math.cos(3*angle)
+
+-Math.cos(4*angle)
+
+);
+
+
+
+
+
+particles.push({
+
+
+x:x,
+
+y:y,
+
+
+vx:hx/8,
+
+vy:hy/8,
+
+
+life:100
+
+
+});
+
+
+
+}
+
+
+
+}
+
+
+
+
+
+
+function animateFirework(){
+
+
+ctx.clearRect(0,0,canvas.width,canvas.height);
+
+
+
+particles.forEach((p,index)=>{
+
+
+p.x+=p.vx;
+
+p.y+=p.vy;
+
+
+p.life--;
+
+
+
+ctx.font="20px serif";
+
+ctx.fillText("❤️",p.x,p.y);
+
+
+
+
+if(p.life<=0){
+
+
+particles.splice(index,1);
+
+
+}
+
+
+});
+
+
+
+
+requestAnimationFrame(animateFirework);
+
+
+}
+
+
+animateFirework();
+
+
+
+
+
+function startFireworks(){
+
+
+setInterval(()=>{
+
+
+heartFirework();
+
+
+},1500);
+
+
+}
+
+
+
+
+
+
+
+
+
+/* CLICK START */
+
+
 
 document.getElementById("startScreen")
 
 .addEventListener("click",()=>{
-
-
-
-
 
 
 let music=document.getElementById("bgMusic");
@@ -740,12 +664,7 @@ let music=document.getElementById("bgMusic");
 music.currentTime=0;
 
 
-
 music.play();
-
-
-
-
 
 
 
@@ -755,11 +674,7 @@ document.getElementById("startScreen")
 
 
 
-
-
 showLyrics();
-
-
 
 
 
@@ -768,10 +683,7 @@ showLyrics();
 
 
 
-
-
 </script>
-
 
 
 
