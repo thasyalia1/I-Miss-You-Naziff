@@ -13,32 +13,33 @@ body{
     background:black;
     overflow:hidden;
     color:white;
-    font-family:Georgia, serif;
+    font-family:Georgia,serif;
 }
 
 
-
-/* START SCREEN */
+/* START */
 
 #startScreen{
 
-    position:fixed;
-    inset:0;
-    background:black;
+position:fixed;
+inset:0;
 
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
+background:black;
 
-    z-index:1000;
-    cursor:pointer;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+
+z-index:1000;
+
+cursor:pointer;
 
 }
 
 
 #startScreen h1{
-    font-size:3em;
+font-size:3em;
 }
 
 
@@ -49,21 +50,19 @@ body{
 
 #lyrics{
 
-    position:absolute;
-    top:50%;
-    width:100%;
+position:absolute;
 
-    text-align:center;
+top:50%;
 
-    transform:translateY(-50%);
+width:100%;
 
-    font-size:2em;
+text-align:center;
 
-    padding:20px;
+transform:translateY(-50%);
+
+font-size:2em;
 
 }
-
-
 
 
 
@@ -73,159 +72,136 @@ body{
 
 .snowflake{
 
-    position:absolute;
+position:absolute;
+color:white;
 
-    color:white;
-
-    animation:fall linear infinite;
+animation:fall linear infinite;
 
 }
-
 
 
 @keyframes fall{
 
-
 from{
-
 transform:translateY(-10vh);
-
 }
-
 
 to{
-
 transform:translateY(110vh);
+}
 
 }
 
 
-}
 
 
 
 
 
-
-
-
-/* ENDING */
+/* END */
 
 #ending{
 
-    position:fixed;
+position:fixed;
 
-    inset:0;
+inset:0;
 
-    background:black;
+background:black;
 
-    display:none;
+display:none;
 
-    flex-direction:column;
+justify-content:center;
 
-    justify-content:center;
+align-items:center;
 
-    align-items:center;
-
-    text-align:center;
-
-    padding:20px;
-
-    z-index:2;
+z-index:10;
 
 }
 
 
 
 
+
+#letter{
+
+
+width:320px;
+
+min-height:220px;
+
+background:#fffaf0;
+
+color:#222;
+
+border-radius:15px;
+
+padding:30px;
+
+box-sizing:border-box;
+
+transform:scale(0);
+
+
+box-shadow:0 0 30px white;
+
+
+}
+
+
+
+#letter.open{
+
+animation:openLetter 1.5s forwards;
+
+}
+
+
+
+#letterText{
+
+font-size:1.4em;
+
+line-height:1.6;
+
+text-align:center;
+
+white-space:pre-line;
+
+}
+
+
+
+@keyframes openLetter{
+
+
+0%{
+
+transform:scale(0) rotateX(90deg);
+
+}
+
+
+100%{
+
+transform:scale(1);
+
+}
+
+
+}
+
+
+
+
+
+
+
+
+/* PHOTOS */
 
 #photoGallery{
 
-    display:flex;
-
-    justify-content:center;
-
-    flex-wrap:wrap;
-
-    gap:15px;
-
-    margin-bottom:25px;
-
-}
-
-
-
-
-
-#photoGallery img{
-
-
-    width:180px;
-
-    height:180px;
-
-
-    object-fit:cover;
-
-
-    border-radius:20px;
-
-
-    animation:fade 2s;
-
-}
-
-
-
-
-
-#endingText{
-
-    font-size:1.8em;
-
-    animation:fade 2s;
-
-}
-
-
-
-
-
-@keyframes fade{
-
-
-from{
-
-opacity:0;
-
-}
-
-
-to{
-
-opacity:1;
-
-}
-
-
-}
-
-
-
-
-
-
-/* FIREWORK */
-
-#fireworks{
-
-    position:fixed;
-
-    inset:0;
-
-    pointer-events:none;
-
-    z-index:5;
+display:none;
 
 }
 
@@ -233,9 +209,7 @@ opacity:1;
 
 </style>
 
-
 </head>
-
 
 
 
@@ -243,16 +217,11 @@ opacity:1;
 
 
 
-
-
 <div id="startScreen">
-
 
 <h1>❤️ Im Sorry Naziff</h1>
 
-
 <p>Click Anywhere</p>
-
 
 </div>
 
@@ -260,21 +229,13 @@ opacity:1;
 
 
 
-
-
-
 <!-- MUSIC -->
 
+<audio id="bgMusic" loop>
 
-<video id="bgMusic" style="display:none;" playsinline>
+<source src="music.mp4" type="audio/mp4">
 
-
-<source src="music.mp4" type="video/mp4">
-
-
-</video>
-
-
+</audio>
 
 
 
@@ -286,49 +247,17 @@ opacity:1;
 
 
 
-
-
-
-<!-- END -->
-
-
 <div id="ending">
 
 
+<div id="letter">
 
-<div id="photoGallery">
-
-
-<img src="photo1.jpg">
-
-<img src="photo2.jpg">
-
-<img src="photo3.jpg">
-
+<div id="letterText"></div>
 
 </div>
 
 
-
-
-<div id="endingText">
-
-
-i love u, please give me another chance ❤️
-
-
 </div>
-
-
-
-</div>
-
-
-
-
-
-
-<canvas id="fireworks"></canvas>
 
 
 
@@ -338,8 +267,6 @@ i love u, please give me another chance ❤️
 
 
 <script>
-
-
 
 
 
@@ -373,9 +300,7 @@ const lyrics=[
 
 
 
-
 let box=document.getElementById("lyrics");
-
 
 
 
@@ -385,14 +310,13 @@ let box=document.getElementById("lyrics");
 async function showLyrics(){
 
 
-await new Promise(resolve=>setTimeout(resolve,500));
-
-
 
 for(let item of lyrics){
 
 
+
 box.innerHTML=item[0];
+
 
 
 await new Promise(resolve=>
@@ -409,14 +333,69 @@ setTimeout(resolve,item[1])
 box.innerHTML="";
 
 
+showLetter();
+
+
+}
+
+
+
+
+
+
+function showLetter(){
+
+
 
 document.getElementById("ending")
-
 .style.display="flex";
 
 
 
-startFireworks();
+let letter=
+document.getElementById("letter");
+
+
+
+letter.classList.add("open");
+
+
+
+let text=
+
+"No matter what happens,\n\nI am grateful I met you. ❤️";
+
+
+
+let target=
+document.getElementById("letterText");
+
+
+
+let i=0;
+
+
+
+let timer=setInterval(()=>{
+
+
+target.innerHTML += text[i];
+
+
+i++;
+
+
+
+if(i>=text.length){
+
+clearInterval(timer);
+
+}
+
+
+
+},80);
+
 
 
 }
@@ -429,41 +408,31 @@ startFireworks();
 
 
 
-/* SNOW */
-
 function createSnow(){
+
 
 
 let snow=document.createElement("div");
 
-
 snow.className="snowflake";
-
 
 snow.innerHTML="❅";
 
 
-
 snow.style.left=
-
 Math.random()*100+"vw";
 
 
-
 snow.style.fontSize=
-
 (10+Math.random()*20)+"px";
 
 
-
 snow.style.animationDuration=
-
 (4+Math.random()*6)+"s";
 
 
 
 document.body.appendChild(snow);
-
 
 
 
@@ -474,7 +443,10 @@ snow.remove();
 },10000);
 
 
+
 }
+
+
 
 
 
@@ -486,175 +458,10 @@ setInterval(createSnow,120);
 
 
 
-
-/* HEART FIREWORK */
-
-
-
-const canvas=document.getElementById("fireworks");
-
-const ctx=canvas.getContext("2d");
-
-
-canvas.width=window.innerWidth;
-
-canvas.height=window.innerHeight;
-
-
-
-let particles=[];
-
-
-
-function heartFirework(){
-
-
-
-let x=Math.random()*canvas.width;
-
-let y=Math.random()*canvas.height/2;
-
-
-
-for(let i=0;i<80;i++){
-
-
-
-let angle=Math.PI*2*i/80;
-
-
-
-let hx=16*Math.pow(Math.sin(angle),3);
-
-
-let hy=-(
-
-13*Math.cos(angle)
-
--5*Math.cos(2*angle)
-
--2*Math.cos(3*angle)
-
--Math.cos(4*angle)
-
-);
-
-
-
-
-
-particles.push({
-
-
-x:x,
-
-y:y,
-
-
-vx:hx/8,
-
-vy:hy/8,
-
-
-life:100
-
-
-});
-
-
-
-}
-
-
-
-}
-
-
-
-
-
-
-function animateFirework(){
-
-
-ctx.clearRect(0,0,canvas.width,canvas.height);
-
-
-
-particles.forEach((p,index)=>{
-
-
-p.x+=p.vx;
-
-p.y+=p.vy;
-
-
-p.life--;
-
-
-
-ctx.font="20px serif";
-
-ctx.fillText("❤️",p.x,p.y);
-
-
-
-
-if(p.life<=0){
-
-
-particles.splice(index,1);
-
-
-}
-
-
-});
-
-
-
-
-requestAnimationFrame(animateFirework);
-
-
-}
-
-
-animateFirework();
-
-
-
-
-
-function startFireworks(){
-
-
-setInterval(()=>{
-
-
-heartFirework();
-
-
-},1500);
-
-
-}
-
-
-
-
-
-
-
-
-
-/* CLICK START */
-
-
-
 document.getElementById("startScreen")
 
 .addEventListener("click",()=>{
+
 
 
 let music=document.getElementById("bgMusic");
@@ -687,9 +494,6 @@ showLyrics();
 
 
 
-
-
 </body>
-
 
 </html>
