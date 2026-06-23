@@ -5,72 +5,67 @@
 <meta charset="UTF-8">
 <title>Im sorry Naziff ❤️</title>
 
-
 <style>
 
 body{
-    margin:0;
-    background:black;
-    overflow:hidden;
-    color:white;
-    font-family:Georgia,serif;
+margin:0;
+background:black;
+overflow:hidden;
+color:white;
+font-family:Georgia,serif;
 }
 
 
-/* START */
-
 #startScreen{
-    position:fixed;
-    inset:0;
-    background:black;
+position:fixed;
+inset:0;
+background:black;
 
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
 
-    z-index:1000;
-    cursor:pointer;
-    text-align:center;
+z-index:1000;
+cursor:pointer;
+text-align:center;
 }
 
 
 #startScreen h1{
-    font-size:3em;
+font-size:3em;
 }
-
-
-
-/* LYRICS */
 
 
 #lyrics{
-    position:absolute;
-    top:50%;
-    width:100%;
 
-    transform:translateY(-50%);
+position:absolute;
+top:50%;
+width:100%;
 
-    text-align:center;
+transform:translateY(-50%);
 
-    font-size:2em;
+text-align:center;
 
-    padding:20px;
+font-size:2em;
+
+padding:20px;
+
 }
 
 
 
-/* SNOW */
 
 
 .snowflake{
 
-    position:absolute;
-    color:white;
+position:absolute;
+color:white;
 
-    animation:fall linear infinite;
+animation:fall linear infinite;
 
 }
+
 
 
 @keyframes fall{
@@ -87,9 +82,6 @@ transform:translateY(110vh);
 
 
 
-
-
-/* END */
 
 
 #ending{
@@ -115,7 +107,6 @@ z-index:20;
 
 
 
-/* PHOTO */
 
 
 #photoGallery{
@@ -160,11 +151,6 @@ box-shadow:0 0 20px rgba(255,255,255,.2);
 
 
 
-
-
-/* ENVELOPE */
-
-
 #envelope{
 
 position:relative;
@@ -185,7 +171,6 @@ overflow:visible;
 
 
 
-
 #flap{
 
 position:absolute;
@@ -197,6 +182,7 @@ left:0;
 width:0;
 
 height:0;
+
 
 border-left:160px solid transparent;
 
@@ -224,26 +210,33 @@ width:300px;
 
 min-height:220px;
 
+
 background:white;
 
 color:black;
+
 
 padding:25px;
 
 box-sizing:border-box;
 
+
 border-radius:12px;
+
 
 
 transform:translateY(0);
 
 transition:2s ease;
 
+
 z-index:10;
+
 
 box-shadow:0 0 25px rgba(0,0,0,.4);
 
 }
+
 
 
 
@@ -252,6 +245,8 @@ box-shadow:0 0 25px rgba(0,0,0,.4);
 transform:translateY(-150px);
 
 }
+
+
 
 
 
@@ -269,6 +264,8 @@ white-space:pre-line;
 
 
 
+
+
 #seal{
 
 position:absolute;
@@ -277,13 +274,16 @@ top:80px;
 
 left:135px;
 
+
 width:50px;
 
 height:50px;
 
+
 background:#ff3366;
 
 border-radius:50%;
+
 
 display:flex;
 
@@ -291,7 +291,9 @@ align-items:center;
 
 justify-content:center;
 
+
 font-size:25px;
+
 
 z-index:20;
 
@@ -299,8 +301,6 @@ z-index:20;
 
 
 
-
-/* FIREWORK */
 
 
 #fireworks{
@@ -316,6 +316,7 @@ z-index:30;
 }
 
 
+
 </style>
 
 </head>
@@ -323,8 +324,6 @@ z-index:30;
 
 
 <body>
-
-
 
 
 
@@ -345,7 +344,6 @@ z-index:30;
 <source src="music.mp4" type="audio/mp4">
 
 </audio>
-
 
 
 
@@ -372,7 +370,6 @@ z-index:30;
 
 
 </div>
-
 
 
 
@@ -408,8 +405,9 @@ z-index:30;
 
 
 
-
 <canvas id="fireworks"></canvas>
+
+
 
 
 
@@ -423,8 +421,7 @@ z-index:30;
 
 
 
-/* LYRICS SYNC WITH SONG */
-
+/* LYRICS */
 
 const lyrics=[
 
@@ -471,8 +468,8 @@ time:31
 }
 
 
-
 ];
+
 
 
 
@@ -496,18 +493,17 @@ document.getElementById("bgMusic");
 function sync(){
 
 
-let now =
-music.currentTime;
+let now=music.currentTime;
 
 
 
 for(let i=0;i<lyrics.length;i++){
 
 
-
 if(
 now>=lyrics[i].time &&
 now<(lyrics[i+1]?.time || 999)
+
 ){
 
 
@@ -520,15 +516,14 @@ lyrics[i].text;
 
 current=i;
 
-
 }
 
 
 }
 
 
-
 }
+
 
 
 requestAnimationFrame(sync);
@@ -538,7 +533,6 @@ requestAnimationFrame(sync);
 
 
 sync();
-
 
 
 }
@@ -567,6 +561,7 @@ startFireworks();
 
 
 
+
 setTimeout(()=>{
 
 
@@ -581,9 +576,6 @@ document
 
 
 
-// LETTER AFTER 10 SEC
-
-
 setTimeout(()=>{
 
 
@@ -593,6 +585,7 @@ document
 
 
 },10000);
+
 
 
 
@@ -614,14 +607,16 @@ typeLetter();
 
 
 
-function typeLetter(){
 
+
+
+function typeLetter(){
 
 
 const text=
 
 `I'm sorry Naziff ❤️
-Thank you for every memory, sayang
+Thank you for every memory, sayang.
 Please give me another chance.
 I hope we can be okay again ❤️`;
 
@@ -638,8 +633,7 @@ let i=0;
 let timer=setInterval(()=>{
 
 
-target.innerHTML +=
-text.charAt(i);
+target.innerHTML+=text.charAt(i);
 
 
 i++;
@@ -652,12 +646,11 @@ clearInterval(timer);
 }
 
 
-
 },60);
 
 
-
 }
+
 
 
 
@@ -672,12 +665,14 @@ clearInterval(timer);
 function createSnow(){
 
 
-let snow =
-document.createElement("div");
+let snow=document.createElement("div");
+
 
 snow.className="snowflake";
 
+
 snow.innerHTML="❅";
+
 
 snow.style.left=
 Math.random()*100+"vw";
@@ -703,8 +698,8 @@ snow.remove();
 },10000);
 
 
-
 }
+
 
 
 setInterval(createSnow,120);
@@ -716,23 +711,22 @@ setInterval(createSnow,120);
 
 
 
+
+
 /* FIREWORK */
 
 
-const canvas =
+const canvas=
 document.getElementById("fireworks");
 
 
-const ctx =
+const ctx=
 canvas.getContext("2d");
 
 
-canvas.width =
-innerWidth;
+canvas.width=innerWidth;
 
-
-canvas.height =
-innerHeight;
+canvas.height=innerHeight;
 
 
 
@@ -740,28 +734,23 @@ let particles=[];
 
 
 
+
 function heartFirework(){
 
 
-let x=
-Math.random()*canvas.width;
+let x=Math.random()*canvas.width;
 
-
-let y=
-Math.random()*canvas.height/2;
+let y=Math.random()*canvas.height/2;
 
 
 
 for(let i=0;i<80;i++){
 
 
-
-let angle =
-Math.PI*2*i/80;
+let angle=Math.PI*2*i/80;
 
 
-
-let hx =
+let hx=
 16*Math.pow(Math.sin(angle),3);
 
 
@@ -803,6 +792,8 @@ life:100
 
 
 
+
+
 function animateFirework(){
 
 
@@ -827,6 +818,7 @@ p.life--;
 
 
 ctx.font="20px serif";
+
 
 ctx.fillText(
 "❤️",
@@ -853,8 +845,8 @@ animateFirework
 );
 
 
-
 }
+
 
 
 
@@ -883,15 +875,11 @@ heartFirework();
 
 
 
-
-
 /* START */
-
 
 document
 .getElementById("startScreen")
 .addEventListener("click",()=>{
-
 
 
 let music =
@@ -899,7 +887,6 @@ document.getElementById("bgMusic");
 
 
 music.currentTime=0;
-
 
 music.play();
 
@@ -919,8 +906,23 @@ showLyrics();
 
 
 
-</script>
 
+
+
+
+/* WAIT UNTIL LYRICS END */
+
+setTimeout(()=>{
+
+
+showEnding();
+
+
+},36000);
+
+
+
+</script>
 
 
 </body>
