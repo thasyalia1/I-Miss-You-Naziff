@@ -4,74 +4,41 @@
 <head>
 
 <meta charset="UTF-8">
-
 <title>Im Sorry Naziff ❤️</title>
-
 
 <style>
 
-
 body{
-
 margin:0;
-
 background:black;
-
 overflow:hidden;
-
 color:white;
-
 font-family:Georgia,serif;
-
 }
 
-
-
-/* START */
-
-
 #startScreen{
-
 position:fixed;
-
 inset:0;
-
 background:black;
 
 display:flex;
-
 flex-direction:column;
-
 justify-content:center;
-
 align-items:center;
 
 z-index:1000;
-
 cursor:pointer;
-
 }
-
 
 
 #startScreen h1{
-
 font-size:3em;
-
 }
-
-
-
-
-
-
-/* LYRICS */
 
 
 #lyrics{
 
 position:absolute;
-
 top:50%;
 
 width:100%;
@@ -82,23 +49,15 @@ text-align:center;
 
 font-size:2em;
 
-padding:20px;
-
 }
 
 
 
 
 
-
-
-/* SNOW */
-
-
 .snowflake{
 
 position:absolute;
-
 color:white;
 
 animation:fall linear infinite;
@@ -109,32 +68,18 @@ animation:fall linear infinite;
 
 @keyframes fall{
 
-
 from{
-
 transform:translateY(-10vh);
-
 }
-
 
 to{
-
 transform:translateY(110vh);
+}
 
 }
 
 
-}
 
-
-
-
-
-
-
-
-
-/* END */
 
 
 #ending{
@@ -163,9 +108,6 @@ z-index:20;
 
 
 
-/* PHOTO */
-
-
 #photoGallery{
 
 display:flex;
@@ -179,7 +121,6 @@ opacity:0;
 transition:2s;
 
 }
-
 
 
 #photoGallery.show{
@@ -200,19 +141,9 @@ object-fit:cover;
 
 border-radius:15px;
 
-box-shadow:0 0 20px rgba(255,255,255,.2);
-
 }
 
 
-
-
-
-
-
-
-
-/* ENVELOPE */
 
 
 #envelope{
@@ -226,18 +157,13 @@ height:200px;
 
 background:#ff9fbc;
 
+
 border-radius:15px;
 
-
-box-shadow:
-0 0 25px rgba(255,100,150,.5);
 
 overflow:visible;
 
 }
-
-
-
 
 
 
@@ -251,29 +177,17 @@ top:0;
 left:0;
 
 
-width:0;
-
-height:0;
-
-
 border-left:160px solid transparent;
 
 border-right:160px solid transparent;
 
 border-top:120px solid #ff6f9c;
 
-
 z-index:5;
 
 }
 
 
-
-
-
-
-
-/* PAPER HIDDEN */
 
 
 #paper{
@@ -294,17 +208,18 @@ width:300px;
 min-height:220px;
 
 
+
 background:white;
 
 
 color:black;
 
 
-
 padding:25px;
 
 
 box-sizing:border-box;
+
 
 
 border-radius:12px;
@@ -321,17 +236,10 @@ opacity:0;
 transition:2s ease;
 
 
-
 z-index:10;
 
 
-
-box-shadow:
-0 0 25px rgba(0,0,0,.4);
-
-
 }
-
 
 
 
@@ -349,48 +257,31 @@ opacity:1;
 
 
 
-
 #letterText{
-
 
 text-align:center;
 
-
 line-height:1.8;
 
-
-font-size:1.1em;
-
-
 white-space:pre-line;
-
 
 }
 
 
 
 
-
-
-
 #seal{
-
 
 position:absolute;
 
-
 top:80px;
-
 
 left:135px;
 
 
-
 width:50px;
 
-
 height:50px;
-
 
 
 background:#ff3366;
@@ -399,32 +290,18 @@ background:#ff3366;
 border-radius:50%;
 
 
-
 display:flex;
 
+align-items:center;
 
 justify-content:center;
 
 
-align-items:center;
-
-
-
-font-size:25px;
-
-
 z-index:20;
-
 
 }
 
 
-
-
-
-
-
-/* FIREWORK */
 
 
 #fireworks{
@@ -440,13 +317,9 @@ z-index:30;
 }
 
 
-
 </style>
 
-
 </head>
-
-
 
 
 
@@ -456,20 +329,15 @@ z-index:30;
 
 
 
-
-
 <div id="startScreen">
-
 
 <h1>
 ❤️ Im Sorry Naziff
 </h1>
 
-
 <p>
 Click Anywhere
 </p>
-
 
 </div>
 
@@ -477,16 +345,11 @@ Click Anywhere
 
 
 
-
 <audio id="bgMusic" loop>
-
 
 <source src="music.mp4" type="audio/mp4">
 
-
 </audio>
-
-
 
 
 
@@ -499,10 +362,7 @@ Click Anywhere
 
 
 
-
 <div id="ending">
-
-
 
 
 
@@ -523,9 +383,7 @@ Click Anywhere
 
 
 
-
 <div id="envelope">
-
 
 
 <div id="paper">
@@ -546,18 +404,12 @@ Click Anywhere
 </div>
 
 
-
 </div>
 
 
 
 
-
-
 </div>
-
-
-
 
 
 
@@ -565,8 +417,6 @@ Click Anywhere
 
 
 <canvas id="fireworks"></canvas>
-
-
 
 
 
@@ -591,54 +441,54 @@ text:"So, what if I call",
 time:0
 },
 
-
 {
 text:"And you pick up the phone?",
 time:4.2
 },
-
 
 {
 text:"And I use this holiday to make my way to your ghost",
 time:8.5
 },
 
-
 {
 text:"Or what if you're lonely",
 time:16
 },
-
 
 {
 text:"And you know I am too",
 time:21
 },
 
-
 {
 text:"And I get the chance to say",
 time:25
 },
-
 
 {
 text:"im sorry naziff, I miss you ❤️",
 time:31
 }
 
-
 ];
-
 
 
 
 
 let box=document.getElementById("lyrics");
 
+
 let current=-1;
 
 let lastTime=0;
+
+let endingShown=false;
+
+let letterStarted=false;
+
+
+
 
 
 
@@ -648,7 +498,8 @@ let lastTime=0;
 function showLyrics(){
 
 
-let music=document.getElementById("bgMusic");
+let music =
+document.getElementById("bgMusic");
 
 
 
@@ -672,7 +523,7 @@ now<(lyrics[i+1]?.time || 999)
 if(current!==i){
 
 
-box.innerHTML =
+box.innerHTML=
 lyrics[i].text;
 
 
@@ -687,8 +538,8 @@ lastTime=now;
 }
 
 
-}
 
+}
 
 
 }
@@ -703,7 +554,8 @@ lastTime=now;
 
 if(
 current===lyrics.length-1 &&
-now>=lastTime+10
+now>=lastTime+10 &&
+!endingShown
 
 ){
 
@@ -714,13 +566,7 @@ box.innerHTML="";
 showEnding();
 
 
-current=-2;
-
-
 }
-
-
-
 
 
 
@@ -728,6 +574,7 @@ requestAnimationFrame(sync);
 
 
 }
+
 
 
 sync();
@@ -744,10 +591,15 @@ sync();
 
 
 
-
-
-
 function showEnding(){
+
+
+
+if(endingShown) return;
+
+
+endingShown=true;
+
 
 
 
@@ -771,16 +623,10 @@ document
 .classList.add("show");
 
 
-
 },500);
 
 
 
-
-
-
-
-// paper comes out after picture 8s
 
 
 setTimeout(()=>{
@@ -791,15 +637,12 @@ document
 .classList.add("open");
 
 
-
 },8500);
 
 
 
 
 
-
-// writing starts
 
 
 setTimeout(()=>{
@@ -821,8 +664,14 @@ typeLetter();
 
 
 
-
 function typeLetter(){
+
+
+if(letterStarted) return;
+
+
+letterStarted=true;
+
 
 
 const text=
@@ -846,7 +695,8 @@ let i=0;
 let timer=setInterval(()=>{
 
 
-target.innerHTML+=text.charAt(i);
+target.innerHTML +=
+text.charAt(i);
 
 
 i++;
@@ -860,11 +710,12 @@ clearInterval(timer);
 }
 
 
+
 },60);
 
 
-
 }
+
 
 
 
@@ -890,9 +741,8 @@ snow.className="snowflake";
 snow.innerHTML="❅";
 
 
-
-snow.style.left=Math.random()*100+"vw";
-
+snow.style.left=
+Math.random()*100+"vw";
 
 
 snow.style.fontSize=
@@ -916,7 +766,9 @@ snow.remove();
 },10000);
 
 
+
 }
+
 
 
 setInterval(createSnow,120);
@@ -931,14 +783,16 @@ setInterval(createSnow,120);
 
 
 
+
+
 /* FIREWORK */
 
 
-const canvas=
+const canvas =
 document.getElementById("fireworks");
 
 
-const ctx=
+const ctx =
 canvas.getContext("2d");
 
 
@@ -955,10 +809,12 @@ let particles=[];
 
 
 
+
 function heartFirework(){
 
 
 let x=Math.random()*canvas.width;
+
 
 let y=Math.random()*canvas.height/2;
 
@@ -967,26 +823,24 @@ let y=Math.random()*canvas.height/2;
 for(let i=0;i<80;i++){
 
 
-let a=Math.PI*2*i/80;
+let angle=Math.PI*2*i/80;
 
 
-
-let hx=16*Math.pow(Math.sin(a),3);
+let hx=16*Math.pow(Math.sin(angle),3);
 
 
 
 let hy=-(
 
-13*Math.cos(a)
+13*Math.cos(angle)
 
--5*Math.cos(2*a)
+-5*Math.cos(2*angle)
 
--2*Math.cos(3*a)
+-2*Math.cos(3*angle)
 
--Math.cos(4*a)
+-Math.cos(4*angle)
 
 );
-
 
 
 
@@ -1008,6 +862,7 @@ life:100
 }
 
 
+
 }
 
 
@@ -1017,7 +872,6 @@ life:100
 
 
 function animateFirework(){
-
 
 
 ctx.clearRect(
@@ -1074,7 +928,6 @@ animateFirework
 
 
 
-
 animateFirework();
 
 
@@ -1091,11 +944,12 @@ setInterval(()=>{
 heartFirework();
 
 
-
 },1500);
 
 
 }
+
+
 
 
 
@@ -1115,9 +969,8 @@ document
 .addEventListener("click",()=>{
 
 
-let music=
+let music =
 document.getElementById("bgMusic");
-
 
 
 music.currentTime=0;
@@ -1142,8 +995,8 @@ showLyrics();
 
 
 
-</script>
 
+</script>
 
 
 </body>
