@@ -17,6 +17,9 @@ body{
 }
 
 
+
+/* START SCREEN */
+
 #startScreen{
 
     position:fixed;
@@ -39,12 +42,10 @@ body{
 }
 
 
-#startScreen p{
-    opacity:0.8;
-}
 
 
 
+/* LYRICS */
 
 #lyrics{
 
@@ -60,16 +61,20 @@ body{
 
     padding:20px;
 
-    box-sizing:border-box;
-
 }
 
 
 
 
+
+
+
+/* SNOW */
+
 .snowflake{
 
     position:absolute;
+
     color:white;
 
     animation:fall linear infinite;
@@ -80,20 +85,31 @@ body{
 
 @keyframes fall{
 
+
 from{
-    transform:translateY(-10vh);
+
+transform:translateY(-10vh);
+
 }
+
 
 to{
-    transform:translateY(110vh);
-}
+
+transform:translateY(110vh);
 
 }
 
 
+}
 
 
 
+
+
+
+
+
+/* ENDING */
 
 #ending{
 
@@ -114,6 +130,8 @@ to{
     text-align:center;
 
     padding:20px;
+
+    z-index:2;
 
 }
 
@@ -137,19 +155,26 @@ to{
 
 
 
+
+
 #photoGallery img{
+
 
     width:180px;
 
     height:180px;
 
+
     object-fit:cover;
 
+
     border-radius:20px;
+
 
     animation:fade 2s;
 
 }
+
 
 
 
@@ -165,15 +190,42 @@ to{
 
 
 
+
 @keyframes fade{
 
+
 from{
-    opacity:0;
+
+opacity:0;
+
 }
 
+
 to{
-    opacity:1;
+
+opacity:1;
+
 }
+
+
+}
+
+
+
+
+
+
+/* FIREWORK */
+
+#fireworks{
+
+    position:fixed;
+
+    inset:0;
+
+    pointer-events:none;
+
+    z-index:5;
 
 }
 
@@ -181,7 +233,9 @@ to{
 
 </style>
 
+
 </head>
+
 
 
 
@@ -189,11 +243,16 @@ to{
 
 
 
+
+
 <div id="startScreen">
+
 
 <h1>❤️ Im Sorry Naziff</h1>
 
+
 <p>Click Anywhere</p>
+
 
 </div>
 
@@ -202,11 +261,16 @@ to{
 
 
 
+
+
 <!-- MUSIC -->
+
 
 <video id="bgMusic" style="display:none;" playsinline>
 
+
 <source src="music.mp4" type="video/mp4">
+
 
 </video>
 
@@ -224,7 +288,12 @@ to{
 
 
 
+
+<!-- END -->
+
+
 <div id="ending">
+
 
 
 <div id="photoGallery">
@@ -241,14 +310,26 @@ to{
 
 
 
+
 <div id="endingText">
+
 
 i love u, please give me another chance ❤️
 
+
 </div>
 
 
+
 </div>
+
+
+
+
+
+
+<canvas id="fireworks"></canvas>
+
 
 
 
@@ -260,10 +341,12 @@ i love u, please give me another chance ❤️
 
 
 
+
+
 const lyrics=[
 
 
-["So, what if I call",2200],
+["So, what if I call",4200],
 
 
 ["And you pick up the phone?",3200],
@@ -299,12 +382,8 @@ let box=document.getElementById("lyrics");
 
 
 
-
 async function showLyrics(){
 
-
-
-// small sync adjustment
 
 await new Promise(resolve=>setTimeout(resolve,500));
 
@@ -313,9 +392,7 @@ await new Promise(resolve=>setTimeout(resolve,500));
 for(let item of lyrics){
 
 
-
 box.innerHTML=item[0];
-
 
 
 await new Promise(resolve=>
@@ -323,7 +400,6 @@ await new Promise(resolve=>
 setTimeout(resolve,item[1])
 
 );
-
 
 
 }
@@ -339,6 +415,10 @@ document.getElementById("ending")
 .style.display="flex";
 
 
+
+startFireworks();
+
+
 }
 
 
@@ -349,16 +429,15 @@ document.getElementById("ending")
 
 
 
-function createSnow(){
+/* SNOW */
 
+function createSnow(){
 
 
 let snow=document.createElement("div");
 
 
-
 snow.className="snowflake";
-
 
 
 snow.innerHTML="❅";
@@ -395,10 +474,7 @@ snow.remove();
 },10000);
 
 
-
 }
-
-
 
 
 
@@ -411,13 +487,174 @@ setInterval(createSnow,120);
 
 
 
+/* HEART FIREWORK */
+
+
+
+const canvas=document.getElementById("fireworks");
+
+const ctx=canvas.getContext("2d");
+
+
+canvas.width=window.innerWidth;
+
+canvas.height=window.innerHeight;
+
+
+
+let particles=[];
+
+
+
+function heartFirework(){
+
+
+
+let x=Math.random()*canvas.width;
+
+let y=Math.random()*canvas.height/2;
+
+
+
+for(let i=0;i<80;i++){
+
+
+
+let angle=Math.PI*2*i/80;
+
+
+
+let hx=16*Math.pow(Math.sin(angle),3);
+
+
+let hy=-(
+
+13*Math.cos(angle)
+
+-5*Math.cos(2*angle)
+
+-2*Math.cos(3*angle)
+
+-Math.cos(4*angle)
+
+);
+
+
+
+
+
+particles.push({
+
+
+x:x,
+
+y:y,
+
+
+vx:hx/8,
+
+vy:hy/8,
+
+
+life:100
+
+
+});
+
+
+
+}
+
+
+
+}
+
+
+
+
+
+
+function animateFirework(){
+
+
+ctx.clearRect(0,0,canvas.width,canvas.height);
+
+
+
+particles.forEach((p,index)=>{
+
+
+p.x+=p.vx;
+
+p.y+=p.vy;
+
+
+p.life--;
+
+
+
+ctx.font="20px serif";
+
+ctx.fillText("❤️",p.x,p.y);
+
+
+
+
+if(p.life<=0){
+
+
+particles.splice(index,1);
+
+
+}
+
+
+});
+
+
+
+
+requestAnimationFrame(animateFirework);
+
+
+}
+
+
+animateFirework();
+
+
+
+
+
+function startFireworks(){
+
+
+setInterval(()=>{
+
+
+heartFirework();
+
+
+},1500);
+
+
+}
+
+
+
+
+
+
+
+
+
+/* CLICK START */
+
+
 
 document.getElementById("startScreen")
 
 .addEventListener("click",()=>{
-
-
-
 
 
 let music=document.getElementById("bgMusic");
@@ -427,10 +664,7 @@ let music=document.getElementById("bgMusic");
 music.currentTime=0;
 
 
-
 music.play();
-
-
 
 
 
@@ -440,11 +674,7 @@ document.getElementById("startScreen")
 
 
 
-
-
 showLyrics();
-
-
 
 
 
@@ -453,13 +683,13 @@ showLyrics();
 
 
 
-
-
-
 </script>
 
 
 
+
+
 </body>
+
 
 </html>
