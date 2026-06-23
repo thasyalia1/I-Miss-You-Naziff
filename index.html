@@ -6,15 +6,20 @@
 <meta charset="UTF-8">
 <title>For You</title>
 
+
 <style>
 
+
 body{
-    margin:0;
-    background:black;
-    overflow:hidden;
-    color:white;
-    font-family:Georgia,serif;
+
+margin:0;
+background:black;
+overflow:hidden;
+color:white;
+font-family:Georgia,serif;
+
 }
+
 
 
 /* START */
@@ -39,7 +44,9 @@ cursor:pointer;
 
 
 #startScreen h1{
+
 font-size:3em;
+
 }
 
 
@@ -47,6 +54,7 @@ font-size:3em;
 
 
 /* LYRICS */
+
 
 #lyrics{
 
@@ -70,6 +78,7 @@ font-size:2em;
 
 /* SNOW */
 
+
 .snowflake{
 
 position:absolute;
@@ -80,25 +89,34 @@ animation:fall linear infinite;
 }
 
 
+
 @keyframes fall{
 
+
 from{
+
 transform:translateY(-10vh);
+
 }
+
 
 to{
+
 transform:translateY(110vh);
-}
 
 }
 
 
+}
 
 
 
 
 
-/* END */
+
+
+/* ENDING */
+
 
 #ending{
 
@@ -116,58 +134,212 @@ align-items:center;
 
 z-index:10;
 
+
 }
 
 
 
+
+
+
+
+/* ENVELOPE */
 
 
 #letter{
 
 
-width:320px;
+position:relative;
 
-min-height:220px;
+
+width:300px;
+
+height:200px;
+
 
 background:#fffaf0;
 
-color:#222;
 
-border-radius:15px;
+border-radius:8px;
 
-padding:30px;
 
-box-sizing:border-box;
+box-shadow:0 0 40px white;
+
 
 transform:scale(0);
 
 
-box-shadow:0 0 30px white;
+}
+
+
+
+/* flap */
+
+
+#letter::before{
+
+
+content:"";
+
+
+position:absolute;
+
+
+top:0;
+
+left:0;
+
+
+width:0;
+
+height:0;
+
+
+border-left:150px solid transparent;
+
+border-right:150px solid transparent;
+
+
+border-top:100px solid #e7d5ae;
+
+
+
+transform-origin:top;
+
+
+transition:1s;
+
+
+z-index:5;
 
 
 }
+
+
+
+
+
+
+
+/* PAPER */
+
+
+#paper{
+
+
+position:absolute;
+
+
+left:25px;
+
+
+bottom:20px;
+
+
+width:250px;
+
+
+height:170px;
+
+
+background:white;
+
+
+color:#222;
+
+
+padding:25px;
+
+
+box-sizing:border-box;
+
+
+border-radius:5px;
+
+
+transform:translateY(80px);
+
+
+opacity:0;
+
+
+transition:1.5s;
+
+
+z-index:2;
+
+
+box-shadow:0 5px 20px rgba(0,0,0,.3);
+
+
+}
+
+
+
+
 
 
 
 #letter.open{
 
-animation:openLetter 1.5s forwards;
+
+animation:openLetter 1s forwards;
+
 
 }
+
+
+
+#letter.open::before{
+
+
+transform:rotateX(180deg);
+
+
+z-index:1;
+
+
+}
+
+
+
+
+#letter.open #paper{
+
+
+transform:translateY(-140px);
+
+
+opacity:1;
+
+
+}
+
+
+
+
 
 
 
 #letterText{
 
-font-size:1.4em;
+
+font-size:1.2em;
+
 
 line-height:1.6;
 
+
 text-align:center;
+
 
 white-space:pre-line;
 
+
 }
+
+
+
 
 
 
@@ -176,9 +348,10 @@ white-space:pre-line;
 
 0%{
 
-transform:scale(0) rotateX(90deg);
+transform:scale(0);
 
 }
+
 
 
 100%{
@@ -196,20 +369,11 @@ transform:scale(1);
 
 
 
-
-/* PHOTOS */
-
-#photoGallery{
-
-display:none;
-
-}
-
-
-
 </style>
 
+
 </head>
+
 
 
 
@@ -217,11 +381,16 @@ display:none;
 
 
 
+
+
 <div id="startScreen">
+
 
 <h1>❤️ Im Sorry Naziff</h1>
 
+
 <p>Click Anywhere</p>
+
 
 </div>
 
@@ -229,13 +398,17 @@ display:none;
 
 
 
-<!-- MUSIC -->
+
 
 <audio id="bgMusic" loop>
 
+
 <source src="music.mp4" type="audio/mp4">
 
+
 </audio>
+
+
 
 
 
@@ -247,18 +420,31 @@ display:none;
 
 
 
+
+
+
 <div id="ending">
 
 
 <div id="letter">
 
+
+
+<div id="paper">
+
+
 <div id="letterText"></div>
 
-</div>
 
 
 </div>
 
+
+
+</div>
+
+
+</div>
 
 
 
@@ -270,22 +456,25 @@ display:none;
 
 
 
+
+
 const lyrics=[
+
 
 
 ["So, what if I call",4200],
 
 
-["And you pick up the phone?",3300],
+["And you pick up the phone?",4300],
 
 
 ["And I use this holiday to make my way to your ghost",7800],
 
 
-["Oh, what if you're lonely",3000],
+["Oh, what if you're lonely",4000],
 
 
-["And you know I am too",3000],
+["And you know I am too",3300],
 
 
 ["And I get the chance to stay",3800],
@@ -300,7 +489,12 @@ const lyrics=[
 
 
 
+
+
+
 let box=document.getElementById("lyrics");
+
+
 
 
 
@@ -321,12 +515,17 @@ box.innerHTML=item[0];
 
 await new Promise(resolve=>
 
+
 setTimeout(resolve,item[1])
+
 
 );
 
 
+
 }
+
+
 
 
 
@@ -343,36 +542,64 @@ showLetter();
 
 
 
+
+
+
 function showLetter(){
 
 
 
 document.getElementById("ending")
+
 .style.display="flex";
 
 
 
-let letter=
-document.getElementById("letter");
 
+let letter=document.getElementById("letter");
+
+
+
+
+
+setTimeout(()=>{
 
 
 letter.classList.add("open");
 
 
 
+},300);
+
+
+
+
+
+
+
 let text=
+
 
 "No matter what happens,\n\nI am grateful I met you. ❤️";
 
 
 
-let target=
-document.getElementById("letterText");
+
+
+
+let target=document.getElementById("letterText");
 
 
 
 let i=0;
+
+
+
+
+
+
+
+setTimeout(()=>{
 
 
 
@@ -382,13 +609,17 @@ let timer=setInterval(()=>{
 target.innerHTML += text[i];
 
 
+
 i++;
+
 
 
 
 if(i>=text.length){
 
+
 clearInterval(timer);
+
 
 }
 
@@ -398,7 +629,15 @@ clearInterval(timer);
 
 
 
+
+},1800);
+
+
+
+
+
 }
+
 
 
 
@@ -414,21 +653,37 @@ function createSnow(){
 
 let snow=document.createElement("div");
 
+
+
 snow.className="snowflake";
+
+
 
 snow.innerHTML="❅";
 
 
+
 snow.style.left=
+
 Math.random()*100+"vw";
 
 
+
+
 snow.style.fontSize=
+
 (10+Math.random()*20)+"px";
 
 
+
+
 snow.style.animationDuration=
+
 (4+Math.random()*6)+"s";
+
+
+
+
 
 
 
@@ -436,15 +691,24 @@ document.body.appendChild(snow);
 
 
 
+
+
+
 setTimeout(()=>{
 
+
 snow.remove();
+
+
 
 },10000);
 
 
 
+
 }
+
+
 
 
 
@@ -458,9 +722,14 @@ setInterval(createSnow,120);
 
 
 
+
+
 document.getElementById("startScreen")
 
 .addEventListener("click",()=>{
+
+
+
 
 
 
@@ -471,7 +740,12 @@ let music=document.getElementById("bgMusic");
 music.currentTime=0;
 
 
+
 music.play();
+
+
+
+
 
 
 
@@ -481,7 +755,11 @@ document.getElementById("startScreen")
 
 
 
+
+
 showLyrics();
+
+
 
 
 
@@ -490,10 +768,16 @@ showLyrics();
 
 
 
+
+
 </script>
 
 
 
+
+
+
 </body>
+
 
 </html>
