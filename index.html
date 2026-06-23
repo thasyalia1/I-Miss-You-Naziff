@@ -1,196 +1,110 @@
 <!DOCTYPE html>
-
-
-
 <html>
 
 <head>
 
 <meta charset="UTF-8">
-
 <title>For You</title>
-
-
 
 <style>
 
-
-
 body{
-
     margin:0;
-
     background:black;
-
     overflow:hidden;
-
     color:white;
-
     font-family:Georgia, serif;
-
 }
-
 
 
 #startScreen{
-
     position:fixed;
-
-    top:0;
-
-    left:0;
-
-    width:100%;
-
-    height:100%;
-
+    inset:0;
     background:black;
-
     display:flex;
-
     flex-direction:column;
-
     justify-content:center;
-
     align-items:center;
-
     z-index:1000;
-
     cursor:pointer;
-
 }
-
 
 
 #startScreen h1{
-
     font-size:3em;
-
-    margin-bottom:10px;
-
 }
-
-
-
-#startScreen p{
-
-    opacity:0.8;
-
-}
-
 
 
 #lyrics{
-
     position:absolute;
-
     top:50%;
-
     width:100%;
-
     text-align:center;
-
     transform:translateY(-50%);
-
     font-size:2em;
-
-    padding:0 20px;
-
-    box-sizing:border-box;
-
 }
-
 
 
 .snowflake{
-
     position:absolute;
-
     color:white;
-
     animation:fall linear infinite;
-
 }
-
 
 
 @keyframes fall{
 
-    from{
-
-        transform:translateY(-10vh);
-
-    }
-
-    to{
-
-        transform:translateY(110vh);
-
-    }
-
+from{
+    transform:translateY(-10vh);
 }
 
+to{
+    transform:translateY(110vh);
+}
+
+}
 
 
 #ending{
 
     position:fixed;
-
-    top:0;
-
-    left:0;
-
-    width:100%;
-
-    height:100%;
-
+    inset:0;
     background:black;
-
     display:none;
-
     justify-content:center;
-
     align-items:center;
-
     text-align:center;
-
     font-size:2em;
-
     padding:20px;
-
-    box-sizing:border-box;
 
 }
 
 
-
 </style>
 
-
-
 </head>
-
 
 
 <body>
 
 
-
 <div id="startScreen">
 
-    <h1>🎄 Merry Christmas</h1>
+<h1>🎄 Merry Christmas</h1>
 
-    <p>Click Anywhere</p>
+<p>Click Anywhere</p>
 
 </div>
 
 
 
-<audio id="bgMusic">
+<!-- MUSIC -->
 
-    <source src="music.mp4" type="audio/mp4">
+<video id="bgMusic" style="display:none;" playsinline>
 
-</audio>
+<source src="music.mp4" type="video/mp4">
+
+</video>
 
 
 
@@ -200,7 +114,7 @@ body{
 
 <div id="ending">
 
-    i love u, please give me another chance
+i love u, please give me another chance
 
 </div>
 
@@ -237,78 +151,64 @@ let box = document.getElementById("lyrics");
 async function showLyrics(){
 
 
+for(let item of lyrics){
 
-    for(let item of lyrics){
+box.innerHTML=item[0];
 
-
-
-        box.innerHTML = item[0];
-
-
-
-        await new Promise(r =>
-
-            setTimeout(r,item[1])
-
-        );
-
-    }
-
-
-
-    box.innerHTML = "";
-
-
-
-    document.getElementById("ending").style.display = "flex";
+await new Promise(resolve =>
+setTimeout(resolve,item[1])
+);
 
 }
+
+
+box.innerHTML="";
+
+
+document.getElementById("ending")
+.style.display="flex";
+
+
+}
+
+
 
 
 
 function createSnow(){
 
 
-
-    let flake = document.createElement("div");
-
+let snow=document.createElement("div");
 
 
-    flake.className = "snowflake";
+snow.className="snowflake";
 
 
-
-    flake.innerHTML = "❅";
-
+snow.innerHTML="❅";
 
 
-    flake.style.left =
-
-        Math.random()*100 + "vw";
-
+snow.style.left =
+Math.random()*100+"vw";
 
 
-    flake.style.fontSize =
-
-        (10 + Math.random()*20) + "px";
-
+snow.style.fontSize =
+(10+Math.random()*20)+"px";
 
 
-    flake.style.animationDuration =
+snow.style.animationDuration =
+(4+Math.random()*6)+"s";
 
-        (4 + Math.random()*6) + "s";
+
+document.body.appendChild(snow);
 
 
 
-    document.body.appendChild(flake);
+setTimeout(()=>{
 
+snow.remove();
 
+},10000);
 
-    setTimeout(()=>{
-
-        flake.remove();
-
-    },10000);
 
 }
 
@@ -318,23 +218,27 @@ setInterval(createSnow,120);
 
 
 
-document.getElementById("startScreen")
 
+
+document.getElementById("startScreen")
 .addEventListener("click",()=>{
 
 
-
-    document.getElementById("bgMusic").play();
-
-
-
-    document.getElementById("startScreen")
-
-    .style.display="none";
+let music =
+document.getElementById("bgMusic");
 
 
 
-    showLyrics();
+music.play();
+
+
+
+document.getElementById("startScreen")
+.style.display="none";
+
+
+
+showLyrics();
 
 
 
@@ -342,8 +246,9 @@ document.getElementById("startScreen")
 
 
 
-</script>
 
+
+</script>
 
 
 </body>
