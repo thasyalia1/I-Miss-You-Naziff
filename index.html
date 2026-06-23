@@ -4,50 +4,40 @@
 <head>
 
 <meta charset="UTF-8">
-<title>I'm sorry Naziff ❤️</title>
+<title>I'm Sorry Naziff ❤️</title>
 
 <style>
 
 body{
-    margin:0;
-    background:black;
-    overflow:hidden;
-    color:white;
-    font-family:Georgia,serif;
+margin:0;
+background:black;
+overflow:hidden;
+color:white;
+font-family:Georgia,serif;
 }
 
 
 /* START */
 
 #startScreen{
+position:fixed;
+inset:0;
+background:black;
 
-    position:fixed;
-    inset:0;
-    background:black;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
 
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-
-    z-index:1000;
-    cursor:pointer;
-
+z-index:1000;
+cursor:pointer;
+text-align:center;
 }
-
 
 
 #startScreen h1{
-    font-size:3em;
+font-size:3em;
 }
-
-
-
-#startScreen p{
-    opacity:.8;
-}
-
-
 
 
 /* LYRICS */
@@ -65,8 +55,6 @@ text-align:center;
 font-size:2em;
 
 }
-
-
 
 
 
@@ -96,14 +84,12 @@ transform:translateY(110vh);
 
 
 
-
-
-
-/* ENDING */
+/* END */
 
 #ending{
 
 position:fixed;
+
 inset:0;
 
 background:black;
@@ -111,7 +97,9 @@ background:black;
 display:none;
 
 flex-direction:column;
+
 justify-content:center;
+
 align-items:center;
 
 z-index:20;
@@ -120,10 +108,8 @@ z-index:20;
 
 
 
+/* PHOTO */
 
-
-
-/* POLAROID */
 
 #photoGallery{
 
@@ -132,8 +118,6 @@ display:flex;
 gap:25px;
 
 opacity:0;
-
-transform:translateY(-30px);
 
 transition:2s;
 
@@ -145,10 +129,7 @@ transition:2s;
 
 opacity:1;
 
-transform:translateY(0);
-
 }
-
 
 
 
@@ -168,23 +149,6 @@ box-shadow:0 0 25px rgba(255,255,255,.4);
 
 
 
-.polaroid:nth-child(1){
-transform:rotate(-5deg);
-}
-
-
-.polaroid:nth-child(2){
-transform:rotate(5deg);
-}
-
-
-.polaroid:nth-child(3){
-transform:rotate(-3deg);
-}
-
-
-
-
 .polaroid img{
 
 width:170px;
@@ -196,67 +160,53 @@ object-fit:cover;
 }
 
 
-
-
 .caption{
 
 color:black;
 
 text-align:center;
 
-margin-top:12px;
+margin-top:10px;
 
 }
-
-
-
 
 
 
 
 /* ENVELOPE */
 
+
 #envelopeBox{
 
 margin-top:60px;
 
-position:relative;
-
 width:330px;
 
 height:230px;
+
+position:relative;
 
 }
 
 
 
 
-#envelope{
 
+#envelope{
 
 position:absolute;
 
 bottom:0;
 
-
 width:330px;
 
 height:190px;
 
-
 background:#ff9fbc;
-
 
 border-radius:15px;
 
-
-box-shadow:
-
-0 0 30px rgba(255,120,160,.6);
-
-
-overflow:visible;
-
+box-shadow:0 0 30px rgba(255,120,160,.6);
 
 }
 
@@ -266,32 +216,26 @@ overflow:visible;
 
 /* LETTER */
 
-#paper{
 
+#paper{
 
 position:absolute;
 
-
 left:15px;
-
 
 bottom:20px;
 
-
 width:300px;
-
 
 min-height:230px;
 
 
 background:#fffdf5;
 
-
 color:#333;
 
 
 padding:25px;
-
 
 box-sizing:border-box;
 
@@ -299,9 +243,7 @@ box-sizing:border-box;
 border-radius:15px;
 
 
-
 transform:translateY(0);
-
 
 transition:2s ease;
 
@@ -309,28 +251,22 @@ transition:2s ease;
 z-index:5;
 
 
-box-shadow:
-0 0 20px rgba(0,0,0,.4);
+box-shadow:0 0 20px rgba(0,0,0,.4);
 
 
 }
-
 
 
 
 #paper.open{
 
-
 transform:translateY(-170px);
-
 
 }
 
 
 
-
 #letterText{
-
 
 text-align:center;
 
@@ -345,20 +281,13 @@ white-space:pre-line;
 
 
 
-
-/* FLAP */
-
-
 #flap{
 
-
 position:absolute;
-
 
 top:0;
 
 left:0;
-
 
 width:0;
 
@@ -369,32 +298,22 @@ border-left:165px solid transparent;
 
 border-right:165px solid transparent;
 
-
 border-top:120px solid #ff6f9c;
 
 
 z-index:10;
 
-
 }
 
 
 
-
-
-/* HEART SEAL */
-
-
 #seal{
 
-
 position:absolute;
-
 
 top:75px;
 
 left:140px;
-
 
 width:50px;
 
@@ -425,12 +344,6 @@ z-index:20;
 
 
 
-
-
-
-/* FIREWORK */
-
-
 #fireworks{
 
 position:fixed;
@@ -449,25 +362,18 @@ z-index:50;
 </head>
 
 
-
 <body>
 
 
 
 <div id="startScreen">
 
+<h1>❤️ I'm Sorry Naziff</h1>
 
-<h1>
-❤️ I'm Sorry Naziff
-</h1>
-
-
-<p>
-Click Anywhere
-</p>
-
+<p>Click Anywhere</p>
 
 </div>
+
 
 
 
@@ -484,7 +390,6 @@ Click Anywhere
 
 
 <div id="lyrics"></div>
-
 
 
 
@@ -518,7 +423,7 @@ I
 <img src="photo2.jpg">
 
 <div class="caption">
-MISS
+Love
 </div>
 
 </div>
@@ -531,7 +436,7 @@ MISS
 <img src="photo3.jpg">
 
 <div class="caption">
-US
+You
 </div>
 
 </div>
@@ -548,13 +453,15 @@ US
 <div id="envelopeBox">
 
 
-
 <div id="envelope">
+
 
 
 <div id="paper">
 
+
 <div id="letterText"></div>
+
 
 </div>
 
@@ -571,16 +478,13 @@ US
 
 </div>
 
-
 </div>
 
 
 
 
 
-
 </div>
-
 
 
 
@@ -595,71 +499,119 @@ US
 
 
 
-
-
 <script>
 
 
 
 
 
+/* LYRICS SYNC */
+
+
 const lyrics=[
 
 
-["So, what if I call",4200],
+{
+text:"So, what if I call",
+time:0
+},
 
-["And you pick up the phone?",4300],
 
-["And I use this holiday to make my way to your ghost",7800],
+{
+text:"And you pick up the phone?",
+time:4.2
+},
 
-["Or what if you're lonely",4500],
 
-["And you know I am too",3500],
+{
+text:"And I use this holiday to make my way to your ghost",
+time:8.5
+},
 
-["And I get the chance to say",6000],
 
-["I'm sorry Naziff, I miss you ❤️",5000]
+{
+text:"Or what if you're lonely",
+time:16
+},
+
+
+{
+text:"And you know I am too",
+time:21
+},
+
+
+{
+text:"And I get the chance to say",
+time:25
+},
+
+
+{
+text:"I'm sorry Naziff, I miss you ❤️",
+time:31
+}
+
 
 ];
 
 
 
 
-let box=document.getElementById("lyrics");
+
+let lyricBox =
+document.getElementById("lyrics");
+
+
+let currentLine=-1;
 
 
 
 
 
-async function showLyrics(){
+function syncLyrics(){
+
+
+let song =
+document.getElementById("bgMusic");
+
+
+let now=song.currentTime;
 
 
 
-await new Promise(r=>setTimeout(r,500));
+for(let i=0;i<lyrics.length;i++){
+
+
+if(
+now>=lyrics[i].time &&
+now<(lyrics[i+1]?.time || 999)
+
+){
 
 
 
-for(let item of lyrics){
+if(currentLine!==i){
 
 
-box.innerHTML=item[0];
+lyricBox.innerHTML =
+lyrics[i].text;
 
 
-await new Promise(r=>
+currentLine=i;
 
-setTimeout(r,item[1])
 
-);
+}
 
 
 }
 
 
 
-box.innerHTML="";
+}
 
 
-showEnding();
+requestAnimationFrame(syncLyrics);
 
 
 }
@@ -667,6 +619,11 @@ showEnding();
 
 
 
+
+
+
+
+/* ENDING */
 
 
 function showEnding(){
@@ -679,6 +636,7 @@ document
 
 
 startFireworks();
+
 
 
 
@@ -696,6 +654,9 @@ document
 
 
 
+/* LETTER AFTER 10 SEC */
+
+
 setTimeout(()=>{
 
 
@@ -704,11 +665,13 @@ document
 .classList.add("open");
 
 
-},2500);
+},10000);
 
 
 
 
+
+/* TYPE AFTER OPEN */
 
 
 setTimeout(()=>{
@@ -717,7 +680,7 @@ setTimeout(()=>{
 typeLetter();
 
 
-},4500);
+},12000);
 
 
 
@@ -734,23 +697,17 @@ typeLetter();
 function typeLetter(){
 
 
-
 const text =
 
 `I'm sorry Naziff ❤️
 Thank you for every moment.
-Please give me another chance
+Please give me another chance.
 I hope we can be okay again ❤️`;
 
 
 
 let target =
 document.getElementById("letterText");
-
-
-
-target.innerHTML="";
-
 
 
 let i=0;
@@ -791,8 +748,10 @@ clearInterval(timer);
 
 
 
-function createSnow(){
+/* SNOW */
 
+
+function createSnow(){
 
 
 let snow=document.createElement("div");
@@ -805,17 +764,17 @@ snow.innerHTML="❅";
 
 
 
-snow.style.left=
+snow.style.left =
 Math.random()*100+"vw";
 
 
 
-snow.style.fontSize=
+snow.style.fontSize =
 (10+Math.random()*20)+"px";
 
 
 
-snow.style.animationDuration=
+snow.style.animationDuration =
 (4+Math.random()*6)+"s";
 
 
@@ -826,10 +785,11 @@ document.body.appendChild(snow);
 
 setTimeout(()=>{
 
+
 snow.remove();
 
-},10000);
 
+},10000);
 
 
 }
@@ -844,6 +804,9 @@ setInterval(createSnow,120);
 
 
 
+
+
+/* FIREWORK */
 
 
 const canvas =
@@ -876,29 +839,28 @@ let y=Math.random()*canvas.height/2;
 
 
 
-
 for(let i=0;i<80;i++){
 
 
 
-let angle=Math.PI*2*i/80;
+let a=Math.PI*2*i/80;
 
 
 
-let hx=
-16*Math.pow(Math.sin(angle),3);
+let hx =
+16*Math.pow(Math.sin(a),3);
 
 
 
 let hy=-(
 
-13*Math.cos(angle)
+13*Math.cos(a)
 
--5*Math.cos(2*angle)
+-5*Math.cos(2*a)
 
--2*Math.cos(3*angle)
+-2*Math.cos(3*a)
 
--Math.cos(4*angle)
+-Math.cos(4*a)
 
 );
 
@@ -920,7 +882,6 @@ life:100
 });
 
 
-
 }
 
 
@@ -935,13 +896,15 @@ life:100
 function animateFirework(){
 
 
-
-ctx.clearRect(0,0,canvas.width,canvas.height);
+ctx.clearRect(
+0,0,
+canvas.width,
+canvas.height
+);
 
 
 
 particles.forEach((p,index)=>{
-
 
 
 p.x+=p.vx;
@@ -955,7 +918,12 @@ p.life--;
 
 ctx.font="20px serif";
 
-ctx.fillText("❤️",p.x,p.y);
+
+ctx.fillText(
+"❤️",
+p.x,
+p.y
+);
 
 
 
@@ -966,11 +934,14 @@ particles.splice(index,1);
 }
 
 
+
 });
 
 
 
-requestAnimationFrame(animateFirework);
+requestAnimationFrame(
+animateFirework
+);
 
 
 
@@ -978,9 +949,7 @@ requestAnimationFrame(animateFirework);
 
 
 
-
 animateFirework();
-
 
 
 
@@ -996,8 +965,8 @@ setInterval(()=>{
 heartFirework();
 
 
-
 },1500);
+
 
 
 }
@@ -1010,14 +979,17 @@ heartFirework();
 
 
 
+/* START */
+
+
 document
 .getElementById("startScreen")
 .addEventListener("click",()=>{
 
 
-
 let music =
 document.getElementById("bgMusic");
+
 
 
 music.currentTime=0;
@@ -1033,11 +1005,16 @@ document
 
 
 
-showLyrics();
+syncLyrics();
+
+
+showEnding();
 
 
 
 },{once:true});
+
+
 
 
 
@@ -1046,4 +1023,5 @@ showLyrics();
 
 
 </body>
+
 </html>
