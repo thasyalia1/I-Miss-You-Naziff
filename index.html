@@ -170,16 +170,20 @@ html, body {
     color: white;
 }
 
-/* ===== SNOW - WHITE SNOWFLAKES (FIXED) ===== */
+/* ===== SNOWFLAKE KRISTAL CANTIK - 6 HUJUNG ===== */
 .snowflake {
     position: absolute;
-    color: white !important;
-    animation: fall linear infinite;
     pointer-events: none;
     will-change: transform;
-    font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
-    text-shadow: 0 0 5px rgba(255,255,255,0.3);
     opacity: 0.9;
+    animation: fall linear infinite;
+}
+
+/* Lukis snowflake guna SVG */
+.snowflake svg {
+    display: block;
+    width: 100%;
+    height: 100%;
 }
 
 @keyframes fall {
@@ -753,29 +757,113 @@ function typeLetter() {
 }
 
 // ============================================
-// SNOW - WHITE SNOWFLAKES (FIXED)
+// SNOWFLAKE KRISTAL CANTIK - 6 HUJUNG
 // ============================================
-function createSnow() {
-    let snow = document.createElement("div");
-    snow.className = "snowflake";
+function createSnowflakeSVG(size) {
+    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    svg.setAttribute("viewBox", "-50 -50 100 100");
+    svg.setAttribute("width", size);
+    svg.setAttribute("height", size);
     
-    // Force white snowflake character
-    snow.textContent = "❄";
-    snow.style.color = "white";
-    snow.style.fontSize = (10 + Math.random() * 25) + "px";
-    snow.style.left = Math.random() * 100 + "vw";
-    snow.style.animationDuration = (6 + Math.random() * 12) + "s";
-    snow.style.opacity = 0.3 + Math.random() * 0.7;
-    snow.style.textShadow = "0 0 10px rgba(255,255,255,0.5)";
+    const center = 0;
+    const armLength = 40;
+    const branchLength = 18;
     
-    document.body.appendChild(snow);
+    // Warna putih dengan sedikit transparency
+    const color = "rgba(255,255,255,0.9)";
     
-    setTimeout(() => {
-        snow.remove();
-    }, 18000);
+    // Lukis 6 arm (lengan) snowflake
+    for (let i = 0; i < 6; i++) {
+        const angle = (i * 60) * Math.PI / 180;
+        const x = Math.cos(angle) * armLength;
+        const y = Math.sin(angle) * armLength;
+        
+        // Garisan utama
+        const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+        line.setAttribute("x1", "0");
+        line.setAttribute("y1", "0");
+        line.setAttribute("x2", x);
+        line.setAttribute("y2", y);
+        line.setAttribute("stroke", color);
+        line.setAttribute("stroke-width", "3");
+        line.setAttribute("stroke-linecap", "round");
+        svg.appendChild(line);
+        
+        // Cabang kecil di hujung
+        for (let j = -1; j <= 1; j+=2) {
+            const branchAngle = angle + (j * 50 * Math.PI / 180);
+            const branchX = x * 0.6;
+            const branchY = y * 0.6;
+            const branchEndX = branchX + Math.cos(branchAngle) * branchLength;
+            const branchEndY = branchY + Math.sin(branchAngle) * branchLength;
+            
+            const branch = document.createElementNS("http://www.w3.org/2000/svg", "line");
+            branch.setAttribute("x1", branchX);
+            branch.setAttribute("y1", branchY);
+            branch.setAttribute("x2", branchEndX);
+            branch.setAttribute("y2", branchEndY);
+            branch.setAttribute("stroke", color);
+            branch.setAttribute("stroke-width", "2");
+            branch.setAttribute("stroke-linecap", "round");
+            svg.appendChild(branch);
+        }
+        
+        // Diamond kecil di hujung
+        const diamond = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+        diamond.setAttribute("cx", x);
+        diamond.setAttribute("cy", y);
+        diamond.setAttribute("r", "3");
+        diamond.setAttribute("fill", color);
+        svg.appendChild(diamond);
+    }
+    
+    // Bulatan di tengah
+    const centerCircle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+    centerCircle.setAttribute("cx", "0");
+    centerCircle.setAttribute("cy", "0");
+    centerCircle.setAttribute("r", "6");
+    centerCircle.setAttribute("fill", color);
+    svg.appendChild(centerCircle);
+    
+    // Hiasan tambahan - 6 titik di antara lengan
+    for (let i = 0; i < 6; i++) {
+        const angle = (i * 60 + 30) * Math.PI / 180;
+        const dotX = Math.cos(angle) * 25;
+        const dotY = Math.sin(angle) * 25;
+        
+        const dot = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+        dot.setAttribute("cx", dotX);
+        dot.setAttribute("cy", dotY);
+        dot.setAttribute("r", "1.5");
+        dot.setAttribute("fill", color);
+        svg.appendChild(dot);
+    }
+    
+    return svg;
 }
 
-snowInterval = setInterval(createSnow, 80);
+function createSnow() {
+    const snowflake = document.createElement('div');
+    snowflake.className = 'snowflake';
+    
+    const size = 25 + Math.random() * 35;
+    const svg = createSnowflakeSVG(size);
+    snowflake.appendChild(svg);
+    
+    snowflake.style.left = Math.random() * 100 + 'vw';
+    snowflake.style.width = size + 'px';
+    snowflake.style.height = size + 'px';
+    snowflake.style.animationDuration = (8 + Math.random() * 14) + 's';
+    snowflake.style.opacity = 0.3 + Math.random() * 0.6;
+    
+    document.body.appendChild(snowflake);
+    
+    setTimeout(() => {
+        snowflake.remove();
+    }, 22000);
+}
+
+snowInterval = setInterval(createSnow, 100);
 
 // ============================================
 // FIREWORKS
@@ -910,66 +998,4 @@ function startApp(e) {
     
     let music = document.getElementById("bgMusic");
     
-    let playPromise = music.play();
-    if (playPromise !== undefined) {
-        playPromise.then(() => {
-            console.log("Audio playing");
-        }).catch((err) => {
-            console.log("Audio play failed:", err);
-            document.addEventListener('touchstart', function retry() {
-                music.play().catch(() => {});
-                document.removeEventListener('touchstart', retry);
-            }, {once: true});
-        });
-    }
-    
-    document.getElementById("startScreen").style.display = "none";
-    showLyrics();
-}
-
-// Event listeners
-document.getElementById("startScreen").addEventListener("click", startApp, {once: true});
-document.getElementById("startScreen").addEventListener("touchstart", function(e) {
-    e.preventDefault();
-    startApp(e);
-}, {once: true, passive: false});
-
-document.addEventListener('touchstart', function firstTouch(e) {
-    if (!musicStarted && document.getElementById("startScreen").style.display !== "none") {
-        startApp(e);
-    }
-    document.removeEventListener('touchstart', firstTouch);
-}, {once: true, passive: false});
-
-document.addEventListener('keydown', function(e) {
-    if ((e.key === ' ' || e.key === 'Enter') && !musicStarted) {
-        e.preventDefault();
-        startApp(e);
-    }
-}, {once: true});
-
-// ============================================
-// RESIZE
-// ============================================
-window.addEventListener('resize', function() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    resizeHeart();
-    document.body.style.height = window.innerHeight + 'px';
-});
-
-// ============================================
-// CLEANUP
-// ============================================
-window.addEventListener('beforeunload', function() {
-    if (syncId) cancelAnimationFrame(syncId);
-    if (snowInterval) clearInterval(snowInterval);
-    if (fireworksInterval) clearInterval(fireworksInterval);
-    if (floatingHeartInterval) clearInterval(floatingHeartInterval);
-});
-
-console.log("❤️ Final version loaded - Compatible with iPhone, iPad, and Mac ❤️");
-</script>
-
-</body>
-</html>
+    let playPromise = music
