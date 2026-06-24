@@ -170,20 +170,15 @@ html, body {
     color: white;
 }
 
-/* ===== SNOW - MENGGUNAKAN SVG UNTUK PASTIKAN PUTIH ===== */
+/* ===== SNOW - ORIGINAL STYLE - FIXED FOR iOS ===== */
 .snowflake {
     position: absolute;
+    color: white;
+    animation: fall linear infinite;
     pointer-events: none;
     will-change: transform;
-    animation: fall linear infinite;
-    opacity: 0.8;
-}
-
-.snowflake svg {
-    display: block;
-    width: 100%;
-    height: 100%;
-    fill: white;
+    font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
+    text-shadow: 0 0 5px rgba(255,255,255,0.2);
 }
 
 @keyframes fall {
@@ -605,7 +600,25 @@ function stopFloatingHearts() {
     document.querySelectorAll('.floating-heart').forEach(el => el.remove());
 }
 
-
+// ============================================
+// SPARKLES AROUND ENVELOPE
+// ============================================
+function createSparkles() {
+    const envelope = document.getElementById('envelope');
+    if (!envelope) return;
+    
+    const sparkleEmojis = ['✨', '⭐', '🌟', '💫'];
+    for (let i = 0; i < 6; i++) {
+        const sparkle = document.createElement('div');
+        sparkle.className = 'sparkle';
+        sparkle.innerHTML = sparkleEmojis[Math.floor(Math.random() * sparkleEmojis.length)];
+        sparkle.style.left = (Math.random() * 100) + '%';
+        sparkle.style.top = (Math.random() * 100) + '%';
+        sparkle.style.animationDelay = (Math.random() * 2) + 's';
+        sparkle.style.fontSize = (10 + Math.random() * 15) + 'px';
+        envelope.appendChild(sparkle);
+    }
+}
 
 // ============================================
 // UNIVERSAL COMPATIBILITY
@@ -739,28 +752,22 @@ function typeLetter() {
 }
 
 // ============================================
-// SNOW - MENGGUNAKAN SVG UNTUK PASTIKAN PUTIH
+// SNOW - ORIGINAL STYLE - FIXED FOR iOS
 // ============================================
 function createSnow() {
-    const snow = document.createElement('div');
-    snow.className = 'snowflake';
+    let snow = document.createElement("div");
+    snow.className = "snowflake";
     
-    // Buat snowflake guna SVG - confirm putih!
-    snow.innerHTML = `
-        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-            <path d="M50 5 L55 35 L85 20 L70 45 L95 60 L65 60 L60 90 L50 70 L40 90 L35 60 L5 60 L30 45 L15 20 L45 35 Z" 
-                  fill="white" opacity="0.9"/>
-            <circle cx="50" cy="50" r="8" fill="white" opacity="0.5"/>
-        </svg>
-    `;
+    // Guna character yang iOS tak tukar jadi emoji
+    // Tapi masih nampak macam snowflake
+    snow.textContent = "❄";
     
-    const size = 10 + Math.random() * 25;
-    snow.style.width = size + 'px';
-    snow.style.height = size + 'px';
-    snow.style.left = Math.random() * 100 + 'vw';
-    snow.style.animationDuration = (6 + Math.random() * 12) + 's';
+    // Force white - iOS akan respect ini
+    snow.style.color = "white";
+    snow.style.fontSize = (8 + Math.random() * 20) + "px";
+    snow.style.left = Math.random() * 100 + "vw";
+    snow.style.animationDuration = (6 + Math.random() * 12) + "s";
     snow.style.opacity = 0.2 + Math.random() * 0.8;
-    snow.style.filter = 'drop-shadow(0 0 5px rgba(255,255,255,0.2))';
     
     document.body.appendChild(snow);
     
