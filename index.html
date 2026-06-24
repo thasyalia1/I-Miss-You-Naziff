@@ -109,16 +109,22 @@ html, body {
 #startScreen h1 {
     font-size: clamp(2em, 6vw, 4em);
     text-shadow: 0 0 30px rgba(255,50,100,0.5);
-    animation: glowPulse 2s ease-in-out infinite alternate;
     text-align: center;
     padding: 0 20px;
     pointer-events: none;
     letter-spacing: 2px;
+    animation: titlePulse 1.5s ease-in-out infinite;
 }
 
-@keyframes glowPulse {
-    0% { text-shadow: 0 0 20px rgba(255,50,100,0.3); }
-    100% { text-shadow: 0 0 40px rgba(255,50,100,0.8), 0 0 60px rgba(255,50,100,0.4); }
+@keyframes titlePulse {
+    0%, 100% { 
+        transform: scale(1);
+        text-shadow: 0 0 20px rgba(255,50,100,0.3), 0 0 40px rgba(255,50,100,0.1);
+    }
+    50% { 
+        transform: scale(1.05);
+        text-shadow: 0 0 40px rgba(255,50,100,0.8), 0 0 80px rgba(255,50,100,0.4), 0 0 120px rgba(255,50,100,0.2);
+    }
 }
 
 #startScreen p {
@@ -154,15 +160,16 @@ html, body {
     color: white;
 }
 
-/* ===== SNOW - ORIGINAL WHITE ===== */
+/* ===== SNOW - FIXED FOR iOS (WHITE) ===== */
 .snowflake {
     position: absolute;
     color: white;
-    font-size: 14px;
-    animation: fall linear infinite;
     pointer-events: none;
     will-change: transform;
-    opacity: 0.8;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 100;
+    text-shadow: 0 0 15px rgba(255,255,255,0.3);
+    animation: fall linear infinite;
 }
 
 @keyframes fall {
@@ -513,6 +520,11 @@ html, body {
 
 <script>
 // ============================================
+// FORCE ENABLE TOUCH FOR iOS
+// ============================================
+document.addEventListener('touchstart', function(){}, {passive: true});
+
+// ============================================
 // STARS BACKGROUND
 // ============================================
 function createStars() {
@@ -576,6 +588,25 @@ function stopFloatingHearts() {
     document.querySelectorAll('.floating-heart').forEach(el => el.remove());
 }
 
+// ============================================
+// SPARKLES AROUND ENVELOPE
+// ============================================
+function createSparkles() {
+    const envelope = document.getElementById('envelope');
+    if (!envelope) return;
+    
+    const sparkleEmojis = ['✨', '⭐', '🌟', '💫'];
+    for (let i = 0; i < 6; i++) {
+        const sparkle = document.createElement('div');
+        sparkle.className = 'sparkle';
+        sparkle.innerHTML = sparkleEmojis[Math.floor(Math.random() * sparkleEmojis.length)];
+        sparkle.style.left = (Math.random() * 100) + '%';
+        sparkle.style.top = (Math.random() * 100) + '%';
+        sparkle.style.animationDelay = (Math.random() * 2) + 's';
+        sparkle.style.fontSize = (10 + Math.random() * 15) + 'px';
+        envelope.appendChild(sparkle);
+    }
+}
 
 // ============================================
 // UNIVERSAL COMPATIBILITY
@@ -613,7 +644,7 @@ const lyrics = [
     {text: "Or what if you're lonely", time: 16},
     {text: "And you know I am too", time: 21},
     {text: "And I get the chance to say", time: 25},
-    {text: "im sorry naziff, I miss you ❤️", time: 31}
+    {text: "im sorry naziff, I miss you", time: 31}
 ];
 
 let box = document.getElementById("lyrics");
@@ -662,13 +693,11 @@ function showEnding() {
     if (endingShown) return;
     endingShown = true;
     
-    // Stop floating hearts if any
     stopFloatingHearts();
     
     document.getElementById("ending").style.display = "flex";
     startFireworks();
     
-    // Create sparkles after envelope appears
     setTimeout(() => {
         createSparkles();
     }, 8500);
@@ -690,7 +719,6 @@ function typeLetter() {
     if (letterStarted) return;
     letterStarted = true;
     
-    // Start floating hearts only when letter appears
     setTimeout(() => {
         startFloatingHearts();
     }, 1000);
@@ -704,7 +732,6 @@ function typeLetter() {
         i++;
         if (i >= text.length) {
             clearInterval(timer);
-            // WAIT 8 SAAT before neon heart
             setTimeout(() => {
                 startNeonHeart();
             }, 8000);
@@ -713,22 +740,29 @@ function typeLetter() {
 }
 
 // ============================================
-// SNOW - ORIGINAL WHITE FLAKES
+// SNOW - FIXED FOR iOS (WHITE FLAKES)
 // ============================================
 function createSnow() {
     let snow = document.createElement("div");
     snow.className = "snowflake";
-    snow.textContent = "❄";
+    
+    // Guna bullet point - iOS tak tukar jadi emoji
+    snow.textContent = "●";
+    
     snow.style.left = Math.random() * 100 + "vw";
-    snow.style.fontSize = (8 + Math.random() * 16) + "px";
-    snow.style.animationDuration = (6 + Math.random() * 10) + "s";
-    snow.style.opacity = 0.3 + Math.random() * 0.7;
+    snow.style.fontSize = (8 + Math.random() * 20) + "px";
+    snow.style.animationDuration = (6 + Math.random() * 12) + "s";
+    snow.style.opacity = 0.2 + Math.random() * 0.8;
+    snow.style.color = "white";
+    snow.style.textShadow = "0 0 15px rgba(255,255,255,0.3)";
+    snow.style.fontWeight = "100";
+    snow.style.fontFamily = "Arial, Helvetica, sans-serif";
     
     document.body.appendChild(snow);
     
     setTimeout(() => {
         snow.remove();
-    }, 16000);
+    }, 18000);
 }
 
 snowInterval = setInterval(createSnow, 80);
@@ -841,7 +875,7 @@ function neonDraw() {
         hctx.shadowColor = "#ff4fa3";
         hctx.shadowBlur = 35;
         hctx.fillStyle = "#ff7ed0";
-        hctx.fillText("I love u Naziff", 0, 0);
+        hctx.fillText("I love u Naziff ❤️", 0, 0);
         hctx.restore();
     });
     
@@ -849,7 +883,6 @@ function neonDraw() {
 }
 
 function startNeonHeart() {
-    // Stop floating hearts
     stopFloatingHearts();
     
     document.getElementById("neonHeart").style.display = "block";
