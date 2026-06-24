@@ -170,21 +170,22 @@ html, body {
     color: white;
 }
 
-/* ===== SNOW - ORIGINAL STYLE - FIXED FOR iOS ===== */
+/* ===== SNOW - WHITE SNOWFLAKES (FIXED) ===== */
 .snowflake {
     position: absolute;
-    color: white;
+    color: white !important;
     animation: fall linear infinite;
     pointer-events: none;
     will-change: transform;
     font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
-    text-shadow: 0 0 5px rgba(255,255,255,0.2);
+    text-shadow: 0 0 5px rgba(255,255,255,0.3);
+    opacity: 0.9;
 }
 
 @keyframes fall {
     0% {
         transform: translateY(-10vh) translateX(0px) rotate(0deg);
-        opacity: 0.8;
+        opacity: 0.9;
     }
     25% {
         transform: translateY(20vh) translateX(20px) rotate(90deg);
@@ -196,7 +197,7 @@ html, body {
     }
     75% {
         transform: translateY(80vh) translateX(20px) rotate(270deg);
-        opacity: 0.6;
+        opacity: 0.7;
     }
     100% {
         transform: translateY(110vh) translateX(-10px) rotate(360deg);
@@ -752,22 +753,20 @@ function typeLetter() {
 }
 
 // ============================================
-// SNOW - ORIGINAL STYLE - FIXED FOR iOS
+// SNOW - WHITE SNOWFLAKES (FIXED)
 // ============================================
 function createSnow() {
     let snow = document.createElement("div");
     snow.className = "snowflake";
     
-    // Guna character yang iOS tak tukar jadi emoji
-    // Tapi masih nampak macam snowflake
+    // Force white snowflake character
     snow.textContent = "❄";
-    
-    // Force white - iOS akan respect ini
     snow.style.color = "white";
-    snow.style.fontSize = (8 + Math.random() * 20) + "px";
+    snow.style.fontSize = (10 + Math.random() * 25) + "px";
     snow.style.left = Math.random() * 100 + "vw";
     snow.style.animationDuration = (6 + Math.random() * 12) + "s";
-    snow.style.opacity = 0.2 + Math.random() * 0.8;
+    snow.style.opacity = 0.3 + Math.random() * 0.7;
+    snow.style.textShadow = "0 0 10px rgba(255,255,255,0.5)";
     
     document.body.appendChild(snow);
     
