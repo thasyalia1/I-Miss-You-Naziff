@@ -108,36 +108,16 @@ html, body {
 
 #startScreen h1 {
     font-size: clamp(2em, 6vw, 4em);
-    text-shadow: 0 0 30px rgba(255,50,100,0.5), 0 0 60px rgba(255,50,100,0.3);
+    text-shadow: 0 0 30px rgba(255,50,100,0.5);
     animation: glowPulse 2s ease-in-out infinite alternate;
     text-align: center;
     padding: 0 20px;
     pointer-events: none;
-    position: relative;
-}
-
-#startScreen h1::before {
-    content: '💕';
-    position: absolute;
-    left: -50px;
-    animation: floatHeart 3s ease-in-out infinite;
-}
-
-#startScreen h1::after {
-    content: '💕';
-    position: absolute;
-    right: -50px;
-    animation: floatHeart 3s ease-in-out infinite 1.5s;
 }
 
 @keyframes glowPulse {
-    0% { text-shadow: 0 0 20px rgba(255,50,100,0.3), 0 0 40px rgba(255,50,100,0.1); }
-    100% { text-shadow: 0 0 40px rgba(255,50,100,0.8), 0 0 80px rgba(255,50,100,0.4), 0 0 120px rgba(255,50,100,0.2); }
-}
-
-@keyframes floatHeart {
-    0%, 100% { transform: translateY(0) scale(1); }
-    50% { transform: translateY(-20px) scale(1.2); }
+    0% { text-shadow: 0 0 20px rgba(255,50,100,0.3); }
+    100% { text-shadow: 0 0 40px rgba(255,50,100,0.8), 0 0 60px rgba(255,50,100,0.4); }
 }
 
 #startScreen p {
@@ -150,27 +130,6 @@ html, body {
     background: rgba(255,100,150,0.1);
     border-radius: 50px;
     border: 1px solid rgba(255,100,150,0.3);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    box-shadow: 0 0 30px rgba(255,100,150,0.1);
-    position: relative;
-    overflow: hidden;
-}
-
-#startScreen p::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: conic-gradient(from 0deg, transparent, rgba(255,100,150,0.1), transparent, rgba(255,100,150,0.1), transparent);
-    animation: rotateBorder 4s linear infinite;
-}
-
-@keyframes rotateBorder {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
 }
 
 @keyframes pulse {
@@ -187,21 +146,11 @@ html, body {
     text-align: center;
     font-size: clamp(1.2em, 3.5vw, 2.5em);
     z-index: 10;
-    text-shadow: 0 0 20px rgba(255,100,150,0.5), 0 0 40px rgba(255,100,150,0.2);
+    text-shadow: 0 0 20px rgba(255,255,255,0.3);
     padding: 0 20px;
     pointer-events: none;
     line-height: 1.6;
-    background: linear-gradient(45deg, #ff6b9d, #ff2d75, #ff6b9d);
-    background-size: 200% 200%;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    animation: gradientMove 3s ease-in-out infinite;
-}
-
-@keyframes gradientMove {
-    0%, 100% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
+    color: white;
 }
 
 /* ===== SNOW ===== */
@@ -211,7 +160,7 @@ html, body {
     animation: fall linear infinite;
     pointer-events: none;
     will-change: transform;
-    text-shadow: 0 0 10px rgba(255,255,255,0.5);
+    text-shadow: 0 0 10px rgba(255,255,255,0.3);
 }
 
 @keyframes fall {
@@ -290,16 +239,10 @@ html, body {
     position: relative;
     width: clamp(280px, 40vw, 400px);
     height: clamp(180px, 25vw, 250px);
-    background: linear-gradient(135deg, #ff9fbc, #ff7da8);
+    background: #ff9fbc;
     border-radius: 15px;
     overflow: visible;
-    box-shadow: 0 10px 40px rgba(255,100,150,0.3), inset 0 1px 0 rgba(255,255,255,0.3);
-    animation: envelopeFloat 3s ease-in-out infinite;
-}
-
-@keyframes envelopeFloat {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
+    box-shadow: 0 10px 40px rgba(255,100,150,0.3);
 }
 
 #flap {
@@ -311,7 +254,6 @@ html, body {
     border-top: clamp(100px, 14vw, 150px) solid #ff6f9c;
     z-index: 5;
     transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-    filter: drop-shadow(0 -5px 10px rgba(255,100,150,0.2));
 }
 
 #paper {
@@ -320,7 +262,7 @@ html, body {
     bottom: clamp(15px, 2vw, 25px);
     width: calc(100% - clamp(20px, 3vw, 40px));
     min-height: clamp(180px, 25vw, 280px);
-    background: linear-gradient(135deg, #ffffff, #fff5f7);
+    background: white;
     color: black;
     padding: clamp(15px, 2.5vw, 30px);
     border-radius: 12px;
@@ -344,13 +286,6 @@ html, body {
     color: #333;
 }
 
-#letterText::before {
-    content: '💌';
-    display: block;
-    font-size: 30px;
-    margin-bottom: 10px;
-}
-
 #seal {
     position: absolute;
     top: clamp(70px, 10vw, 100px);
@@ -358,22 +293,21 @@ html, body {
     transform: translateX(-50%);
     width: clamp(40px, 5vw, 60px);
     height: clamp(40px, 5vw, 60px);
-    background: radial-gradient(circle at 30% 30%, #ff6b9d, #ff2d75);
+    background: #ff3366;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 20;
     font-size: clamp(18px, 2.5vw, 28px);
-    box-shadow: 0 0 30px rgba(255,51,102,0.5), inset 0 -2px 5px rgba(0,0,0,0.2);
+    box-shadow: 0 0 30px rgba(255,51,102,0.5);
     animation: sealPulse 2s infinite;
     pointer-events: none;
-    border: 2px solid rgba(255,255,255,0.3);
 }
 
 @keyframes sealPulse {
-    0%, 100% { transform: translateX(-50%) scale(1); box-shadow: 0 0 30px rgba(255,51,102,0.5); }
-    50% { transform: translateX(-50%) scale(1.1); box-shadow: 0 0 60px rgba(255,51,102,0.8), 0 0 90px rgba(255,51,102,0.4); }
+    0%, 100% { transform: translateX(-50%) scale(1); }
+    50% { transform: translateX(-50%) scale(1.1); }
 }
 
 /* ===== FIREWORKS ===== */
@@ -528,12 +462,12 @@ function createShootingStar() {
 setInterval(createShootingStar, 3000);
 
 // ============================================
-// FLOATING HEARTS
+// FLOATING HEARTS - Kurang sikit
 // ============================================
 function createFloatingHeart() {
     const heart = document.createElement('div');
     heart.className = 'floating-heart';
-    heart.innerHTML = ['❤️', '💕', '💗', '💖', '💝'][Math.floor(Math.random() * 5)];
+    heart.innerHTML = ['❤️', '💕', '💗'][Math.floor(Math.random() * 3)];
     heart.style.left = Math.random() * 100 + '%';
     heart.style.fontSize = (20 + Math.random() * 30) + 'px';
     heart.style.animationDuration = (8 + Math.random() * 6) + 's';
@@ -542,7 +476,7 @@ function createFloatingHeart() {
     setTimeout(() => heart.remove(), 14000);
 }
 
-setInterval(createFloatingHeart, 500);
+setInterval(createFloatingHeart, 800);
 
 // ============================================
 // UNIVERSAL COMPATIBILITY
@@ -580,7 +514,7 @@ const lyrics = [
     {text: "Or what if you're lonely", time: 16},
     {text: "And you know I am too", time: 21},
     {text: "And I get the chance to say", time: 25},
-    {text: "im sorry naziff, I miss you ❤️", time: 31}
+    {text: "im sorry naziff, I miss you", time: 31}
 ];
 
 let box = document.getElementById("lyrics");
@@ -663,7 +597,7 @@ function typeLetter() {
                 startNeonHeart();
             }, 8000);
         }
-    }, 60);
+    }, 30);
 }
 
 // ============================================
@@ -672,25 +606,23 @@ function typeLetter() {
 function createSnow() {
     let snow = document.createElement("div");
     snow.className = "snowflake";
-    const emojis = ['❅', '❆', '✦', '♥'];
-    snow.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
+    snow.innerHTML = '❄️';
     snow.style.left = Math.random() * 100 + "vw";
-    snow.style.fontSize = (10 + Math.random() * 25) + "px";
-    snow.style.animationDuration = (4 + Math.random() * 8) + "s";
+    snow.style.fontSize = (10 + Math.random() * 20) + "px";
+    snow.style.animationDuration = (4 + Math.random() * 6) + "s";
     snow.style.opacity = 0.3 + Math.random() * 0.7;
-    snow.style.color = ['white', '#ffb3d9', '#ff80bf', '#ff4da6'][Math.floor(Math.random() * 4)];
     
     document.body.appendChild(snow);
     
     setTimeout(() => {
         snow.remove();
-    }, 12000);
+    }, 10000);
 }
 
-snowInterval = setInterval(createSnow, 100);
+snowInterval = setInterval(createSnow, 120);
 
 // ============================================
-// FIREWORKS
+// FIREWORKS - ORIGINAL BACK
 // ============================================
 const canvas = document.getElementById("fireworks");
 const ctx = canvas.getContext("2d");
@@ -701,24 +633,20 @@ canvas.height = window.innerHeight;
 let particles = [];
 
 function heartFirework() {
-    const colors = ['#ff2d75', '#ff6b9d', '#ff4da6', '#ff80bf', '#ffb3d9', '#ff1a5e'];
     let x = Math.random() * canvas.width;
     let y = Math.random() * canvas.height / 2;
-    let color = colors[Math.floor(Math.random() * colors.length)];
     
-    for (let i = 0; i < 120; i++) {
-        let angle = Math.PI * 2 * i / 120;
+    for (let i = 0; i < 80; i++) {
+        let angle = Math.PI * 2 * i / 80;
         let hx = 16 * Math.pow(Math.sin(angle), 3);
         let hy = -(13 * Math.cos(angle) - 5 * Math.cos(2 * angle) - 2 * Math.cos(3 * angle) - Math.cos(4 * angle));
         
         particles.push({
             x: x,
             y: y,
-            vx: hx / 6 + (Math.random() - 0.5) * 0.5,
-            vy: hy / 6 + (Math.random() - 0.5) * 0.5,
-            life: 120 + Math.random() * 40,
-            color: color,
-            size: 15 + Math.random() * 15
+            vx: hx / 8,
+            vy: hy / 8,
+            life: 100
         });
     }
 }
@@ -729,17 +657,11 @@ function animateFirework() {
     particles.forEach((p, index) => {
         p.x += p.vx;
         p.y += p.vy;
-        p.vx *= 0.99;
-        p.vy *= 0.99;
         p.life--;
         
-        ctx.font = p.size + "px serif";
+        ctx.font = "20px serif";
         ctx.textAlign = "center";
-        ctx.shadowColor = p.color;
-        ctx.shadowBlur = 30;
-        ctx.fillStyle = p.color;
         ctx.fillText("❤️", p.x, p.y);
-        ctx.shadowBlur = 0;
         
         if (p.life <= 0) {
             particles.splice(index, 1);
@@ -753,12 +675,9 @@ animateFirework();
 
 function startFireworks() {
     if (fireworksInterval) clearInterval(fireworksInterval);
-    heartFirework();
-    heartFirework();
     fireworksInterval = setInterval(() => {
         heartFirework();
-        setTimeout(() => heartFirework(), 300);
-    }, 2000);
+    }, 1500);
 }
 
 // ============================================
@@ -780,68 +699,39 @@ let ttt = 0;
 
 function makeHeart() {
     points = [];
-    for (let i = 0; i < 200; i++) {
-        let t = Math.PI * 2 * i / 200;
+    for (let i = 0; i < 160; i++) {
+        let t = Math.PI * 2 * i / 160;
         let x = 16 * Math.pow(Math.sin(t), 3);
         let y = -(13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t));
         
         points.push({
-            x: x * 20,
-            y: y * 20,
-            phase: Math.random() * 10,
-            size: 18 + Math.random() * 15
+            x: x * 18,
+            y: y * 18,
+            phase: Math.random() * 10
         });
     }
 }
 
 function neonDraw() {
     hctx.clearRect(0, 0, hCanvas.width, hCanvas.height);
-    ttt += 0.02;
+    ttt += 0.03;
     
     let cx = hCanvas.width / 2;
     let cy = hCanvas.height / 2;
     
-    // Glow background
-    let gradient = hctx.createRadialGradient(cx, cy, 0, cx, cy, 300);
-    gradient.addColorStop(0, 'rgba(255,50,100,0.05)');
-    gradient.addColorStop(1, 'rgba(255,50,100,0)');
-    hctx.fillStyle = gradient;
-    hctx.fillRect(0, 0, hCanvas.width, hCanvas.height);
-    
-    points.forEach((p, i) => {
-        let pulse = Math.sin(ttt + p.phase) * 8;
-        let scale = 1 + Math.sin(ttt * 0.5 + i * 0.1) * 0.1;
+    points.forEach(p => {
+        let pulse = Math.sin(ttt + p.phase) * 5;
         
         hctx.save();
-        hctx.translate(cx + p.x * scale + pulse, cy + p.y * scale + pulse);
-        hctx.font = `bold ${p.size}px Arial`;
+        hctx.translate(cx + p.x + pulse, cy + p.y + pulse);
+        hctx.font = "bold 22px Arial";
         hctx.textAlign = "center";
-        hctx.textBaseline = "middle";
-        
-        // Outer glow
         hctx.shadowColor = "#ff4fa3";
-        hctx.shadowBlur = 50;
+        hctx.shadowBlur = 35;
         hctx.fillStyle = "#ff7ed0";
-        hctx.fillText("❤️", 0, 0);
-        
-        // Inner glow
-        hctx.shadowBlur = 0;
-        hctx.fillStyle = "white";
-        hctx.fillText("❤️", 0, 0);
-        
+        hctx.fillText("I love u Naziff", 0, 0);
         hctx.restore();
     });
-    
-    // Add text in center
-    hctx.save();
-    hctx.shadowColor = "#ff4fa3";
-    hctx.shadowBlur = 40;
-    hctx.font = `bold ${Math.min(30, hCanvas.width / 20)}px Arial`;
-    hctx.textAlign = "center";
-    hctx.textBaseline = "middle";
-    hctx.fillStyle = "#ff7ed0";
-    hctx.fillText("I love u Naziff", cx, cy + 250 + Math.sin(ttt) * 10);
-    hctx.restore();
     
     requestAnimationFrame(neonDraw);
 }
@@ -920,7 +810,7 @@ window.addEventListener('beforeunload', function() {
     if (floatHeartInterval) clearInterval(floatHeartInterval);
 });
 
-console.log("❤️ Ultimate version loaded - Compatible with iPhone, iPad, and Mac ❤️");
+console.log("❤️ Final version loaded - Compatible with iPhone, iPad, and Mac ❤️");
 </script>
 
 </body>
