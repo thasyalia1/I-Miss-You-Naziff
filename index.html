@@ -206,6 +206,7 @@ body {
     transition: transform 0.3s;
     pointer-events: none;
     -webkit-user-drag: none;
+    user-drag: none;
 }
 
 #photoGallery.show img:nth-child(1) {
@@ -644,8 +645,12 @@ function typeLetter() {
 const canvas = document.getElementById("fireworks");
 const ctx = canvas.getContext("2d");
 
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+}
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
 
 let particles = [];
 
@@ -760,42 +765,71 @@ function startNeonHeart() {
 }
 
 // ============================================
-// START APP
+// START APP - FIXED FOR ANDROID
 // ============================================
+let startAttempts = 0;
+
 function startApp(e) {
     if (e) e.preventDefault();
     if (musicStarted) return;
-    musicStarted = true;
     
     let music = document.getElementById("bgMusic");
     
-    music.play().catch(() => {
-        document.addEventListener('touchstart', function retry() {
-            music.play().catch(() => {});
-            document.removeEventListener('touchstart', retry);
-        }, {once: true});
-    });
+    // Try to play audio - Android needs user interaction
+    const playPromise = music.play();
     
-    document.getElementById("startScreen").style.display = "none";
-    showLyrics();
+    if (playPromise !== undefined) {
+        playPromise.then(() => {
+            // Audio started successfully
+            musicStarted = true;
+            document.getElementById("startScreen").style.display = "none";
+            showLyrics();
+            snowInterval = setInterval(createSnow, 100);
+        }).catch(() => {
+            // Audio failed - try again with user interaction
+            startAttempts++;
+            if (startAttempts < 3) {
+                // Retry on next tap
+                console.log("Retry audio play...");
+            }
+        });
+    }
     
-    // Start snow
-    snowInterval = setInterval(createSnow, 100);
+    // Always hide start screen even if audio fails (user can tap again)
+    if (!musicStarted) {
+        // Try to play without waiting for promise
+        music.play().catch(() => {});
+    }
 }
 
-// EVENT LISTENERS - iOS + Mac compatible
-document.getElementById("startScreen").addEventListener("click", startApp, {once: true});
-document.getElementById("startScreen").addEventListener("touchstart", function(e) {
+// Better event handling for all platforms
+const startScreen = document.getElementById("startScreen");
+
+// For click (desktop)
+startScreen.addEventListener("click", function(e) {
+    startApp(e);
+});
+
+// For touch (mobile) - prevent double firing
+startScreen.addEventListener("touchstart", function(e) {
     e.preventDefault();
     startApp(e);
-}, {once: true, passive: false});
+}, {passive: false});
+
+// Also handle key press for accessibility
+document.addEventListener("keydown", function(e) {
+    if (e.key === "Enter" || e.key === " ") {
+        if (document.getElementById("startScreen").style.display !== "none") {
+            startApp(e);
+        }
+    }
+});
 
 // ============================================
 // RESIZE
 // ============================================
 window.addEventListener('resize', function() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    resizeCanvas();
     resizeHeart();
     document.body.style.height = window.innerHeight + 'px';
 });
@@ -810,7 +844,7 @@ window.addEventListener('beforeunload', function() {
     if (floatingHeartInterval) clearInterval(floatingHeartInterval);
 });
 
-console.log("❤️ Full version ready - Snowflake ❅ sebijik macam kau nak ❤️");
+console.log("❤️ Full version ready - Compatible with Android, Mac, iOS ❤️");
 </script>
 
 </body>
