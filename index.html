@@ -113,6 +113,7 @@ html, body {
     text-align: center;
     padding: 0 20px;
     pointer-events: none;
+    letter-spacing: 2px;
 }
 
 @keyframes glowPulse {
@@ -160,14 +161,12 @@ html, body {
     animation: fall linear infinite;
     pointer-events: none;
     will-change: transform;
-    text-shadow: 0 0 10px rgba(255,255,255,0.3);
+    font-family: Arial, sans-serif;
 }
 
 @keyframes fall {
-    0% { transform: translateY(-10vh) rotate(0deg) scale(0.5); opacity: 0; }
-    10% { opacity: 1; }
-    90% { opacity: 1; }
-    100% { transform: translateY(110vh) rotate(720deg) scale(1.5); opacity: 0; }
+    0% { transform: translateY(-10vh) rotate(0deg); opacity: 0.8; }
+    100% { transform: translateY(110vh) rotate(360deg); opacity: 0.2; }
 }
 
 /* ===== ENDING ===== */
@@ -234,15 +233,56 @@ html, body {
     box-shadow: 0 0 50px rgba(255,100,150,0.4);
 }
 
-/* ===== ENVELOPE ===== */
+/* ===== ENVELOPE WITH ANIMATION ===== */
+#envelopeContainer {
+    animation: envelopeFloat 3s ease-in-out infinite;
+    position: relative;
+}
+
+@keyframes envelopeFloat {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    25% { transform: translateY(-8px) rotate(-1deg); }
+    75% { transform: translateY(-8px) rotate(1deg); }
+}
+
 #envelope {
     position: relative;
     width: clamp(280px, 40vw, 400px);
     height: clamp(180px, 25vw, 250px);
-    background: #ff9fbc;
+    background: linear-gradient(145deg, #ff9fbc, #ff7da8);
     border-radius: 15px;
     overflow: visible;
-    box-shadow: 0 10px 40px rgba(255,100,150,0.3);
+    box-shadow: 
+        0 10px 40px rgba(255,100,150,0.3),
+        inset 0 1px 0 rgba(255,255,255,0.4),
+        inset 0 -2px 0 rgba(200,80,120,0.3);
+    animation: envelopePulse 2s ease-in-out infinite;
+}
+
+@keyframes envelopePulse {
+    0%, 100% { box-shadow: 0 10px 40px rgba(255,100,150,0.3), inset 0 1px 0 rgba(255,255,255,0.4); }
+    50% { box-shadow: 0 15px 60px rgba(255,100,150,0.5), inset 0 1px 0 rgba(255,255,255,0.4), 0 0 80px rgba(255,100,150,0.1); }
+}
+
+#envelope::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    border-radius: 17px;
+    background: linear-gradient(45deg, #ff6f9c, #ffb3d9, #ff6f9c, #ffb3d9);
+    background-size: 300% 300%;
+    z-index: -1;
+    animation: borderGlow 3s ease-in-out infinite;
+    opacity: 0.5;
+}
+
+@keyframes borderGlow {
+    0% { background-position: 0% 50%; opacity: 0.3; }
+    50% { background-position: 100% 50%; opacity: 0.8; }
+    100% { background-position: 0% 50%; opacity: 0.3; }
 }
 
 #flap {
@@ -254,6 +294,7 @@ html, body {
     border-top: clamp(100px, 14vw, 150px) solid #ff6f9c;
     z-index: 5;
     transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    filter: drop-shadow(0 -5px 10px rgba(255,100,150,0.2));
 }
 
 #paper {
@@ -262,7 +303,7 @@ html, body {
     bottom: clamp(15px, 2vw, 25px);
     width: calc(100% - clamp(20px, 3vw, 40px));
     min-height: clamp(180px, 25vw, 280px);
-    background: white;
+    background: linear-gradient(180deg, #ffffff, #fff5f7);
     color: black;
     padding: clamp(15px, 2.5vw, 30px);
     border-radius: 12px;
@@ -278,12 +319,41 @@ html, body {
     opacity: 1;
 }
 
+#paper::before {
+    content: '✉️';
+    position: absolute;
+    top: -15px;
+    right: -15px;
+    font-size: 30px;
+    transform: rotate(15deg);
+    opacity: 0;
+    transition: all 0.8s ease 0.5s;
+}
+
+#paper.open::before {
+    opacity: 1;
+    transform: rotate(0deg);
+}
+
 #letterText {
     text-align: center;
     line-height: 1.8;
     white-space: pre-line;
     font-size: clamp(12px, 1.5vw, 16px);
     color: #333;
+}
+
+#letterText::before {
+    content: '💌';
+    display: block;
+    font-size: clamp(24px, 3vw, 36px);
+    margin-bottom: 10px;
+    animation: letterStamp 2s ease-in-out infinite;
+}
+
+@keyframes letterStamp {
+    0%, 100% { transform: scale(1) rotate(0deg); }
+    50% { transform: scale(1.1) rotate(-5deg); }
 }
 
 #seal {
@@ -293,21 +363,31 @@ html, body {
     transform: translateX(-50%);
     width: clamp(40px, 5vw, 60px);
     height: clamp(40px, 5vw, 60px);
-    background: #ff3366;
+    background: radial-gradient(circle at 30% 30%, #ff6b9d, #ff2d75);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 20;
     font-size: clamp(18px, 2.5vw, 28px);
-    box-shadow: 0 0 30px rgba(255,51,102,0.5);
+    box-shadow: 
+        0 0 30px rgba(255,51,102,0.5),
+        inset 0 -2px 5px rgba(0,0,0,0.2),
+        inset 0 2px 5px rgba(255,255,255,0.3);
     animation: sealPulse 2s infinite;
     pointer-events: none;
+    border: 2px solid rgba(255,255,255,0.2);
 }
 
 @keyframes sealPulse {
-    0%, 100% { transform: translateX(-50%) scale(1); }
-    50% { transform: translateX(-50%) scale(1.1); }
+    0%, 100% { 
+        transform: translateX(-50%) scale(1); 
+        box-shadow: 0 0 30px rgba(255,51,102,0.5), inset 0 -2px 5px rgba(0,0,0,0.2);
+    }
+    50% { 
+        transform: translateX(-50%) scale(1.15); 
+        box-shadow: 0 0 60px rgba(255,51,102,0.8), 0 0 100px rgba(255,51,102,0.3), inset 0 -2px 5px rgba(0,0,0,0.2);
+    }
 }
 
 /* ===== FIREWORKS ===== */
@@ -355,6 +435,21 @@ html, body {
         opacity: 0;
         transform: translateY(-10vh) scale(1.5) rotate(720deg);
     }
+}
+
+/* ===== SPARKLES AROUND ENVELOPE ===== */
+.sparkle {
+    position: absolute;
+    pointer-events: none;
+    font-size: 12px;
+    animation: sparkleFloat 2s ease-in-out infinite;
+    opacity: 0;
+}
+
+@keyframes sparkleFloat {
+    0% { opacity: 0; transform: scale(0) rotate(0deg); }
+    50% { opacity: 1; transform: scale(1.5) rotate(180deg); }
+    100% { opacity: 0; transform: scale(0) rotate(360deg); }
 }
 
 /* ===== RESPONSIVE ===== */
@@ -407,12 +502,14 @@ html, body {
         <img src="photo3.jpg" alt="Memory 3" draggable="false">
     </div>
 
-    <div id="envelope">
-        <div id="paper">
-            <div id="letterText"></div>
+    <div id="envelopeContainer">
+        <div id="envelope">
+            <div id="paper">
+                <div id="letterText"></div>
+            </div>
+            <div id="flap"></div>
+            <div id="seal">❤️</div>
         </div>
-        <div id="flap"></div>
-        <div id="seal">❤️</div>
     </div>
 </div>
 
@@ -462,7 +559,7 @@ function createShootingStar() {
 setInterval(createShootingStar, 3000);
 
 // ============================================
-// FLOATING HEARTS - Kurang sikit
+// FLOATING HEARTS
 // ============================================
 function createFloatingHeart() {
     const heart = document.createElement('div');
@@ -477,6 +574,26 @@ function createFloatingHeart() {
 }
 
 setInterval(createFloatingHeart, 800);
+
+// ============================================
+// SPARKLES AROUND ENVELOPE
+// ============================================
+function createSparkles() {
+    const envelope = document.getElementById('envelope');
+    if (!envelope) return;
+    
+    const sparkleEmojis = ['✨', '⭐', '🌟', '💫'];
+    for (let i = 0; i < 6; i++) {
+        const sparkle = document.createElement('div');
+        sparkle.className = 'sparkle';
+        sparkle.innerHTML = sparkleEmojis[Math.floor(Math.random() * sparkleEmojis.length)];
+        sparkle.style.left = (Math.random() * 100) + '%';
+        sparkle.style.top = (Math.random() * 100) + '%';
+        sparkle.style.animationDelay = (Math.random() * 2) + 's';
+        sparkle.style.fontSize = (10 + Math.random() * 15) + 'px';
+        envelope.appendChild(sparkle);
+    }
+}
 
 // ============================================
 // UNIVERSAL COMPATIBILITY
@@ -567,6 +684,11 @@ function showEnding() {
     document.getElementById("ending").style.display = "flex";
     startFireworks();
     
+    // Create sparkles after envelope appears
+    setTimeout(() => {
+        createSparkles();
+    }, 8500);
+    
     setTimeout(() => {
         document.getElementById("photoGallery").classList.add("show");
     }, 500);
@@ -597,7 +719,7 @@ function typeLetter() {
                 startNeonHeart();
             }, 8000);
         }
-    }, 30);
+    }, 15);
 }
 
 // ============================================
@@ -606,23 +728,23 @@ function typeLetter() {
 function createSnow() {
     let snow = document.createElement("div");
     snow.className = "snowflake";
-    snow.innerHTML = '❄️';
+    snow.innerHTML = "❄️";
     snow.style.left = Math.random() * 100 + "vw";
     snow.style.fontSize = (10 + Math.random() * 20) + "px";
-    snow.style.animationDuration = (4 + Math.random() * 6) + "s";
-    snow.style.opacity = 0.3 + Math.random() * 0.7;
+    snow.style.animationDuration = (5 + Math.random() * 8) + "s";
+    snow.style.opacity = 0.4 + Math.random() * 0.6;
     
     document.body.appendChild(snow);
     
     setTimeout(() => {
         snow.remove();
-    }, 10000);
+    }, 13000);
 }
 
-snowInterval = setInterval(createSnow, 120);
+snowInterval = setInterval(createSnow, 100);
 
 // ============================================
-// FIREWORKS - ORIGINAL BACK
+// FIREWORKS
 // ============================================
 const canvas = document.getElementById("fireworks");
 const ctx = canvas.getContext("2d");
@@ -810,7 +932,7 @@ window.addEventListener('beforeunload', function() {
     if (floatHeartInterval) clearInterval(floatHeartInterval);
 });
 
-console.log("❤️ Final version loaded - Compatible with iPhone, iPad, and Mac ❤️");
+console.log("❤️ Final version with envelope animation loaded ❤️");
 </script>
 
 </body>
