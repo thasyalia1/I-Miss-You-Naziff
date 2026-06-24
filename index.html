@@ -108,23 +108,33 @@ html, body {
 
 #startScreen h1 {
     font-size: clamp(2em, 6vw, 4em);
-    text-shadow: 0 0 30px rgba(255,50,100,0.5);
     text-align: center;
     padding: 0 20px;
     pointer-events: none;
     letter-spacing: 2px;
-    animation: titlePulse 1.5s ease-in-out infinite;
 }
 
-@keyframes titlePulse {
+#startScreen h1 .heart-pulse {
+    display: inline-block;
+    animation: heartPulse 1.5s ease-in-out infinite;
+    color: #ff3366;
+    text-shadow: 0 0 30px rgba(255,50,100,0.5);
+}
+
+@keyframes heartPulse {
     0%, 100% { 
         transform: scale(1);
         text-shadow: 0 0 20px rgba(255,50,100,0.3), 0 0 40px rgba(255,50,100,0.1);
     }
     50% { 
-        transform: scale(1.05);
+        transform: scale(1.3);
         text-shadow: 0 0 40px rgba(255,50,100,0.8), 0 0 80px rgba(255,50,100,0.4), 0 0 120px rgba(255,50,100,0.2);
     }
+}
+
+#startScreen h1 .title-text {
+    color: white;
+    text-shadow: 0 0 20px rgba(255,255,255,0.2);
 }
 
 #startScreen p {
@@ -160,16 +170,15 @@ html, body {
     color: white;
 }
 
-/* ===== SNOW - FIXED FOR iOS (WHITE) ===== */
+/* ===== SNOW - ORIGINAL SHAPE, FIXED FOR iOS ===== */
 .snowflake {
     position: absolute;
     color: white;
     pointer-events: none;
     will-change: transform;
-    font-family: Arial, Helvetica, sans-serif;
-    font-weight: 100;
-    text-shadow: 0 0 15px rgba(255,255,255,0.3);
+    font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
     animation: fall linear infinite;
+    text-shadow: 0 0 10px rgba(255,255,255,0.2);
 }
 
 @keyframes fall {
@@ -477,7 +486,10 @@ html, body {
 
 <!-- ===== START SCREEN ===== -->
 <div id="startScreen">
-    <h1>❤️ Im Sorry Naziff</h1>
+    <h1>
+        <span class="heart-pulse">❤️</span>
+        <span class="title-text">Im Sorry Naziff</span>
+    </h1>
     <p>👆 Tap to Start</p>
 </div>
 
@@ -740,23 +752,24 @@ function typeLetter() {
 }
 
 // ============================================
-// SNOW - FIXED FOR iOS (WHITE FLAKES)
+// SNOW - ORIGINAL SHAPE, FIXED FOR iOS
 // ============================================
 function createSnow() {
     let snow = document.createElement("div");
     snow.className = "snowflake";
     
-    // Guna bullet point - iOS tak tukar jadi emoji
-    snow.textContent = "●";
+    // Guna ❄ dengan font yang support
+    snow.textContent = "❄";
+    
+    // Force white color and prevent emoji conversion
+    snow.style.color = "white";
+    snow.style.fontFamily = '"Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif';
     
     snow.style.left = Math.random() * 100 + "vw";
     snow.style.fontSize = (8 + Math.random() * 20) + "px";
     snow.style.animationDuration = (6 + Math.random() * 12) + "s";
     snow.style.opacity = 0.2 + Math.random() * 0.8;
-    snow.style.color = "white";
-    snow.style.textShadow = "0 0 15px rgba(255,255,255,0.3)";
-    snow.style.fontWeight = "100";
-    snow.style.fontFamily = "Arial, Helvetica, sans-serif";
+    snow.style.textShadow = "0 0 10px rgba(255,255,255,0.2)";
     
     document.body.appendChild(snow);
     
