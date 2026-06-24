@@ -170,7 +170,7 @@ html, body {
     color: white;
 }
 
-/* ===== SNOWFLAKE KRISTAL CANTIK - 6 HUJUNG ===== */
+/* ===== SNOWFLAKE KRISTAL CANTIK ===== */
 .snowflake {
     position: absolute;
     pointer-events: none;
@@ -179,7 +179,6 @@ html, body {
     animation: fall linear infinite;
 }
 
-/* Lukis snowflake guna SVG */
 .snowflake svg {
     display: block;
     width: 100%;
@@ -268,12 +267,7 @@ html, body {
     100% { transform: scale(1) rotate(0deg); opacity: 1; }
 }
 
-#photoGallery img:hover {
-    transform: scale(1.1) rotate(-3deg);
-    box-shadow: 0 0 50px rgba(255,100,150,0.4);
-}
-
-/* ===== ENVELOPE WITH ANIMATION ===== */
+/* ===== ENVELOPE ===== */
 #envelopeContainer {
     animation: envelopeFloat 3s ease-in-out infinite;
     position: relative;
@@ -304,27 +298,6 @@ html, body {
     50% { box-shadow: 0 15px 60px rgba(255,100,150,0.5), inset 0 1px 0 rgba(255,255,255,0.4), 0 0 80px rgba(255,100,150,0.1); }
 }
 
-#envelope::before {
-    content: '';
-    position: absolute;
-    top: -2px;
-    left: -2px;
-    right: -2px;
-    bottom: -2px;
-    border-radius: 17px;
-    background: linear-gradient(45deg, #ff6f9c, #ffb3d9, #ff6f9c, #ffb3d9);
-    background-size: 300% 300%;
-    z-index: -1;
-    animation: borderGlow 3s ease-in-out infinite;
-    opacity: 0.5;
-}
-
-@keyframes borderGlow {
-    0% { background-position: 0% 50%; opacity: 0.3; }
-    50% { background-position: 100% 50%; opacity: 0.8; }
-    100% { background-position: 0% 50%; opacity: 0.3; }
-}
-
 #flap {
     position: absolute;
     top: 0;
@@ -334,7 +307,6 @@ html, body {
     border-top: clamp(100px, 14vw, 150px) solid #ff6f9c;
     z-index: 5;
     transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-    filter: drop-shadow(0 -5px 10px rgba(255,100,150,0.2));
 }
 
 #paper {
@@ -381,24 +353,14 @@ html, body {
     justify-content: center;
     z-index: 20;
     font-size: clamp(18px, 2.5vw, 28px);
-    box-shadow: 
-        0 0 30px rgba(255,51,102,0.5),
-        inset 0 -2px 5px rgba(0,0,0,0.2),
-        inset 0 2px 5px rgba(255,255,255,0.3);
+    box-shadow: 0 0 30px rgba(255,51,102,0.5);
     animation: sealPulse 2s infinite;
     pointer-events: none;
-    border: 2px solid rgba(255,255,255,0.2);
 }
 
 @keyframes sealPulse {
-    0%, 100% { 
-        transform: translateX(-50%) scale(1); 
-        box-shadow: 0 0 30px rgba(255,51,102,0.5), inset 0 -2px 5px rgba(0,0,0,0.2);
-    }
-    50% { 
-        transform: translateX(-50%) scale(1.15); 
-        box-shadow: 0 0 60px rgba(255,51,102,0.8), 0 0 100px rgba(255,51,102,0.3), inset 0 -2px 5px rgba(0,0,0,0.2);
-    }
+    0%, 100% { transform: translateX(-50%) scale(1); }
+    50% { transform: translateX(-50%) scale(1.15); }
 }
 
 /* ===== FIREWORKS ===== */
@@ -424,7 +386,7 @@ html, body {
     display: block;
 }
 
-/* ===== FLOATING HEARTS - Only during letter ===== */
+/* ===== FLOATING HEARTS ===== */
 .floating-heart {
     position: fixed;
     pointer-events: none;
@@ -446,21 +408,6 @@ html, body {
         opacity: 0;
         transform: translateY(-10vh) scale(1.5) rotate(720deg);
     }
-}
-
-/* ===== SPARKLES AROUND ENVELOPE ===== */
-.sparkle {
-    position: absolute;
-    pointer-events: none;
-    font-size: 12px;
-    animation: sparkleFloat 2s ease-in-out infinite;
-    opacity: 0;
-}
-
-@keyframes sparkleFloat {
-    0% { opacity: 0; transform: scale(0) rotate(0deg); }
-    50% { opacity: 1; transform: scale(1.5) rotate(180deg); }
-    100% { opacity: 0; transform: scale(0) rotate(360deg); }
 }
 
 /* ===== RESPONSIVE ===== */
@@ -486,7 +433,7 @@ html, body {
 
 <body>
 
-<!-- ===== STARS BACKGROUND ===== -->
+<!-- ===== STARS ===== -->
 <div id="stars"></div>
 
 <!-- ===== START SCREEN ===== -->
@@ -502,7 +449,6 @@ html, body {
 <audio id="bgMusic" loop preload="auto" playsinline webkit-playsinline>
     <source src="music.m4a" type="audio/mp4">
     <source src="music.mp3" type="audio/mpeg">
-    <source src="music.mp4" type="audio/mp4">
 </audio>
 
 <!-- ===== LYRICS ===== -->
@@ -515,7 +461,6 @@ html, body {
         <img src="photo2.jpg" alt="Memory 2" draggable="false">
         <img src="photo3.jpg" alt="Memory 3" draggable="false">
     </div>
-
     <div id="envelopeContainer">
         <div id="envelope">
             <div id="paper">
@@ -537,12 +482,7 @@ html, body {
 
 <script>
 // ============================================
-// FORCE ENABLE TOUCH FOR iOS
-// ============================================
-document.addEventListener('touchstart', function(){}, {passive: true});
-
-// ============================================
-// STARS BACKGROUND
+// STARS
 // ============================================
 function createStars() {
     const container = document.getElementById('stars');
@@ -574,11 +514,10 @@ function createShootingStar() {
     document.body.appendChild(star);
     setTimeout(() => star.remove(), 4000);
 }
-
 setInterval(createShootingStar, 3000);
 
 // ============================================
-// FLOATING HEARTS - Only during letter
+// FLOATING HEARTS
 // ============================================
 let floatingHeartInterval = null;
 
@@ -591,7 +530,6 @@ function startFloatingHearts() {
         heart.style.left = Math.random() * 100 + '%';
         heart.style.fontSize = (20 + Math.random() * 30) + 'px';
         heart.style.animationDuration = (8 + Math.random() * 6) + 's';
-        heart.style.animationDelay = Math.random() * 2 + 's';
         document.body.appendChild(heart);
         setTimeout(() => heart.remove(), 14000);
     }, 800);
@@ -604,52 +542,6 @@ function stopFloatingHearts() {
     }
     document.querySelectorAll('.floating-heart').forEach(el => el.remove());
 }
-
-// ============================================
-// SPARKLES AROUND ENVELOPE
-// ============================================
-function createSparkles() {
-    const envelope = document.getElementById('envelope');
-    if (!envelope) return;
-    
-    const sparkleEmojis = ['✨', '⭐', '🌟', '💫'];
-    for (let i = 0; i < 6; i++) {
-        const sparkle = document.createElement('div');
-        sparkle.className = 'sparkle';
-        sparkle.innerHTML = sparkleEmojis[Math.floor(Math.random() * sparkleEmojis.length)];
-        sparkle.style.left = (Math.random() * 100) + '%';
-        sparkle.style.top = (Math.random() * 100) + '%';
-        sparkle.style.animationDelay = (Math.random() * 2) + 's';
-        sparkle.style.fontSize = (10 + Math.random() * 15) + 'px';
-        envelope.appendChild(sparkle);
-    }
-}
-
-// ============================================
-// UNIVERSAL COMPATIBILITY
-// ============================================
-document.addEventListener('DOMContentLoaded', function() {
-    document.body.style.height = window.innerHeight + 'px';
-    document.body.addEventListener('touchmove', function(e) {
-        if (e.target === document.body) {
-            e.preventDefault();
-        }
-    }, { passive: false });
-});
-
-window.addEventListener('orientationchange', function() {
-    setTimeout(function() {
-        document.body.style.height = window.innerHeight + 'px';
-        if (canvas) {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-        if (hCanvas) {
-            hCanvas.width = window.innerWidth;
-            hCanvas.height = window.innerHeight;
-        }
-    }, 300);
-});
 
 // ============================================
 // LYRICS
@@ -673,6 +565,110 @@ let syncId = null;
 let snowInterval = null;
 let musicStarted = false;
 let fireworksInterval = null;
+
+// ============================================
+// SNOWFLAKE KRISTAL CANTIK - 6 HUJUNG
+// ============================================
+function createSnowflakeSVG(size) {
+    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    svg.setAttribute("viewBox", "-50 -50 100 100");
+    svg.setAttribute("width", size);
+    svg.setAttribute("height", size);
+    
+    const color = "rgba(255,255,255,0.95)";
+    const armLength = 40;
+    const branchLength = 18;
+    
+    // 6 lengan utama
+    for (let i = 0; i < 6; i++) {
+        const angle = (i * 60) * Math.PI / 180;
+        const x = Math.cos(angle) * armLength;
+        const y = Math.sin(angle) * armLength;
+        
+        // Garisan utama
+        const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+        line.setAttribute("x1", "0");
+        line.setAttribute("y1", "0");
+        line.setAttribute("x2", x);
+        line.setAttribute("y2", y);
+        line.setAttribute("stroke", color);
+        line.setAttribute("stroke-width", "3");
+        line.setAttribute("stroke-linecap", "round");
+        svg.appendChild(line);
+        
+        // Cabang-cabang kecil
+        for (let j = -1; j <= 1; j+=2) {
+            const branchAngle = angle + (j * 50 * Math.PI / 180);
+            const branchX = x * 0.6;
+            const branchY = y * 0.6;
+            const branchEndX = branchX + Math.cos(branchAngle) * branchLength;
+            const branchEndY = branchY + Math.sin(branchAngle) * branchLength;
+            
+            const branch = document.createElementNS("http://www.w3.org/2000/svg", "line");
+            branch.setAttribute("x1", branchX);
+            branch.setAttribute("y1", branchY);
+            branch.setAttribute("x2", branchEndX);
+            branch.setAttribute("y2", branchEndY);
+            branch.setAttribute("stroke", color);
+            branch.setAttribute("stroke-width", "2");
+            branch.setAttribute("stroke-linecap", "round");
+            svg.appendChild(branch);
+        }
+        
+        // Hiasan di hujung
+        const diamond = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+        diamond.setAttribute("cx", x);
+        diamond.setAttribute("cy", y);
+        diamond.setAttribute("r", "3");
+        diamond.setAttribute("fill", color);
+        svg.appendChild(diamond);
+    }
+    
+    // Bulatan tengah
+    const center = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+    center.setAttribute("cx", "0");
+    center.setAttribute("cy", "0");
+    center.setAttribute("r", "6");
+    center.setAttribute("fill", color);
+    svg.appendChild(center);
+    
+    // Hiasan antara lengan
+    for (let i = 0; i < 6; i++) {
+        const angle = (i * 60 + 30) * Math.PI / 180;
+        const dotX = Math.cos(angle) * 25;
+        const dotY = Math.sin(angle) * 25;
+        
+        const dot = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+        dot.setAttribute("cx", dotX);
+        dot.setAttribute("cy", dotY);
+        dot.setAttribute("r", "1.5");
+        dot.setAttribute("fill", color);
+        svg.appendChild(dot);
+    }
+    
+    return svg;
+}
+
+function createSnow() {
+    const snowflake = document.createElement('div');
+    snowflake.className = 'snowflake';
+    
+    const size = 25 + Math.random() * 35;
+    const svg = createSnowflakeSVG(size);
+    snowflake.appendChild(svg);
+    
+    snowflake.style.left = Math.random() * 100 + 'vw';
+    snowflake.style.width = size + 'px';
+    snowflake.style.height = size + 'px';
+    snowflake.style.animationDuration = (8 + Math.random() * 14) + 's';
+    snowflake.style.opacity = 0.3 + Math.random() * 0.6;
+    
+    document.body.appendChild(snowflake);
+    
+    setTimeout(() => {
+        snowflake.remove();
+    }, 22000);
+}
 
 // ============================================
 // MAIN FUNCTIONS
@@ -716,10 +712,6 @@ function showEnding() {
     startFireworks();
     
     setTimeout(() => {
-        createSparkles();
-    }, 8500);
-    
-    setTimeout(() => {
         document.getElementById("photoGallery").classList.add("show");
     }, 500);
     
@@ -755,115 +747,6 @@ function typeLetter() {
         }
     }, 40);
 }
-
-// ============================================
-// SNOWFLAKE KRISTAL CANTIK - 6 HUJUNG
-// ============================================
-function createSnowflakeSVG(size) {
-    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-    svg.setAttribute("viewBox", "-50 -50 100 100");
-    svg.setAttribute("width", size);
-    svg.setAttribute("height", size);
-    
-    const center = 0;
-    const armLength = 40;
-    const branchLength = 18;
-    
-    // Warna putih dengan sedikit transparency
-    const color = "rgba(255,255,255,0.9)";
-    
-    // Lukis 6 arm (lengan) snowflake
-    for (let i = 0; i < 6; i++) {
-        const angle = (i * 60) * Math.PI / 180;
-        const x = Math.cos(angle) * armLength;
-        const y = Math.sin(angle) * armLength;
-        
-        // Garisan utama
-        const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
-        line.setAttribute("x1", "0");
-        line.setAttribute("y1", "0");
-        line.setAttribute("x2", x);
-        line.setAttribute("y2", y);
-        line.setAttribute("stroke", color);
-        line.setAttribute("stroke-width", "3");
-        line.setAttribute("stroke-linecap", "round");
-        svg.appendChild(line);
-        
-        // Cabang kecil di hujung
-        for (let j = -1; j <= 1; j+=2) {
-            const branchAngle = angle + (j * 50 * Math.PI / 180);
-            const branchX = x * 0.6;
-            const branchY = y * 0.6;
-            const branchEndX = branchX + Math.cos(branchAngle) * branchLength;
-            const branchEndY = branchY + Math.sin(branchAngle) * branchLength;
-            
-            const branch = document.createElementNS("http://www.w3.org/2000/svg", "line");
-            branch.setAttribute("x1", branchX);
-            branch.setAttribute("y1", branchY);
-            branch.setAttribute("x2", branchEndX);
-            branch.setAttribute("y2", branchEndY);
-            branch.setAttribute("stroke", color);
-            branch.setAttribute("stroke-width", "2");
-            branch.setAttribute("stroke-linecap", "round");
-            svg.appendChild(branch);
-        }
-        
-        // Diamond kecil di hujung
-        const diamond = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-        diamond.setAttribute("cx", x);
-        diamond.setAttribute("cy", y);
-        diamond.setAttribute("r", "3");
-        diamond.setAttribute("fill", color);
-        svg.appendChild(diamond);
-    }
-    
-    // Bulatan di tengah
-    const centerCircle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-    centerCircle.setAttribute("cx", "0");
-    centerCircle.setAttribute("cy", "0");
-    centerCircle.setAttribute("r", "6");
-    centerCircle.setAttribute("fill", color);
-    svg.appendChild(centerCircle);
-    
-    // Hiasan tambahan - 6 titik di antara lengan
-    for (let i = 0; i < 6; i++) {
-        const angle = (i * 60 + 30) * Math.PI / 180;
-        const dotX = Math.cos(angle) * 25;
-        const dotY = Math.sin(angle) * 25;
-        
-        const dot = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-        dot.setAttribute("cx", dotX);
-        dot.setAttribute("cy", dotY);
-        dot.setAttribute("r", "1.5");
-        dot.setAttribute("fill", color);
-        svg.appendChild(dot);
-    }
-    
-    return svg;
-}
-
-function createSnow() {
-    const snowflake = document.createElement('div');
-    snowflake.className = 'snowflake';
-    
-    const size = 25 + Math.random() * 35;
-    const svg = createSnowflakeSVG(size);
-    snowflake.appendChild(svg);
-    
-    snowflake.style.left = Math.random() * 100 + 'vw';
-    snowflake.style.width = size + 'px';
-    snowflake.style.height = size + 'px';
-    snowflake.style.animationDuration = (8 + Math.random() * 14) + 's';
-    snowflake.style.opacity = 0.3 + Math.random() * 0.6;
-    
-    document.body.appendChild(snowflake);
-    
-    setTimeout(() => {
-        snowflake.remove();
-    }, 22000);
-}
-
-snowInterval = setInterval(createSnow, 100);
 
 // ============================================
 // FIREWORKS
@@ -934,7 +817,6 @@ function resizeHeart() {
     hCanvas.width = window.innerWidth;
     hCanvas.height = window.innerHeight;
 }
-
 resizeHeart();
 window.addEventListener("resize", resizeHeart);
 
@@ -982,7 +864,6 @@ function neonDraw() {
 
 function startNeonHeart() {
     stopFloatingHearts();
-    
     document.getElementById("neonHeart").style.display = "block";
     makeHeart();
     neonDraw();
@@ -998,4 +879,49 @@ function startApp(e) {
     
     let music = document.getElementById("bgMusic");
     
-    let playPromise = music
+    music.play().catch(() => {
+        document.addEventListener('touchstart', function retry() {
+            music.play().catch(() => {});
+            document.removeEventListener('touchstart', retry);
+        }, {once: true});
+    });
+    
+    document.getElementById("startScreen").style.display = "none";
+    showLyrics();
+    
+    // Start snow
+    snowInterval = setInterval(createSnow, 100);
+}
+
+// EVENT LISTENERS
+document.getElementById("startScreen").addEventListener("click", startApp, {once: true});
+document.getElementById("startScreen").addEventListener("touchstart", function(e) {
+    e.preventDefault();
+    startApp(e);
+}, {once: true, passive: false});
+
+// ============================================
+// RESIZE
+// ============================================
+window.addEventListener('resize', function() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    resizeHeart();
+    document.body.style.height = window.innerHeight + 'px';
+});
+
+// ============================================
+// CLEANUP
+// ============================================
+window.addEventListener('beforeunload', function() {
+    if (syncId) cancelAnimationFrame(syncId);
+    if (snowInterval) clearInterval(snowInterval);
+    if (fireworksInterval) clearInterval(fireworksInterval);
+    if (floatingHeartInterval) clearInterval(floatingHeartInterval);
+});
+
+console.log("❤️ Full version with crystal snowflakes - Compatible with iPhone, iPad, and Mac ❤️");
+</script>
+
+</body>
+</html>
