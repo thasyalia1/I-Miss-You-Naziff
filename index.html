@@ -154,19 +154,38 @@ html, body {
     color: white;
 }
 
-/* ===== SNOW ===== */
+/* ===== SNOW - ORIGINAL WHITE ===== */
 .snowflake {
     position: absolute;
     color: white;
+    font-size: 14px;
     animation: fall linear infinite;
     pointer-events: none;
     will-change: transform;
-    font-family: Arial, sans-serif;
+    opacity: 0.8;
 }
 
 @keyframes fall {
-    0% { transform: translateY(-10vh) rotate(0deg); opacity: 0.8; }
-    100% { transform: translateY(110vh) rotate(360deg); opacity: 0.2; }
+    0% {
+        transform: translateY(-10vh) translateX(0px) rotate(0deg);
+        opacity: 0.8;
+    }
+    25% {
+        transform: translateY(20vh) translateX(20px) rotate(90deg);
+        opacity: 0.9;
+    }
+    50% {
+        transform: translateY(50vh) translateX(-20px) rotate(180deg);
+        opacity: 0.8;
+    }
+    75% {
+        transform: translateY(80vh) translateX(20px) rotate(270deg);
+        opacity: 0.6;
+    }
+    100% {
+        transform: translateY(110vh) translateX(-10px) rotate(360deg);
+        opacity: 0.2;
+    }
 }
 
 /* ===== ENDING ===== */
@@ -319,41 +338,12 @@ html, body {
     opacity: 1;
 }
 
-#paper::before {
-    content: '✉️';
-    position: absolute;
-    top: -15px;
-    right: -15px;
-    font-size: 30px;
-    transform: rotate(15deg);
-    opacity: 0;
-    transition: all 0.8s ease 0.5s;
-}
-
-#paper.open::before {
-    opacity: 1;
-    transform: rotate(0deg);
-}
-
 #letterText {
     text-align: center;
     line-height: 1.8;
     white-space: pre-line;
     font-size: clamp(12px, 1.5vw, 16px);
     color: #333;
-}
-
-#letterText::before {
-    content: '💌';
-    display: block;
-    font-size: clamp(24px, 3vw, 36px);
-    margin-bottom: 10px;
-    animation: letterStamp 2s ease-in-out infinite;
-}
-
-@keyframes letterStamp {
-    0%, 100% { transform: scale(1) rotate(0deg); }
-    50% { transform: scale(1.1) rotate(-5deg); }
 }
 
 #seal {
@@ -413,7 +403,7 @@ html, body {
     display: block;
 }
 
-/* ===== FLOATING HEARTS ===== */
+/* ===== FLOATING HEARTS - Only during letter ===== */
 .floating-heart {
     position: fixed;
     pointer-events: none;
@@ -559,41 +549,33 @@ function createShootingStar() {
 setInterval(createShootingStar, 3000);
 
 // ============================================
-// FLOATING HEARTS
+// FLOATING HEARTS - Only during letter
 // ============================================
-function createFloatingHeart() {
-    const heart = document.createElement('div');
-    heart.className = 'floating-heart';
-    heart.innerHTML = ['❤️', '💕', '💗'][Math.floor(Math.random() * 3)];
-    heart.style.left = Math.random() * 100 + '%';
-    heart.style.fontSize = (20 + Math.random() * 30) + 'px';
-    heart.style.animationDuration = (8 + Math.random() * 6) + 's';
-    heart.style.animationDelay = Math.random() * 2 + 's';
-    document.body.appendChild(heart);
-    setTimeout(() => heart.remove(), 14000);
+let floatingHeartInterval = null;
+
+function startFloatingHearts() {
+    if (floatingHeartInterval) return;
+    floatingHeartInterval = setInterval(() => {
+        const heart = document.createElement('div');
+        heart.className = 'floating-heart';
+        heart.innerHTML = ['❤️', '💕', '💗'][Math.floor(Math.random() * 3)];
+        heart.style.left = Math.random() * 100 + '%';
+        heart.style.fontSize = (20 + Math.random() * 30) + 'px';
+        heart.style.animationDuration = (8 + Math.random() * 6) + 's';
+        heart.style.animationDelay = Math.random() * 2 + 's';
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 14000);
+    }, 800);
 }
 
-setInterval(createFloatingHeart, 800);
-
-// ============================================
-// SPARKLES AROUND ENVELOPE
-// ============================================
-function createSparkles() {
-    const envelope = document.getElementById('envelope');
-    if (!envelope) return;
-    
-    const sparkleEmojis = ['✨', '⭐', '🌟', '💫'];
-    for (let i = 0; i < 6; i++) {
-        const sparkle = document.createElement('div');
-        sparkle.className = 'sparkle';
-        sparkle.innerHTML = sparkleEmojis[Math.floor(Math.random() * sparkleEmojis.length)];
-        sparkle.style.left = (Math.random() * 100) + '%';
-        sparkle.style.top = (Math.random() * 100) + '%';
-        sparkle.style.animationDelay = (Math.random() * 2) + 's';
-        sparkle.style.fontSize = (10 + Math.random() * 15) + 'px';
-        envelope.appendChild(sparkle);
+function stopFloatingHearts() {
+    if (floatingHeartInterval) {
+        clearInterval(floatingHeartInterval);
+        floatingHeartInterval = null;
     }
+    document.querySelectorAll('.floating-heart').forEach(el => el.remove());
 }
+
 
 // ============================================
 // UNIVERSAL COMPATIBILITY
@@ -631,7 +613,7 @@ const lyrics = [
     {text: "Or what if you're lonely", time: 16},
     {text: "And you know I am too", time: 21},
     {text: "And I get the chance to say", time: 25},
-    {text: "im sorry naziff, I miss you", time: 31}
+    {text: "im sorry naziff, I miss you ❤️", time: 31}
 ];
 
 let box = document.getElementById("lyrics");
@@ -643,7 +625,6 @@ let syncId = null;
 let snowInterval = null;
 let musicStarted = false;
 let fireworksInterval = null;
-let floatHeartInterval = null;
 
 // ============================================
 // MAIN FUNCTIONS
@@ -681,6 +662,9 @@ function showEnding() {
     if (endingShown) return;
     endingShown = true;
     
+    // Stop floating hearts if any
+    stopFloatingHearts();
+    
     document.getElementById("ending").style.display = "flex";
     startFireworks();
     
@@ -706,6 +690,11 @@ function typeLetter() {
     if (letterStarted) return;
     letterStarted = true;
     
+    // Start floating hearts only when letter appears
+    setTimeout(() => {
+        startFloatingHearts();
+    }, 1000);
+    
     const text = `I'm sorry Naziff ❤️\nThank you for every memory, sayang.\nPlease give me another chance.\nI hope we can be okay again ❤️`;
     let target = document.getElementById("letterText");
     let i = 0;
@@ -715,33 +704,34 @@ function typeLetter() {
         i++;
         if (i >= text.length) {
             clearInterval(timer);
+            // WAIT 8 SAAT before neon heart
             setTimeout(() => {
                 startNeonHeart();
             }, 8000);
         }
-    }, 15);
+    }, 40);
 }
 
 // ============================================
-// SNOW
+// SNOW - ORIGINAL WHITE FLAKES
 // ============================================
 function createSnow() {
     let snow = document.createElement("div");
     snow.className = "snowflake";
-    snow.innerHTML = "❄️";
+    snow.textContent = "❄";
     snow.style.left = Math.random() * 100 + "vw";
-    snow.style.fontSize = (10 + Math.random() * 20) + "px";
-    snow.style.animationDuration = (5 + Math.random() * 8) + "s";
-    snow.style.opacity = 0.4 + Math.random() * 0.6;
+    snow.style.fontSize = (8 + Math.random() * 16) + "px";
+    snow.style.animationDuration = (6 + Math.random() * 10) + "s";
+    snow.style.opacity = 0.3 + Math.random() * 0.7;
     
     document.body.appendChild(snow);
     
     setTimeout(() => {
         snow.remove();
-    }, 13000);
+    }, 16000);
 }
 
-snowInterval = setInterval(createSnow, 100);
+snowInterval = setInterval(createSnow, 80);
 
 // ============================================
 // FIREWORKS
@@ -859,6 +849,9 @@ function neonDraw() {
 }
 
 function startNeonHeart() {
+    // Stop floating hearts
+    stopFloatingHearts();
+    
     document.getElementById("neonHeart").style.display = "block";
     makeHeart();
     neonDraw();
@@ -929,10 +922,10 @@ window.addEventListener('beforeunload', function() {
     if (syncId) cancelAnimationFrame(syncId);
     if (snowInterval) clearInterval(snowInterval);
     if (fireworksInterval) clearInterval(fireworksInterval);
-    if (floatHeartInterval) clearInterval(floatHeartInterval);
+    if (floatingHeartInterval) clearInterval(floatingHeartInterval);
 });
 
-console.log("❤️ Final version with envelope animation loaded ❤️");
+console.log("❤️ Final version loaded - Compatible with iPhone, iPad, and Mac ❤️");
 </script>
 
 </body>
