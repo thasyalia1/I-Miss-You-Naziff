@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<title>Im Sorry Naziff ❤️</title>
+<title>Im sorry Naziff ❤️</title>
 
 <style>
 
@@ -16,25 +14,24 @@
     padding: 0;
     box-sizing: border-box;
     -webkit-tap-highlight-color: transparent;
-    -webkit-touch-callout: none;
 }
 
-html, body {
+body {
+    margin: 0;
+    background: black;
+    overflow: hidden;
+    color: white;
+    font-family: Georgia, serif;
     width: 100%;
     height: 100%;
-    overflow: hidden;
     position: fixed;
     top: 0;
     left: 0;
-    background: black;
-    color: white;
-    font-family: Georgia, serif;
     -webkit-user-select: none;
     user-select: none;
-    -webkit-text-size-adjust: 100%;
 }
 
-/* ===== BACKGROUND STARS ===== */
+/* ===== STARS ===== */
 #stars {
     position: fixed;
     inset: 0;
@@ -76,20 +73,10 @@ html, body {
 }
 
 @keyframes shoot {
-    0% {
-        transform: translate(0, 0) rotate(-45deg);
-        opacity: 0;
-    }
-    10% {
-        opacity: 1;
-    }
-    90% {
-        opacity: 1;
-    }
-    100% {
-        transform: translate(-500px, 500px) rotate(-45deg);
-        opacity: 0;
-    }
+    0% { transform: translate(0, 0) rotate(-45deg); opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { transform: translate(-500px, 500px) rotate(-45deg); opacity: 0; }
 }
 
 /* ===== START SCREEN ===== */
@@ -111,30 +98,17 @@ html, body {
     text-align: center;
     padding: 0 20px;
     pointer-events: none;
-    letter-spacing: 2px;
 }
 
 #startScreen h1 .heart-pulse {
     display: inline-block;
     animation: heartPulse 1.5s ease-in-out infinite;
     color: #ff3366;
-    text-shadow: 0 0 30px rgba(255,50,100,0.5);
 }
 
 @keyframes heartPulse {
-    0%, 100% { 
-        transform: scale(1);
-        text-shadow: 0 0 20px rgba(255,50,100,0.3), 0 0 40px rgba(255,50,100,0.1);
-    }
-    50% { 
-        transform: scale(1.3);
-        text-shadow: 0 0 40px rgba(255,50,100,0.8), 0 0 80px rgba(255,50,100,0.4), 0 0 120px rgba(255,50,100,0.2);
-    }
-}
-
-#startScreen h1 .title-text {
-    color: white;
-    text-shadow: 0 0 20px rgba(255,255,255,0.2);
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.3); }
 }
 
 #startScreen p {
@@ -170,40 +144,24 @@ html, body {
     color: white;
 }
 
-/* ===== SNOWFLAKE KRISTAL CANTIK ===== */
+/* ===== SNOW - SEBIJIK MACAM KAU NAK ===== */
 .snowflake {
     position: absolute;
+    color: white !important;
+    animation: fall linear infinite;
     pointer-events: none;
     will-change: transform;
-    opacity: 0.9;
-    animation: fall linear infinite;
-}
-
-.snowflake svg {
-    display: block;
-    width: 100%;
-    height: 100%;
+    font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
+    text-shadow: 0 0 10px rgba(255,255,255,0.3);
 }
 
 @keyframes fall {
-    0% {
-        transform: translateY(-10vh) translateX(0px) rotate(0deg);
+    from {
+        transform: translateY(-10vh) rotate(0deg);
         opacity: 0.9;
     }
-    25% {
-        transform: translateY(20vh) translateX(20px) rotate(90deg);
-        opacity: 0.9;
-    }
-    50% {
-        transform: translateY(50vh) translateX(-20px) rotate(180deg);
-        opacity: 0.8;
-    }
-    75% {
-        transform: translateY(80vh) translateX(20px) rotate(270deg);
-        opacity: 0.7;
-    }
-    100% {
-        transform: translateY(110vh) translateX(-10px) rotate(360deg);
+    to {
+        transform: translateY(110vh) rotate(360deg);
         opacity: 0.2;
     }
 }
@@ -245,7 +203,7 @@ html, body {
     border-radius: 15px;
     border: 2px solid rgba(255,100,150,0.3);
     box-shadow: 0 0 30px rgba(255,100,150,0.1);
-    transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    transition: transform 0.3s;
     pointer-events: none;
     -webkit-user-drag: none;
 }
@@ -253,11 +211,9 @@ html, body {
 #photoGallery.show img:nth-child(1) {
     animation: photoPop 0.8s ease-out 0.5s both;
 }
-
 #photoGallery.show img:nth-child(2) {
     animation: photoPop 0.8s ease-out 0.8s both;
 }
-
 #photoGallery.show img:nth-child(3) {
     animation: photoPop 0.8s ease-out 1.1s both;
 }
@@ -274,9 +230,8 @@ html, body {
 }
 
 @keyframes envelopeFloat {
-    0%, 100% { transform: translateY(0px) rotate(0deg); }
-    25% { transform: translateY(-8px) rotate(-1deg); }
-    75% { transform: translateY(-8px) rotate(1deg); }
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
 }
 
 #envelope {
@@ -286,16 +241,7 @@ html, body {
     background: linear-gradient(145deg, #ff9fbc, #ff7da8);
     border-radius: 15px;
     overflow: visible;
-    box-shadow: 
-        0 10px 40px rgba(255,100,150,0.3),
-        inset 0 1px 0 rgba(255,255,255,0.4),
-        inset 0 -2px 0 rgba(200,80,120,0.3);
-    animation: envelopePulse 2s ease-in-out infinite;
-}
-
-@keyframes envelopePulse {
-    0%, 100% { box-shadow: 0 10px 40px rgba(255,100,150,0.3), inset 0 1px 0 rgba(255,255,255,0.4); }
-    50% { box-shadow: 0 15px 60px rgba(255,100,150,0.5), inset 0 1px 0 rgba(255,255,255,0.4), 0 0 80px rgba(255,100,150,0.1); }
+    box-shadow: 0 10px 40px rgba(255,100,150,0.3);
 }
 
 #flap {
@@ -397,25 +343,27 @@ html, body {
 }
 
 @keyframes floatUp {
-    0% {
-        opacity: 0;
-        transform: translateY(100vh) scale(0) rotate(0deg);
-    }
-    20% {
-        opacity: 1;
-    }
-    100% {
-        opacity: 0;
-        transform: translateY(-10vh) scale(1.5) rotate(720deg);
-    }
+    0% { opacity: 0; transform: translateY(100vh) scale(0) rotate(0deg); }
+    20% { opacity: 1; }
+    100% { opacity: 0; transform: translateY(-10vh) scale(1.5) rotate(720deg); }
+}
+
+/* ===== SPARKLES ===== */
+.sparkle {
+    position: absolute;
+    pointer-events: none;
+    font-size: 12px;
+    animation: sparkleFloat 2s ease-in-out infinite;
+    opacity: 0;
+}
+
+@keyframes sparkleFloat {
+    0% { opacity: 0; transform: scale(0) rotate(0deg); }
+    50% { opacity: 1; transform: scale(1.5) rotate(180deg); }
+    100% { opacity: 0; transform: scale(0) rotate(360deg); }
 }
 
 /* ===== RESPONSIVE ===== */
-@media (max-width: 1024px) and (orientation: portrait) {
-    #lyrics { font-size: 1.8em; }
-    #photoGallery img { width: 150px; height: 150px; }
-}
-
 @media (max-width: 768px) {
     #lyrics { font-size: 1.2em; }
     #photoGallery img { width: 120px; height: 120px; }
@@ -440,7 +388,7 @@ html, body {
 <div id="startScreen">
     <h1>
         <span class="heart-pulse">❤️</span>
-        <span class="title-text">Im Sorry Naziff</span>
+        Im Sorry Naziff
     </h1>
     <p>👆 Tap to Start</p>
 </div>
@@ -449,6 +397,7 @@ html, body {
 <audio id="bgMusic" loop preload="auto" playsinline webkit-playsinline>
     <source src="music.m4a" type="audio/mp4">
     <source src="music.mp3" type="audio/mpeg">
+    <source src="music.mp4" type="audio/mp4">
 </audio>
 
 <!-- ===== LYRICS ===== -->
@@ -461,6 +410,7 @@ html, body {
         <img src="photo2.jpg" alt="Memory 2" draggable="false">
         <img src="photo3.jpg" alt="Memory 3" draggable="false">
     </div>
+
     <div id="envelopeContainer">
         <div id="envelope">
             <div id="paper">
@@ -481,6 +431,7 @@ html, body {
 </div>
 
 <script>
+
 // ============================================
 // STARS
 // ============================================
@@ -544,9 +495,28 @@ function stopFloatingHearts() {
 }
 
 // ============================================
+// SPARKLES
+// ============================================
+function createSparkles() {
+    const envelope = document.getElementById('envelope');
+    if (!envelope) return;
+    const sparkleEmojis = ['✨', '⭐', '🌟', '💫'];
+    for (let i = 0; i < 6; i++) {
+        const sparkle = document.createElement('div');
+        sparkle.className = 'sparkle';
+        sparkle.innerHTML = sparkleEmojis[Math.floor(Math.random() * sparkleEmojis.length)];
+        sparkle.style.left = (Math.random() * 100) + '%';
+        sparkle.style.top = (Math.random() * 100) + '%';
+        sparkle.style.animationDelay = (Math.random() * 2) + 's';
+        sparkle.style.fontSize = (10 + Math.random() * 15) + 'px';
+        envelope.appendChild(sparkle);
+    }
+}
+
+// ============================================
 // LYRICS
 // ============================================
-const lyrics = [
+const lyricsData = [
     {text: "So, what if I call", time: 0},
     {text: "And you pick up the phone?", time: 4.2},
     {text: "And I use this holiday to make my way to your ghost", time: 8.5},
@@ -567,107 +537,23 @@ let musicStarted = false;
 let fireworksInterval = null;
 
 // ============================================
-// SNOWFLAKE KRISTAL CANTIK - 6 HUJUNG
+// SNOW - SEBIJIK MACAM KAU NAK
 // ============================================
-function createSnowflakeSVG(size) {
-    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-    svg.setAttribute("viewBox", "-50 -50 100 100");
-    svg.setAttribute("width", size);
-    svg.setAttribute("height", size);
-    
-    const color = "rgba(255,255,255,0.95)";
-    const armLength = 40;
-    const branchLength = 18;
-    
-    // 6 lengan utama
-    for (let i = 0; i < 6; i++) {
-        const angle = (i * 60) * Math.PI / 180;
-        const x = Math.cos(angle) * armLength;
-        const y = Math.sin(angle) * armLength;
-        
-        // Garisan utama
-        const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
-        line.setAttribute("x1", "0");
-        line.setAttribute("y1", "0");
-        line.setAttribute("x2", x);
-        line.setAttribute("y2", y);
-        line.setAttribute("stroke", color);
-        line.setAttribute("stroke-width", "3");
-        line.setAttribute("stroke-linecap", "round");
-        svg.appendChild(line);
-        
-        // Cabang-cabang kecil
-        for (let j = -1; j <= 1; j+=2) {
-            const branchAngle = angle + (j * 50 * Math.PI / 180);
-            const branchX = x * 0.6;
-            const branchY = y * 0.6;
-            const branchEndX = branchX + Math.cos(branchAngle) * branchLength;
-            const branchEndY = branchY + Math.sin(branchAngle) * branchLength;
-            
-            const branch = document.createElementNS("http://www.w3.org/2000/svg", "line");
-            branch.setAttribute("x1", branchX);
-            branch.setAttribute("y1", branchY);
-            branch.setAttribute("x2", branchEndX);
-            branch.setAttribute("y2", branchEndY);
-            branch.setAttribute("stroke", color);
-            branch.setAttribute("stroke-width", "2");
-            branch.setAttribute("stroke-linecap", "round");
-            svg.appendChild(branch);
-        }
-        
-        // Hiasan di hujung
-        const diamond = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-        diamond.setAttribute("cx", x);
-        diamond.setAttribute("cy", y);
-        diamond.setAttribute("r", "3");
-        diamond.setAttribute("fill", color);
-        svg.appendChild(diamond);
-    }
-    
-    // Bulatan tengah
-    const center = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-    center.setAttribute("cx", "0");
-    center.setAttribute("cy", "0");
-    center.setAttribute("r", "6");
-    center.setAttribute("fill", color);
-    svg.appendChild(center);
-    
-    // Hiasan antara lengan
-    for (let i = 0; i < 6; i++) {
-        const angle = (i * 60 + 30) * Math.PI / 180;
-        const dotX = Math.cos(angle) * 25;
-        const dotY = Math.sin(angle) * 25;
-        
-        const dot = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-        dot.setAttribute("cx", dotX);
-        dot.setAttribute("cy", dotY);
-        dot.setAttribute("r", "1.5");
-        dot.setAttribute("fill", color);
-        svg.appendChild(dot);
-    }
-    
-    return svg;
-}
-
 function createSnow() {
-    const snowflake = document.createElement('div');
-    snowflake.className = 'snowflake';
+    let snow = document.createElement("div");
+    snow.className = "snowflake";
+    snow.innerHTML = "❅";  // Snowflake trident - 6 hujung
+    snow.style.left = Math.random() * 100 + "vw";
+    snow.style.fontSize = (10 + Math.random() * 25) + "px";
+    snow.style.animationDuration = (6 + Math.random() * 10) + "s";
+    snow.style.opacity = 0.3 + Math.random() * 0.7;
+    snow.style.textShadow = "0 0 15px rgba(255,255,255,0.4)";
     
-    const size = 25 + Math.random() * 35;
-    const svg = createSnowflakeSVG(size);
-    snowflake.appendChild(svg);
-    
-    snowflake.style.left = Math.random() * 100 + 'vw';
-    snowflake.style.width = size + 'px';
-    snowflake.style.height = size + 'px';
-    snowflake.style.animationDuration = (8 + Math.random() * 14) + 's';
-    snowflake.style.opacity = 0.3 + Math.random() * 0.6;
-    
-    document.body.appendChild(snowflake);
+    document.body.appendChild(snow);
     
     setTimeout(() => {
-        snowflake.remove();
-    }, 22000);
+        snow.remove();
+    }, 16000);
 }
 
 // ============================================
@@ -679,19 +565,19 @@ function showLyrics() {
     function sync() {
         let now = music.currentTime;
         
-        for (let i = 0; i < lyrics.length; i++) {
-            if (now >= lyrics[i].time && now < (lyrics[i+1]?.time || 999)) {
+        for (let i = 0; i < lyricsData.length; i++) {
+            if (now >= lyricsData[i].time && now < (lyricsData[i+1]?.time || 999)) {
                 if (current !== i) {
-                    box.innerHTML = lyrics[i].text;
+                    box.innerHTML = lyricsData[i].text;
                     current = i;
-                    if (i === lyrics.length - 1) {
+                    if (i === lyricsData.length - 1) {
                         lastTime = now;
                     }
                 }
             }
         }
         
-        if (current === lyrics.length - 1 && now >= lastTime + 10 && !endingShown) {
+        if (current === lyricsData.length - 1 && now >= lastTime + 10 && !endingShown) {
             box.innerHTML = "";
             showEnding();
         }
@@ -710,6 +596,10 @@ function showEnding() {
     
     document.getElementById("ending").style.display = "flex";
     startFireworks();
+    
+    setTimeout(() => {
+        createSparkles();
+    }, 8500);
     
     setTimeout(() => {
         document.getElementById("photoGallery").classList.add("show");
@@ -893,7 +783,7 @@ function startApp(e) {
     snowInterval = setInterval(createSnow, 100);
 }
 
-// EVENT LISTENERS
+// EVENT LISTENERS - iOS + Mac compatible
 document.getElementById("startScreen").addEventListener("click", startApp, {once: true});
 document.getElementById("startScreen").addEventListener("touchstart", function(e) {
     e.preventDefault();
@@ -920,7 +810,7 @@ window.addEventListener('beforeunload', function() {
     if (floatingHeartInterval) clearInterval(floatingHeartInterval);
 });
 
-console.log("❤️ Full version with crystal snowflakes - Compatible with iPhone, iPad, and Mac ❤️");
+console.log("❤️ Full version ready - Snowflake ❅ sebijik macam kau nak ❤️");
 </script>
 
 </body>
