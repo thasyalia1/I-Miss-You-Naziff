@@ -4,6 +4,7 @@
 <head>
 
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Im Sorry Naziff ❤️</title>
 
 <style>
@@ -37,6 +38,16 @@ cursor:pointer;
 font-size:3em;
 }
 
+#startScreen p {
+margin-top:20px;
+animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+0%, 100% { opacity:1; }
+50% { opacity:0.3; }
+}
+
 #lyrics{
 position:absolute;
 top:50%;
@@ -44,6 +55,8 @@ width:100%;
 transform:translateY(-50%);
 text-align:center;
 font-size:2em;
+z-index:10;
+text-shadow: 0 0 20px rgba(255,100,150,0.5);
 }
 
 
@@ -51,6 +64,7 @@ font-size:2em;
 position:absolute;
 color:white;
 animation:fall linear infinite;
+pointer-events:none;
 }
 
 
@@ -105,6 +119,7 @@ width:180px;
 height:180px;
 object-fit:cover;
 border-radius:15px;
+border:2px solid rgba(255,100,150,0.3);
 
 }
 
@@ -190,6 +205,8 @@ display:flex;
 align-items:center;
 justify-content:center;
 z-index:20;
+font-size:24px;
+box-shadow: 0 0 30px rgba(255,51,102,0.5);
 
 }
 
@@ -231,8 +248,6 @@ height:100%;
 
 </head>
 
-
-
 <body>
 
 
@@ -244,17 +259,17 @@ height:100%;
 </h1>
 
 <p>
-Click Anywhere
+Tap to Start
 </p>
 
 </div>
 
 
 
-<audio id="bgMusic" loop>
+<audio id="bgMusic" loop preload="auto">
 
-<source src="music.mp4" type="audio/mp4">
-
+<source src="music.mp3" type="audio/mpeg">
+<source src="music.mp3" type="audio/mp3">
 </audio>
 
 
@@ -270,9 +285,9 @@ Click Anywhere
 
 <div id="photoGallery">
 
-<img src="photo1.jpg">
-<img src="photo2.jpg">
-<img src="photo3.jpg">
+<img src="photo1.jpg" alt="Memory 1">
+<img src="photo2.jpg" alt="Memory 2">
+<img src="photo3.jpg" alt="Memory 3">
 
 </div>
 
@@ -355,6 +370,8 @@ let endingShown=false;
 
 let letterStarted=false;
 
+let syncId = null;
+
 
 
 
@@ -418,7 +435,7 @@ showEnding();
 }
 
 
-requestAnimationFrame(sync);
+syncId = requestAnimationFrame(sync);
 
 
 }
@@ -919,15 +936,22 @@ neonDraw();
 
 document
 .getElementById("startScreen")
-.addEventListener("click",()=>{
+.addEventListener("click", function startApp(){
 
 
 let music=document.getElementById("bgMusic");
 
-
-music.currentTime=0;
-
+// Try to play with user interaction
+music.play().then(() => {
+// Success
+}).catch((e) => {
+console.log("Audio play failed:", e);
+// Try again with user interaction
+document.addEventListener('touchstart', function playAgain() {
 music.play();
+document.removeEventListener('touchstart', playAgain);
+}, {once: true});
+});
 
 
 
@@ -941,7 +965,10 @@ showLyrics();
 
 },{once:true});
 
-
+// Also handle touch events for mobile
+document.getElementById("startScreen").addEventListener("touchstart", function(e) {
+e.preventDefault();
+}, {passive: false});
 
 </script>
 
